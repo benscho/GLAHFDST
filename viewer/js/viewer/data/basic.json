@@ -1,0 +1,24 @@
+[
+	{
+		"name": "Invasive Species by County",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_aquatic_invasive_species_glansis/MapServer/0",
+		"fields": [
+			"County"
+		],
+		"layers": [
+			0
+		],
+		"description": "This is a simple query to demonstrate the query functionality."
+	},
+	{
+		"name": "Diporeia by Lake",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_diporeia_2010_glinpo/MapServer/0",
+		"fields": [
+			"Lake"
+		],
+		"layers": [
+			0
+		],
+		"description": "This is a simple query to demonstrate the query functionality."
+	}
+]

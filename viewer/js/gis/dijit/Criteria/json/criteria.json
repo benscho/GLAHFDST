@@ -1,0 +1,23 @@
+[
+	{
+		"name": "Lake",
+		"URL": "https://arcgis.lsa.umich.edu/arcgis/rest/services/IFR/mi_ifrhd_lakes_tabular/MapServer/",
+		"layer": "0",
+		"type": "text",
+		"param": "GNIS_Name"
+	},
+	{
+		"name": "County",
+		"URL": "https://arcgis.lsa.umich.edu/arcgis/rest/services/IFR/mi_boundaries/MapServer/",
+		"layer": "2",
+		"type": "text",
+		"param": "NAME"
+	},
+	{
+		"name": "Basin",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_glb_boundaries/MapServer",
+		"layer": "0",
+		"type": "select",
+		"param": "LAKE"
+	}
+]

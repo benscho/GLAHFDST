@@ -1,0 +1,17 @@
+<div class="gis_PrintDijit">
+	<div class="formContainer">
+		<h3><center>Investigate Criteria</center></h3>
+		<div id="criteriaOptions">
+
+		</div>
+		<div class = "critRadio">
+			Return areas that satisfy:<br>
+			<input type="radio" name="critOp" value="union">ANY of these criteria<br>
+			<input type="radio" name="critOp" value="intersection">ALL of these criteria
+		</div>
+		<button type="button" id="investigate"  data-dojo-attach-event="onClick:runInvestigation">Investigate</button>
+		<br>
+		<br>
+		<button type="button" id="clearCrit" data-dojo-attach-event="onClick:clearCriteria">Clear</button>
+	</div>
+</div>
