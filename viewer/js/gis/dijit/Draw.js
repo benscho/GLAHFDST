@@ -133,7 +133,7 @@ define([
 				console.log("deactivating toolbar");
 				this.editToolbar.deactivate();
 			}));
-			this.map.pointGraphics.on ("click", lang.hitch(this, function (evt) {
+			this.pointGraphics.on("click", lang.hitch(this, function (evt) {
 				console.log("clicked on a point graphic");
 				this.editGraphic(evt);
 			}));
