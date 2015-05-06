@@ -35,7 +35,11 @@ _Criteria:_ Build criteria json for new data. Bug "cannot read property 'missing
 
 #KNOWN ISSUES:
 -CSS is sloppy. With overflow:hidden disabled there is scrolling. Lower priority, but should be fixed before project shown to public.
+
 -Documentation is incomplete. I'm working on it ;)
+
 -No clear plan on how to handle CMV updates. Previous merge was done by hand.
+
 -Not adequately testing mobile support during development. Need to work on android and iOS testing.
+
 -Advanced Query on back burner for now. May be repurposed at later point.
