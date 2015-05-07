@@ -25,6 +25,7 @@ define([
    'dojo/aspect',
    'dojo/keys',
    'dojo/on',
+   'dojo/_base/event',
    'dojo/i18n!./Draw/nls/resource',
 
    'dijit/form/Button',
@@ -33,7 +34,7 @@ define([
 ], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Menu, MenuItem, lang, Color,
 		Draw, GraphicsLayer, Graphic, SimpleRenderer, drawTemplate, UniqueValueRenderer, SimpleMarkerSymbol,
 		SimpleLineSymbol, SimpleFillSymbol, TextSymbol, Font, FeatureLayer, Polygon, Edit, topic, aspect,
-		keys, on, i18n) {
+		keys, on, event, i18n) {
 
     // main draw dijit
     return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -136,6 +137,7 @@ define([
 			this.pointGraphics.on("click", lang.hitch(this, function (evt) {
 				console.log("clicked on a point graphic");
 				this.editGraphic(evt);
+				event.stop(evt);
 			}));
         },
         drawPoint: function () {
@@ -168,8 +170,8 @@ define([
             this.drawToolbar.activate(Draw.FREEHAND_POLYGON);
             this.drawModeTextNode.innerText = this.i18n.labels.freehandPolygon;
         },
-		editGraphic: function (event) {
-			
+		editGraphic: function (evt) {
+			this.editToolbar.activate(31, evt.graphic);
 		},
         disconnectMapClick: function () {
             topic.publish('mapClickMode/setCurrent', 'draw');

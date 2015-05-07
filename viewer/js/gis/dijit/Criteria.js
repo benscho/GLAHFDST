@@ -23,7 +23,7 @@ define([
 	'dojo/promise/all',
 	'dojo/topic',
 	
-	'dijit/form/Select',
+	'dijit/form/ComboBox',
 	'dijit/form/TextBox',
 	'dijit/registry',
 	'dijit/_WidgetBase',
@@ -32,7 +32,7 @@ define([
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
 ], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, OnDemandGrid, Selection, Keyboard, Memory,
-				on, dom, request, arrayUtil, declare, lang, all, topic, Select, TextBox, registry, _WidgetBase, _TemplatedMixin,
+				on, dom, request, arrayUtil, declare, lang, all, topic, ComboBox, TextBox, registry, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -95,20 +95,22 @@ define([
 			}).then(function (results) {
 				for(var i in results) {
 					if (results[i].type === "select") {
+						var myStore = new Memory({
+							data: [
+								{name:"Options...", id:"option"}
+							]
+						});
 						dom.byId('criteriaOptions').innerHTML += results[i].name + ":";
-						var select = new Select({
+						var combo = new ComboBox({
 							name: results[i].name,
 							id: "criteria-"+i,
-							options:[{
-								label: "Options...",
-								value: "",
-								selected: true
-							}],
+							value: "Options...",
 							URL: results[i].URL,
 							layer: results[i].layer,
-							param: results[i].param
+							param: results[i].param,
+							store: myStore
 						}).placeAt('criteriaOptions');
-						select.startup();
+						combo.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
 					} else if (results[i].type === "text") {
 						dom.byId('criteriaOptions').innerHTML += results[i].name + ":";
