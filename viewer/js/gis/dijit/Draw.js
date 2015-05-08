@@ -184,6 +184,7 @@ define([
 			} else {
 				this.pointGraphics.remove(evt.graphic);
 				this.editToolbar.activate(31, evt.graphic.attributes.text);
+				this.currGraphic = evt.graphic.attributes.text;
 			}
 		},
         disconnectMapClick: function () {
