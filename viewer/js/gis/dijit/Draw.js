@@ -132,6 +132,12 @@ define([
 			this.editToolbar = new Edit(this.map);
 			this.map.on("click", lang.hitch(this, function (evt) {
 				console.log("deactivating toolbar");
+				if(this.currGraphic){
+					var newGraphic = new Graphic(this.currGraphic.geometry);
+					newGraphic.setAttributes({"text": this.currGraphic});
+					this.currGraphic.attr("point", newGraphic);
+					this.pointGraphics.add(newGraphic);
+				}
 				this.editToolbar.deactivate();
 			}));
 			this.pointGraphics.on("click", lang.hitch(this, function (evt) {
@@ -171,7 +177,14 @@ define([
             this.drawModeTextNode.innerText = this.i18n.labels.freehandPolygon;
         },
 		editGraphic: function (evt) {
-			this.editToolbar.activate(31, evt.graphic);
+			if (evt.graphic.symbol) {
+				this.pointGraphics.remove(evt.graphic.attributes.point);
+				this.editToolbar.activate(31, evt.graphic);
+				this.currGraphic = evt.graphic;
+			} else {
+				this.pointGraphics.remove(evt.graphic);
+				this.editToolbar.activate(31, evt.graphic.attributes.text);
+			}
 		},
         disconnectMapClick: function () {
             topic.publish('mapClickMode/setCurrent', 'draw');
@@ -196,7 +209,7 @@ define([
                     graphic = new Graphic(evt.geometry);
 					//graphic.setTextSymbol(textSymbol);
 					//this.pointGraphics.addTextGraphic(graphic);
-					this.pointGraphics.add(graphic);
+					//this.pointGraphics.add(graphic);
                     break;
                 case 'polyline':
                     graphic = new Graphic(evt.geometry);
@@ -211,7 +224,10 @@ define([
                 default:
             }
 			var textGraphic = new Graphic(evt.geometry);
+			graphic.setAttributes({"text": textGraphic});
+			textGraphic.setAttributes({"point": graphic});
 			textGraphic.setSymbol(textSymbol);
+			this.currGraphic = textGraphic;
 			this.pointGraphics.add(textGraphic);
 			this.editToolbar.activate(31, textGraphic);
         },
