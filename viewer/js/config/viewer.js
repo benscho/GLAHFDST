@@ -488,7 +488,7 @@ define([
 					mapClickMode: true
 				}
 			},
-			measure: {
+			/*measure: {
 				include: true,
 				id: 'measurement',
 				type: 'titlePane',
@@ -521,67 +521,6 @@ define([
 					defaultTitle: 'Viewer Map',
 					defaultFormat: 'PDF',
 					defaultLayout: 'Letter ANSI A Landscape'
-				}
-			},
-			/*directions: {
-				include: true,
-				id: 'directions',
-				type: 'titlePane',
-				path: 'gis/dijit/Directions',
-				title: 'Directions',
-				open: false,
-				position: 8,
-				options: {
-					map: true,
-					mapRightClickMenu: true,
-					options: {
-						routeTaskUrl: 'http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route',
-						routeParams: {
-							directionsLanguage: 'en-US',
-							directionsLengthUnits: units.MILES
-						}
-					}
-				}
-			},
-			editor: {
-				include: true,
-				id: 'editor',
-				type: 'titlePane',
-				path: 'gis/dijit/Editor',
-				title: 'Editor',
-				open: false,
-				position: 9,
-				options: {
-					map: true,
-					mapClickMode: true,
-					editorLayerInfos: true,
-					settings: {
-						toolbarVisible: true,
-						showAttributesOnClick: true,
-						enableUndoRedo: true,
-						createOptions: {
-							polygonDrawTools: ['freehandpolygon', 'autocomplete']
-						},
-						toolbarOptions: {
-							reshapeVisible: true,
-							cutVisible: true,
-							mergeVisible: true
-						}
-					}
-				}
-			},
-			streetview: {
-				include: true,
-				id: 'streetview',
-				type: 'titlePane',
-				canFloat: true,
-				position: 10,
-				path: 'gis/dijit/StreetView',
-				title: 'Google Street View',
-				options: {
-					map: true,
-					mapClickMode: true,
-					mapRightClickMenu: true
 				}
 			},*/
 			criteria: {
@@ -624,6 +563,22 @@ define([
 				position: 11,
 				options: {
 					map: true
+				}
+			},
+			navtools: {
+				include: true, // false will not load widget
+				id: 'navtools',
+				type: 'contentPane', // can be contentPane
+				canFloat: false, // if contentPane, use false
+				path: 'gis/dijit/NavTools',
+				title: 'Navigation Tools', // title will appear if type: titlePane
+				open: false, // option only applies if type: titlePane
+				position: 12, // use your position value as needed
+				placeAt: 'top', // right or left if type: titlePane, can use top or bottom if type: contentPane
+				options: { // map and mapClickMode are required to use the widget
+					map: true, // required
+					mapClickMode: true, // required
+					mapRightClickMenu: true // optional, can use right click context tools
 				}
 			},
 			help: {

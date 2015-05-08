@@ -45,6 +45,12 @@ define([
 				placeAt: 'outer',
 				region: 'center',
 				content: mapOverlay
+			},
+			top: {
+				id: 'toolbarTop',
+				placeAt: 'outer',
+				collapsible: true,
+				region: 'top'
 			}
 		},
 		collapseButtons: {},
@@ -533,7 +539,10 @@ define([
 		},
 		widgetLoader: function (widgetConfig, position) {
 			var parentId, pnl;
-
+			
+			if(widgetConfig.id === 'navtools'){
+				console.log("in widgetLoader, located navTools widget");
+			}
 			// only proceed for valid widget types
 			var widgetTypes = ['titlePane', 'contentPane', 'floating', 'domNode', 'invisible', 'map'];
 			if (array.indexOf(widgetTypes, widgetConfig.type) < 0) {
@@ -566,6 +575,9 @@ define([
 		},
 		createWidget: function (widgetConfig, options, WidgetClass) {
 			// set any additional options
+			if(widgetConfig.id === 'navtools'){
+				console.log("found navtools widget");
+			}
 			options.id = widgetConfig.id + '_widget';
 			options.parentWidget = widgetConfig.parentWidget;
 
