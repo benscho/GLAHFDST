@@ -539,10 +539,6 @@ define([
 		},
 		widgetLoader: function (widgetConfig, position) {
 			var parentId, pnl;
-			
-			if(widgetConfig.id === 'navtools'){
-				console.log("in widgetLoader, located navTools widget");
-			}
 			// only proceed for valid widget types
 			var widgetTypes = ['titlePane', 'contentPane', 'floating', 'domNode', 'invisible', 'map'];
 			if (array.indexOf(widgetTypes, widgetConfig.type) < 0) {

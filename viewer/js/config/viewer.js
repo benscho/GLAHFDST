@@ -565,13 +565,13 @@ define([
 					map: true
 				}
 			},
-			navtools: {
+			toolbar: {
 				include: true, // false will not load widget
-				id: 'navtools',
+				id: 'toolbar',
 				type: 'contentPane', // can be contentPane
 				canFloat: false, // if contentPane, use false
-				path: 'gis/dijit/NavTools',
-				title: 'Navigation Tools', // title will appear if type: titlePane
+				path: 'gis/dijit/Toolbar',
+				title: 'Toolbar', // title will appear if type: titlePane
 				open: false, // option only applies if type: titlePane
 				position: 12, // use your position value as needed
 				placeAt: 'top', // right or left if type: titlePane, can use top or bottom if type: contentPane

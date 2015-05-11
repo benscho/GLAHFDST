@@ -20,12 +20,11 @@ define([
         templateString: NavToolsTemplate,
         navTools: null,
         postCreate: function(){
-			console.log("in navTools.js");
-          this.navTools = new Navigation(this.map);
-          this.own(topic.subscribe('mapClickMode/currentSet', lang.hitch(this, 'setMapClickMode', 'navTools')));
-          this.navTools.on('extent-history-change', lang.hitch(this, 'extentHistoryChangeHandler'));
-          if (this.mapRightClickMenu) {
-            this.addRightClickMenu();
+			this.navTools = new Navigation(this.map);
+			this.own(topic.subscribe('mapClickMode/currentSet', lang.hitch(this, 'setMapClickMode', 'navTools')));
+			this.navTools.on('extent-history-change', lang.hitch(this, 'extentHistoryChangeHandler'));
+			if (this.mapRightClickMenu) {
+				this.addRightClickMenu();
             }
         },
            addRightClickMenu: function () {

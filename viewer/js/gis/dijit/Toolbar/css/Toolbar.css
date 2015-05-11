@@ -1,0 +1,49 @@
+.gis_ToolbarDijit {
+	height: 25px;
+}
+
+.gis_ToolbarDijit .zoominIcon {
+    /*background-image: url(../images/nav_zoomin.png);
+    width: 16px;
+    height: 16px;
+}
+
+ .gis_ToolbarDijit .zoomoutIcon {
+	/*background-image: url(../images/nav_zoomout.png);
+	width: 16px;
+	height: 16px;*/
+}
+
+.gis_ToolbarDijit .zoomfullextIcon {
+	/*background-image: url(../images/nav_fullextent.png);
+	width: 16px;
+	height: 16px;*/
+}
+
+.gis_ToolbarDijit .zoomprevIcon {
+	/*background-image: url(../images/nav_previous.png);
+	width: 16px;
+	height: 16px;*/
+}
+
+.gis_ToolbarDijit .zoomnextIcon {
+	/*background-image: url(../images/nav_next.png);
+	width: 16px;
+	height: 16px;*/
+}
+
+.gis_ToolbarDijit .panIcon {
+	/*background-image: url(../images/nav_pan.png);
+	width: 16px;
+	height: 16px;*/
+}
+
+.gis_ToolbarDijit .deactivateIcon {
+	/*background-image: url(../images/nav_decline.png);
+	width: 16px;
+	height: 16px;*/
+}
+.gis_ToolbarDijit .formContainer {
+    /*border: 1px solid #bbb;*/
+    width: 100%;
+}
