@@ -22,7 +22,7 @@ define([
 	'esri/tasks/FindTask',
 	'esri/tasks/FindParameters',
 	'esri/geometry/Extent',
-	'dojo/text!./Find/templates/Find.html',
+	'dojo/text!./Toolbar/templates/Find.html',
 	'dojo/i18n!./Find/nls/resource',
 
 	'dijit/form/Form',

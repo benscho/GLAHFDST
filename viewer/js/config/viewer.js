@@ -311,7 +311,7 @@ define([
 					}
 				}
 			},
-			identify: {
+			/*identify: {
 				include: true,
 				id: 'identify',
 				type: 'titlePane',
@@ -320,7 +320,7 @@ define([
 				open: false,
 				position: 3,
 				options: 'config/identify'
-			},
+			},*/
 			basemaps: {
 				include: true,
 				id: 'basemaps',
@@ -449,7 +449,7 @@ define([
 				position: 2,
 				options: 'config/bookmarks'
 			},
-			find: {
+			/*find: {
 				include: true,
 				id: 'find',
 				type: 'titlePane',
@@ -459,7 +459,7 @@ define([
 				open: false,
 				position: 3,
 				options: 'config/find'
-			},
+			},*/
 			draw: {
 				include: true,
 				id: 'draw',
@@ -576,6 +576,7 @@ define([
 				position: 12, // use your position value as needed
 				placeAt: 'top', // right or left if type: titlePane, can use top or bottom if type: contentPane
 				options: { // map and mapClickMode are required to use the widget
+					identifyLayerInfos: true,
 					map: true, // required
 					mapClickMode: true, // required
 					mapRightClickMenu: true // optional, can use right click context tools

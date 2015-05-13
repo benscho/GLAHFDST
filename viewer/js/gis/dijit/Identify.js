@@ -16,7 +16,7 @@ define([
     'esri/tasks/IdentifyTask',
     'esri/tasks/IdentifyParameters',
     'esri/dijit/PopupTemplate',
-    'dojo/text!./Identify/templates/Identify.html',
+    'dojo/text!./Toolbar/templates/Identify.html',
     'dojo/i18n!./Identify/nls/resource',
 
     'dijit/form/Form',
@@ -83,13 +83,13 @@ define([
 
                     // rebuild the layer selection list when any layer is hidden
                     // but only if we have a UI
-                    if (this.parentWidget) {
+					// removed this.parentWidget check for now
                         layer.on('visibility-change', lang.hitch(this, function (evt) {
                             if (evt.visible === false) {
                                 this.createIdentifyLayerList();
                             }
                         }));
-                    }
+
                 }
             }, this);
 
@@ -106,12 +106,11 @@ define([
 
             // rebuild the layer selection list when the map is updated
             // but only if we have a UI
-            if (this.parentWidget) {
+			// removed this.parentWidget check for now
                 this.createIdentifyLayerList();
                 this.map.on('update-end', lang.hitch(this, function () {
                     this.createIdentifyLayerList();
                 }));
-            }
 
             if (this.draggable) {
                 this.setupDraggable();
@@ -230,14 +229,13 @@ define([
         getSelectedLayer: function () {
             var selectedLayer = this.allLayersId; // default is all layers
             // if we have a UI, then get the selected layer
-            if (this.parentWidget) {
+			// removed this.parentWidget check for now
                 var form = this.identifyFormDijit.get('value');
                 if (!form.identifyLayer || form.identifyLayer === '') {
                     this.identifyLayerDijit.set('value', selectedLayer);
                 } else {
                     selectedLayer = form.identifyLayer;
                 }
-            }
             return selectedLayer;
         },
 
