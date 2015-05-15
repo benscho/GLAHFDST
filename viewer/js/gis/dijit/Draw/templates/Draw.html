@@ -91,9 +91,16 @@
                         <span data-dojo-attach-point="drawModeTextNode">${i18n.labels.currentDrawModeNone}</span>
                     </div>
                 </li>
-
+				
             </ul>
-
+			<div id="drawCheckBox">
+				<input id="addText" name="addText" data-dojo-type="dijit/form/CheckBox" value="text">
+				<label for="addText">Add Text</label>
+			</div>
+			<div id="drawTextBox">
+				<label for="drawText">Text:</label>
+				<input id="drawText" data-dojo-type="dijit/form/TextBox"/>
+			</div>
         </div>
     </div>
 

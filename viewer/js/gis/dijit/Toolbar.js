@@ -9,12 +9,14 @@ define([
 	'dijit/MenuItem',
 	'dijit/form/Select',
 	'dijit/form/TextBox',
+	'dijit/registry',
 	
 	'dstore/Memory',
 	
 	'esri/dijit/Measurement',
 	'esri/units',
 	
+	'dojo/dom-style',
 	'dojo/dom-construct',
 	'dojo/request',
 	'dojo/html',
@@ -24,10 +26,11 @@ define([
 	'./Identify',
 	'./Find'
 ], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Button, ComboButton, Menu, MenuItem, Select,
-			 TextBox, Memory, Measurement, units, domConstruct, request, html, lang, topic, ToolbarTemplate, Identify, Find) {
+			 TextBox, registry, Memory, Measurement, units, domStyle, domConstruct, request, html, lang, topic, ToolbarTemplate, Identify, Find) {
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 		widgetsInTemplate: true,
         templateString: ToolbarTemplate,
+		isActive: false,
 		postCreate: function () {
 			topic.subscribe('mapClickMode/currentSet', lang.hitch(this, 'setMapClickMode', 'toolbar'));
 			//TODO: clean up loading find and identify, fix identify mapClickMode
@@ -86,6 +89,8 @@ define([
 			request.get("/js/gis/dijit/Toolbar/Templates/Measure.html").then(function(results) {
 				html.set(dojo.byId("toolbarContents"), results);
 			});
+			this.isActive = true;
+		//	this.changeHeight();
 		},
 		/*measureArea: function () {
 			this.measure.setTool("area", true);
@@ -98,20 +103,39 @@ define([
 		},*/
 		startIdentify: function () {
 			this.clearContents();
+			this.isActive = true;
+		//	this.changeHeight();
 			this.identify.placeAt(dojo.byId("toolbarContents"));
 		},
 		startFind: function () {
 			this.clearContents();
+			this.isActive = true;
+		//	this.changeHeight();
 			this.find.placeAt(dojo.byId("toolbarContents"));
 		},
 		startPrint: function () {
 			this.clearContents();
+			this.isActive = true;
+		//	this.changeHeight();
 		},
 		clearContents: function () {
 			dojo.byId("toolbarContents").innerHTML = "";
 			if(this.measure){
 				this.measure.destroy();
 			}
+		},
+		deactivate: function () {
+			this.isActive = false;
+			this.clearContents();
+		//	this.changeHeight();
+		},
+		changeHeight: function () {
+			if (this.isActive) {
+				domStyle.set(dojo.byId("toolbarTop"), "height", "100px");
+			} else {
+				domStyle.set(dojo.byId("toolbarTop"), "height", "40px");
+			}
+			registry.byId("toolbarTop");
 		},
 		setMapClickMode: function () {
 			

@@ -28,6 +28,8 @@ define([
    'dojo/_base/event',
    'dojo/i18n!./Draw/nls/resource',
 
+   'dijit/form/TextBox',
+   'dijit/form/CheckBox',
    'dijit/form/Button',
    'xstyle/css!./Draw/css/Draw.css',
    'xstyle/css!./Draw/css/adw-icons.css'
@@ -142,7 +144,11 @@ define([
 			}));
 			this.pointGraphics.on("click", lang.hitch(this, function (evt) {
 				console.log("clicked on a point graphic");
-				this.editGraphic(evt);
+				if(evt.graphic.attributes){
+					this.editGraphic(evt);
+				} else {
+					this.editToolbar.activate(31, evt.graphic);
+				}
 				event.stop(evt);
 			}));
         },
@@ -204,7 +210,6 @@ define([
 			this.drawToolbar.deactivate();
             this.drawModeTextNode.innerText = this.i18n.labels.currentDrawModeNone;
             var graphic;
-			var textSymbol = new TextSymbol("Test text");
             switch (evt.geometry.type) {
                 case 'point':
                     graphic = new Graphic(evt.geometry);
@@ -224,13 +229,22 @@ define([
                     break;
                 default:
             }
-			var textGraphic = new Graphic(evt.geometry);
-			graphic.setAttributes({"text": textGraphic});
-			textGraphic.setAttributes({"point": graphic});
-			textGraphic.setSymbol(textSymbol);
-			this.currGraphic = textGraphic;
-			this.pointGraphics.add(textGraphic);
-			this.editToolbar.activate(31, textGraphic);
+			if (dojo.byId("addText").checked) {
+				if (dojo.byId("drawText").value) {
+					var textSymbol = new TextSymbol(dojo.byId("drawText").value);
+				} else { 
+					var textSymbol = new TextSymbol("Default text");
+				}
+				var textGraphic = new Graphic(evt.geometry);
+				graphic.setAttributes({"text": textGraphic});
+				textGraphic.setAttributes({"point": graphic});
+				textGraphic.setSymbol(textSymbol);
+				this.currGraphic = textGraphic;
+				this.pointGraphics.add(textGraphic);
+				this.editToolbar.activate(31, textGraphic);
+			} else {
+				this.pointGraphics.add(graphic);
+			}
         },
         clearGraphics: function () {
             this.endDrawing();

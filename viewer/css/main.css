@@ -3,8 +3,8 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
-    /*overflow: hidden;
-    font-family: Tahoma;*/
+    overflow: hidden;
+    /*font-family: Tahoma;*/
     font-size: 14px;
 }
 .appHeader {
@@ -349,3 +349,14 @@ body, html {
 }
 
 /* end media queries bootstrap style */
+
+/* GLAHF DST overrides */
+#Metadata{
+	overflow: auto;
+}
+
+#toolbarTop{
+	height: 100px;
+}
+
+/* end of GLAHF DST overrides */

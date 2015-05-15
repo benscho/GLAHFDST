@@ -7,32 +7,28 @@ define([
 	'esri/symbols/SimpleFillSymbol',
 	'esri/graphic',
 	'esri/geometry/Polygon',
-	
-	'dgrid/OnDemandGrid',
-	'dgrid/Selection',
-	'dgrid/Keyboard',
-	
+
 	'dstore/Memory',
 	
 	'dojo/on',
 	'dojo/dom',
 	'dojo/request',
-	'dojo/_base/array',
 	'dojo/_base/declare',
 	'dojo/_base/lang',
 	'dojo/promise/all',
 	'dojo/topic',
 	
+	'dijit/form/Form',
+	'dijit/form/RadioButton',
 	'dijit/form/ComboBox',
 	'dijit/form/TextBox',
-	'dijit/registry',
 	'dijit/_WidgetBase',
 	'dijit/_TemplatedMixin',
 	'dijit/_WidgetsInTemplateMixin',
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
-], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, OnDemandGrid, Selection, Keyboard, Memory,
-				on, dom, request, arrayUtil, declare, lang, all, topic, ComboBox, TextBox, registry, _WidgetBase, _TemplatedMixin,
+], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, Memory,
+				on, dom, request, declare, lang, all, topic, Form, RadioButton, ComboBox, TextBox, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -123,6 +119,25 @@ define([
 						}).placeAt('criteriaOptions');
 						textbox.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
+					} else if (results[i].type === "radio") {
+						dom.byId('criteriaOptions').innerHTML += results[i].name + ":";
+						var form = new Form({
+							name: results[i].name,
+							id: "criteria-"+i,
+							URL: results[i].URL,
+							layer: results[i].layer,
+							param: results[i].param
+						}).placeAt('criteriaOptions');
+						for(var j in results[i].choices){
+							var radioBtn = new RadioButton({
+								value: results[i].choices[j],
+								name: results[i].name
+							}).placeAt("criteria-"+i).startup();
+						}
+						form.startup();
+						dom.byId('criteriaOptions').innerHTML += "<br/>";
+					} else if (results[i].type === "heading") {
+						dom.byId('criteriaOptions').innerHTML += "<h4>" + results[i].name + "</h4><br/>";
 					} else { //result.type not recognized
 						console.log("ERROR: Unrecognized results[i].type: " + results[i]);
 					}
