@@ -22,13 +22,14 @@ define([
 	'dijit/form/RadioButton',
 	'dijit/form/ComboBox',
 	'dijit/form/TextBox',
+	'dijit/form/Button',
 	'dijit/_WidgetBase',
 	'dijit/_TemplatedMixin',
 	'dijit/_WidgetsInTemplateMixin',
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
 ], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, Memory,
-				on, dom, request, declare, lang, all, topic, Form, RadioButton, ComboBox, TextBox, _WidgetBase, _TemplatedMixin,
+				on, dom, request, declare, lang, all, topic, Form, RadioButton, ComboBox, TextBox, Button, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -121,23 +122,13 @@ define([
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
 					} else if (results[i].type === "radio") {
 						dom.byId('criteriaOptions').innerHTML += results[i].name + ":";
-						var form = new Form({
-							name: results[i].name,
-							id: "criteria-"+i,
-							URL: results[i].URL,
-							layer: results[i].layer,
-							param: results[i].param
-						}).placeAt('criteriaOptions');
 						for(var j in results[i].choices){
-							var radioBtn = new RadioButton({
-								value: results[i].choices[j],
-								name: results[i].name
-							}).placeAt("criteria-"+i).startup();
+							dom.byId('criteriaOptions').innerHTML += "<input type=\"radio\" name=\"" + results[i].name + "\" value=\"" + results.name + "\">" + results[i].choices[j][0] + "</input>";
 						}
-						form.startup();
+						//form.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
 					} else if (results[i].type === "heading") {
-						dom.byId('criteriaOptions').innerHTML += "<h4>" + results[i].name + "</h4><br/>";
+						dom.byId('criteriaOptions').innerHTML += "<h4>" + results[i].name + "</h4>";
 					} else { //result.type not recognized
 						console.log("ERROR: Unrecognized results[i].type: " + results[i]);
 					}

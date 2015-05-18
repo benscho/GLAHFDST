@@ -1,5 +1,9 @@
 .gis_ToolbarDijit {
-	height: 250px;
+
+}
+
+.gis_ToolbarDijit .dijitButtonNode{
+	display: inline-block !important;
 }
 
 .gis_ToolbarDijit .zoominIcon {

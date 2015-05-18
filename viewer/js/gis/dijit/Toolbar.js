@@ -5,11 +5,10 @@ define([
     'dijit/_WidgetsInTemplateMixin',
 	'dijit/form/Button',
 	'dijit/form/ComboButton',
-	'dijit/Menu',
-	'dijit/MenuItem',
 	'dijit/form/Select',
 	'dijit/form/TextBox',
 	'dijit/registry',
+	'dijit/form/ValidationTextBox',
 	
 	'dstore/Memory',
 	
@@ -25,8 +24,8 @@ define([
 	'dojo/text!./Toolbar/Templates/Toolbar.html',
 	'./Identify',
 	'./Find'
-], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Button, ComboButton, Menu, MenuItem, Select,
-			 TextBox, registry, Memory, Measurement, units, domStyle, domConstruct, request, html, lang, topic, ToolbarTemplate, Identify, Find) {
+], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Button, ComboButton, Select, TextBox, 
+			 registry, ValidationTextBox, Memory, Measurement, units, domStyle, domConstruct, request, html, lang, topic, ToolbarTemplate, Identify, Find) {
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 		widgetsInTemplate: true,
         templateString: ToolbarTemplate,

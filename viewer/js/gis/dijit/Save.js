@@ -9,7 +9,8 @@ define([
 	
 	'dijit/_WidgetBase',
 	'dijit/_TemplatedMixin',
-	'dijit/_WidgetsInTemplateMixin'
+	'dijit/_WidgetsInTemplateMixin',
+	'dijit/form/FilteringSelect'
 ], function (LocalDB, dom, declare, JSON, topic, saveTemplate, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin) {
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 		widgetsInTemplate: true,
