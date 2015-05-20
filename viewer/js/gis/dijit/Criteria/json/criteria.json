@@ -4,7 +4,7 @@
 		"type": "heading"
 	},
 	{
-		"name": "Watersheds",
+		"name": "Watersheds (km^2)",
 		"URL": "",
 		"layer": "0",
 		"type": "radio",
@@ -21,6 +21,28 @@
 			},
 			{
 				"0":">7500"
+			}
+		]
+	},
+	{
+		"name": "Temperature/Energy",
+		"type": "heading"
+	},
+	{
+		"name": "Vertical Temp. (deg-days, C)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"<0"
+			},
+			{
+				"0":"0-3,000"
+			},
+			{
+				"0":"3,900+"
 			}
 		]
 	}

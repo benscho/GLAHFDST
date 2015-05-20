@@ -121,7 +121,7 @@ define([
 						textbox.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
 					} else if (results[i].type === "radio") {
-						dom.byId('criteriaOptions').innerHTML += results[i].name + ":";
+						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:<br/>";
 						for(var j in results[i].choices){
 							dom.byId('criteriaOptions').innerHTML += "<input type=\"radio\" name=\"" + results[i].name + "\" value=\"" + results.name + "\">" + results[i].choices[j][0] + "</input>";
 						}

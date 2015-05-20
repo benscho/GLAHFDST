@@ -79,43 +79,35 @@ define([
 		},
 		startMeasure: function () {
 			this.clearContents();
-			/*this.measure = new Measurement({
+			this.measure = new Measurement({
                 map: this.map,
                 defaultAreaUnit: units.SQUARE_MILES,
                 defaultLengthUnit: units.MILES
             }, domConstruct.create('div'));
-            this.measure.startup();*/
-			request.get("/js/gis/dijit/Toolbar/Templates/Measure.html").then(function(results) {
+			this.measure.placeAt(dojo.byId("toolbarContents"));
+            this.measure.startup();
+			/*request.get("/js/gis/dijit/Toolbar/Templates/Measure.html").then(function(results) {
 				html.set(dojo.byId("toolbarContents"), results);
-			});
+			});*/
 			this.isActive = true;
-		//	this.changeHeight();
+			this.changeHeight();
 		},
-		/*measureArea: function () {
-			this.measure.setTool("area", true);
-		},
-		measureDistance: function () {
-			this.measure.setTool("distance", true);
-		},
-		measureLocation: function () {
-			this.measure.setTool("location", true);
-		},*/
 		startIdentify: function () {
 			this.clearContents();
 			this.isActive = true;
-		//	this.changeHeight();
+			this.changeHeight();
 			this.identify.placeAt(dojo.byId("toolbarContents"));
 		},
 		startFind: function () {
 			this.clearContents();
 			this.isActive = true;
-		//	this.changeHeight();
+			this.changeHeight();
 			this.find.placeAt(dojo.byId("toolbarContents"));
 		},
 		startPrint: function () {
 			this.clearContents();
 			this.isActive = true;
-		//	this.changeHeight();
+			this.changeHeight();
 		},
 		clearContents: function () {
 			dojo.byId("toolbarContents").innerHTML = "";
@@ -126,15 +118,16 @@ define([
 		deactivate: function () {
 			this.isActive = false;
 			this.clearContents();
-		//	this.changeHeight();
+			this.changeHeight();
 		},
 		changeHeight: function () {
 			if (this.isActive) {
-				domStyle.set(dojo.byId("toolbarTop"), "height", "100px");
+				domStyle.set("toolbarTop", "height", "110px");
 			} else {
-				domStyle.set(dojo.byId("toolbarTop"), "height", "40px");
+				domStyle.set("toolbarTop", "height", "41px");
 			}
-			registry.byId("toolbarTop");
+			registry.byId("toolbarTop").getParent().resize();
+			topic.publish('viewer/repositionButtons', 'top');
 		},
 		setMapClickMode: function () {
 			

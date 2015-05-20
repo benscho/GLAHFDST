@@ -23,8 +23,28 @@ define([
 		//queryStore = new Memory({ data: resultItems });
 		queryData = results;
 		queryColumns = results.fieldAliases;
+		//currently hardcoded, intended for invasive species query
+		//TODO: map to .json before release
+		var myColumns = {
+				group_: {
+					label : "Group"
+				},
+				Scientific: {
+					label : "Scientific Name"
+				},
+				common_nam: {
+					label: "Common Name"
+				},
+				Year_: {
+					label: "Year"
+				},
+				comments: {
+					label: "Comments"
+				}
+			};
 		var grid = new Grid({
-			columns: queryColumns
+			columns: myColumns
+		//	columns: queryColumns
 		//	collection: queryStore
 		}, "basicGrid");
 		grid.renderArray(resultItems);

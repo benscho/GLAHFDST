@@ -19,6 +19,7 @@ define([
 	'esri/dijit/PopupMobile',
 	'dijit/Menu',
 	'dijit/layout/TabContainer',
+	'dijit/Dialog',
 	'dojo/request',
 	'esri/IdentityManager',
 	'./BasicPane',
@@ -26,7 +27,7 @@ define([
 	'./Results',
 	'./Metadata'
 ], function (Map, dom, domStyle, domGeom, domClass, on, array, BorderContainer, ContentPane, FloatingTitlePane, lang, mapOverlay,
-	FloatingWidgetDialog, put, aspect, has, topic, PopupMobile, Menu, TabContainer, request, IdentityManager, BasicPane, AdvancedPane, Results, Metadata) {
+	FloatingWidgetDialog, put, aspect, has, topic, PopupMobile, Menu, TabContainer, Dialog, request, IdentityManager, BasicPane, AdvancedPane, Results, Metadata) {
 
 	return {
 		legendLayerInfos: [],
@@ -85,6 +86,11 @@ define([
 			topic.subscribe('viewer/togglePane', lang.hitch(this, function (args) {
 				this.togglePane(args.pane, args.show);
 			}));
+			
+			// reposition button
+			topic.subscribe('viewer/repositionButtons', lang.hitch(this, function (args) {
+				this.repositionSideBarButtons(args);
+			}));
 
 			// load a widget
 			topic.subscribe('viewer/loadWidget', lang.hitch(this, function (args) {
@@ -135,11 +141,11 @@ define([
 					
 			tabs.startup();
 			
-			var query = new TabContainer({
+			/*var query = new TabContainer({
 				title: "Query",
 				id: "Query",
 				nested: true
-			});
+			});*/
 			
 			var resultsTab = new ContentPane({
 				title: "Results",
@@ -162,12 +168,12 @@ define([
 			});
 			
 			var basic = new ContentPane({
-				title: "Basic",
+				title: "Query",
 				id: "Basic",
 				content: "This is the basic Query page."
 			});
 			
-			var advanced = new ContentPane({
+			/*var advanced = new ContentPane({
 				title: "Advanced",
 				id: "Advanced",
 				content: "This is the advanced Query page."
@@ -177,7 +183,7 @@ define([
 				title: "Splash",
 				id: "Splash",
 				content: "This is the splash page."
-			});
+			});*/
 			
 			var metadata = new ContentPane({
 				title: "Metadata",
@@ -185,26 +191,36 @@ define([
 				content: "This is the default Metadata content."
 			});
 			
-			query.addChild(basic);
+			var dialogSplash = new Dialog({
+				title: "Welcome to the Great Lakes Aquatic Habitat Explorer!",
+				style: "width: 50%",
+				content: "This tool allows you to view habitat suitability maps for various species, as well as explore areas by selecting your own criteria. Please select how you would like to begin: <br>" +
+						"<center><button type=\"button\" data-dojo-type=\"dijit/form/Button\">View Existing Habitat Suitability</button>" + 
+						"<button type=\"button\" data-dojo-type=\"dijit/form/Button\">Custom Habitat Suitability Mapping</button></center>"
+			});
+			
+			/*query.addChild(basic);
 			query.addChild(advanced);
 			
-			tabs.addChild(splash);
+			tabs.addChild(splash);*/
 			tabs.addChild(this.panes.outer);
-			tabs.addChild(query);
+			tabs.addChild(basic);
 			tabs.addChild(resultsTab);
 			tabs.addChild(metadata);
+			
+			dialogSplash.show();
 
-			request.get("/js/viewer/templates/splash.html").then(function (results) {
+			/*request.get("/js/viewer/templates/splash.html").then(function (results) {
 				splash.set("content", results);
-			});
+			});*/
 			request.get("/js/viewer/templates/basic.html").then(function (results) {
 				basic.set("content", results);
 				BasicPane.initBasic();
 			});			
-			request.get("/js/viewer/templates/advanced.html").then(function (results) {
+			/*request.get("/js/viewer/templates/advanced.html").then(function (results) {
 				advanced.set("content", results);
 				AdvancedPane.initAdvanced();
-			});
+			});*/
 			request.get("/js/viewer/templates/results.html").then(function (results) {
 				resultsTab.set("content", results);
 				Results.initResults();
