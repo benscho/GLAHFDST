@@ -25,7 +25,7 @@ define([
 		queryColumns = results.fieldAliases;
 		//currently hardcoded, intended for invasive species query
 		//TODO: map to .json before release
-		var myColumns = {
+		/*var myColumns = {
 				group_: {
 					label : "Group"
 				},
@@ -41,9 +41,9 @@ define([
 				comments: {
 					label: "Comments"
 				}
-			};
+			};*/
 		var grid = new Grid({
-			columns: myColumns
+			columns: queryColumns
 		//	columns: queryColumns
 		//	collection: queryStore
 		}, "basicGrid");

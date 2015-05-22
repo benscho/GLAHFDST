@@ -1,5 +1,15 @@
 [
 	{
+		"name": "Walleye Suitability",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer/0",
+		"fields": [
+			"Class"
+		],
+		"layers": [
+			0
+		],
+		"description": "This query will display some information about Walleye Suitability."
+	}, {
 		"name": "Invasive Species by County",
 		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_aquatic_invasive_species_glansis/MapServer/0",
 		"fields": [
@@ -9,8 +19,7 @@
 			0
 		],
 		"description": "This is a simple query to demonstrate the query functionality."
-	},
-	{
+	}, {
 		"name": "Diporeia by Lake",
 		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_diporeia_2010_glinpo/MapServer/0",
 		"fields": [

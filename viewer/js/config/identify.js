@@ -21,6 +21,16 @@ define({
 	// for details on pop-up definition see: https://developers.arcgis.com/javascript/jshelp/intro_popuptemplate.html
 
 	identifies: {
+		walleyehsi: {
+			0: {
+				title: 'Walleye HSI',
+				fieldInfos: [{
+					fieldName: 'Area (sq. km)',
+					label: 'Area (sq. km)'
+					visible: true
+				}]
+			}
+		},
 		dnroffices: {
 			0: {
 				title: 'DNR Fisheries Offices',
