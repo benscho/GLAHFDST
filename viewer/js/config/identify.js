@@ -26,7 +26,7 @@ define({
 				title: 'Walleye HSI',
 				fieldInfos: [{
 					fieldName: 'Area (sq. km)',
-					label: 'Area (sq. km)'
+					label: 'Area (sq. km)',
 					visible: true
 				}]
 			}

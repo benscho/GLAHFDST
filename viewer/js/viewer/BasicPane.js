@@ -15,6 +15,8 @@ define([
 ], function (declare, request, arrayUtil, Select, on, dom, Query, QueryTask, Grid, Pagination, Memory, Results) {
 	var queryStore, queryColumns;
 	function showResults (results) {
+		var querySelect = dijit.byId("querySelect");
+		var selected = dijit.byId("querySelect").get("selected");
 		var resultItems = [];
 		var resultCount = results.features.length;
 		for (var i = 0; i < resultCount; i++) {
@@ -22,26 +24,9 @@ define([
 		}
 		//queryStore = new Memory({ data: resultItems });
 		queryData = results;
-		queryColumns = results.fieldAliases;
+		queryColumns = querySelect.options[selected].displayColumns;
 		//currently hardcoded, intended for invasive species query
 		//TODO: map to .json before release
-		/*var myColumns = {
-				group_: {
-					label : "Group"
-				},
-				Scientific: {
-					label : "Scientific Name"
-				},
-				common_nam: {
-					label: "Common Name"
-				},
-				Year_: {
-					label: "Year"
-				},
-				comments: {
-					label: "Comments"
-				}
-			};*/
 		var grid = new Grid({
 			columns: queryColumns
 		//	columns: queryColumns
@@ -71,7 +56,8 @@ define([
 						URL: query.URL,
 						fields: query.fields,
 						layers: query.layers,
-						description: query.description
+						description: query.description,
+						displayColumns: query.displayColumns
 					};
 					dijit.byId("querySelect").addOption(newOption);
 				});

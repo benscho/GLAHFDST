@@ -141,7 +141,7 @@ define([
 				about: '<b>Summary:</b>Aquatic Invasive Species GLANSIS.',
 				url: 'http://www.eregulations.com/michigan/fishing/great-lakes-trout-salmon-regulations/'
 			}
-		},{
+		}, {
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_bathymetry_noaa/MapServer',
 			title: 'Bathymetry',
@@ -155,6 +155,22 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> NOAA Bathymetry.',
+				url: 'http://www.eregulations.com/michigan/fishing/great-lakes-trout-salmon-regulations/'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_tributary_influence_3classes/MapServer',
+			title: 'Tributaries',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'tributaries',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> Tributary & Interfluve influence.',
 				url: 'http://www.eregulations.com/michigan/fishing/great-lakes-trout-salmon-regulations/'
 			}
 		}, {
@@ -223,7 +239,7 @@ define([
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_benscho_subbasins_lapis_lazuli/MapServer',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/benscho_glahf_subbasins_purple/MapServer',
 			title: 'Sub-Basins',
 			noLegend: false,
 			collapsed: true,
@@ -270,7 +286,7 @@ define([
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_benscho_pour_points_purple/MapServer',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/benscho_glahf_pour_points_green/MapServer',
 			title: 'Watershed Pour Points',
 			noLegend: false,
 			collapsed: true,
@@ -619,7 +635,7 @@ define([
 				type: 'titlePane',
 				canFloat: true,
 				path: 'gis/dijit/Criteria',
-				title: 'Define Criteria',
+				title: 'Habitat Characteristics and Criteria',
 				open: false,
 				position: 9,
 				options: {
@@ -670,6 +686,19 @@ define([
 					map: true, // required
 					mapClickMode: true, // required
 					mapRightClickMenu: true // optional, can use right click context tools
+				}
+			},
+			suitability: {
+				include: false,
+				id: 'suitability',
+				type: 'contentPane',
+				canFloat: false,
+				path: 'gis/dijit/Suitability',
+				title: 'Existing Habitat Suitability Maps',
+				open: false,
+				position: 12,
+				options:{
+					map: true
 				}
 			},
 			help: {
