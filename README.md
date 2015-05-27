@@ -4,7 +4,7 @@ This is a web viewer based on the configurable map viewer http://docs.cmv.io/en/
 
 #Major Widgets:
 _Draw (modified from CMV):_ allows multiple points to be placed at once. Integrating text. esriGraphicsLayer and TextGraphics include extended versions of esri objects (GraphicsLayer and graphic) to facilitate development.
-Needs testing. Integrating with ViewEdit to provide an interface to edit and interact with graphics and associated text.
+Needs testing.
 
 _InteractiveDraw:_ allows a user to draw a polygon, polyline, or place a point. The constructed graphic will provide the user with information about the map based on currently active layers. Needs testing and clarification
 for polyline. Plan to integrate with searching and Export widget.
