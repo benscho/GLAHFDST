@@ -43,12 +43,11 @@ define([
         baseClass: 'gis_ExtractDijit',
         extractTaskURL: null,
         extractTask: null,
-		polygon: null,
         postCreate: function () {
-			userArea = false;
             this.inherited(arguments);
             this.extractTask = new Geoprocessor(this.extractTaskURL);
             this.extractTask.setOutSpatialReference(this.map.spatialReference);
+
             esriRequest({
                 url: this.extractTaskURL,
                 content: {
@@ -135,18 +134,16 @@ define([
             var featureSet = new FeatureSet();
             var features = [];
             // use current extents (can't use the extent object directly for some reason)
-			if (!userArea) {
-				polygon = new Polygon({
-					"rings": [[
-						[this.map.extent.xmin, this.map.extent.ymin],
-						[this.map.extent.xmin, this.map.extent.ymax],
-						[this.map.extent.xmax, this.map.extent.ymax],
-						[this.map.extent.xmax, this.map.extent.ymin],
-						[this.map.extent.xmin, this.map.extent.ymin]
-					]],
-					"spatialReference": this.map.spatialReference
-				});			
-			}
+            var polygon = new Polygon({
+                "rings": [[
+                    [this.map.extent.xmin, this.map.extent.ymin],
+                    [this.map.extent.xmin, this.map.extent.ymax],
+                    [this.map.extent.xmax, this.map.extent.ymax],
+                    [this.map.extent.xmax, this.map.extent.ymin],
+                    [this.map.extent.xmin, this.map.extent.ymin]
+                ]],
+                "spatialReference": this.map.spatialReference
+            });
             var graphic = new Graphic(polygon);
             features.push(graphic);
             featureSet.features = features;
@@ -172,16 +169,7 @@ define([
             domConstruct.empty(this.extractResultsNode);
             Style.set(this.clearActionBarNode, 'display', 'none');
             this.count = 1;
-        },
-		setExtent: function (newExtent) {
-			if(newExtent){
-				polygon = newExtent;
-				userArea = true;
-			}
-			else {
-				userArea = false;
-			}
-		}
+        }
     });
 
     // Extract result dijit

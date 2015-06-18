@@ -23,7 +23,8 @@ define([
 	'dojo/topic',
 	'dojo/text!./Toolbar/Templates/Toolbar.html',
 	'./Identify',
-	'./Find'
+	'./Find',
+	'xstyle/css!./Toolbar/css/Toolbar.css',
 ], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Button, ComboButton, Select, TextBox, 
 			 registry, ValidationTextBox, Memory, Measurement, units, domStyle, domConstruct, request, html, lang, topic, ToolbarTemplate, Identify, Find) {
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {

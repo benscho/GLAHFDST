@@ -247,6 +247,9 @@ define([
                 }
             }
         },
+		_changeColor: function (control) {
+		
+		},
         // zoom to layer
         _zoomToLayer: function (layer) {
             if (layer.declaredClass === 'esri.layers.KMLLayer') {

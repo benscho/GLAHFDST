@@ -193,7 +193,7 @@ define([
 			
 			var dialogSplash = new Dialog({
 				title: "Welcome to the Great Lakes Aquatic Habitat Explorer!",
-				style: "width: 50%",
+				style: "width: 300px; height: 300px;",
 				content: "This tool allows you to view habitat suitability maps for various species, as well as explore areas by selecting your own criteria. Please select how you would like to begin: <br>" +
 						"<center><button type=\"button\" data-dojo-type=\"dijit/form/Button\">View Existing Habitat Suitability</button>" + 
 						"<button type=\"button\" data-dojo-type=\"dijit/form/Button\">Custom Habitat Suitability Mapping</button></center>"

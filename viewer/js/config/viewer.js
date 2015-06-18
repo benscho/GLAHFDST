@@ -127,6 +127,38 @@ define([
 		}],*/
 		operationalLayers: [{
 			type: 'dynamic',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_glb_basin_boundary_black/MapServer',
+			title: 'Great Lakes Basin',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'greatlakebasin',
+				opacity: 1.0,
+				visible: true,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF GLB Great Lakes Basin Extent.',
+				url: ''
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_benscho_boundaries_darkgray/MapServer',
+			title: 'Lake Basin Boundaries',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'lakebasin',
+				opacity: 1.0,
+				visible: true,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF GLB Basins.',
+				url: ''
+			}
+		}, {
+			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_aquatic_invasive_species_glansis/MapServer',
 			title: 'Aquatic Invasive Species',
 			noLegend: false,
@@ -187,38 +219,6 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> 2010 GLINPO Diporeia.',
-				url: ''
-			}
-		}, {
-			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_glb_basin_boundary_black/MapServer',
-			title: 'Great Lakes Basin',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'greatlakebasin',
-				opacity: 1.0,
-				visible: true,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF GLB Great Lakes Basin Extent.',
-				url: ''
-			}
-		}, {
-			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_benscho_boundaries_darkgray/MapServer',
-			title: 'Lake Basin Boundaries',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'lakebasin',
-				opacity: 1.0,
-				visible: true,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF GLB Basins.',
 				url: ''
 			}
 		}, {
@@ -653,7 +653,7 @@ define([
 				position: 10,
 				options: {
 					map: true,
-					extractTaskURL: 'http://sampleserver4.arcgisonline.com/ArcGIS/rest/services/HomelandSecurity/Incident_Data_Extraction/MapServer',
+					extractTaskURL: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/Extract_Test/GPServer/Extract%20Data%20Task',
 					defaultFormat: 'Shapefile - SHP - .shp',
 					defaultLayer: ' Incident Points'
 				}
@@ -689,12 +689,12 @@ define([
 				}
 			},
 			suitability: {
-				include: false,
+				include: true,
 				id: 'suitability',
-				type: 'contentPane',
+				type: 'titlePane',
 				canFloat: false,
 				path: 'gis/dijit/Suitability',
-				title: 'Existing Habitat Suitability Maps',
+				title: 'Habitat Suitability Maps',
 				open: false,
 				position: 12,
 				options:{

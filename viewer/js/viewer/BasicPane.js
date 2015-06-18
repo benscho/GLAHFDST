@@ -10,9 +10,10 @@ define([
 	"dgrid/Grid",
 	"dgrid/extensions/Pagination",
 	"dstore/Memory",
+	'dojo/promise/all',
+	'esri/geometry/geometryEngine',
 	"./Results"
-	//http://jsfiddle.net/fz08dh16/4/ for online version
-], function (declare, request, arrayUtil, Select, on, dom, Query, QueryTask, Grid, Pagination, Memory, Results) {
+], function (declare, request, arrayUtil, Select, on, dom, Query, QueryTask, Grid, Pagination, Memory, all, GeometryEngine, Results) {
 	var queryStore, queryColumns;
 	function showResults (results) {
 		var querySelect = dijit.byId("querySelect");
@@ -25,11 +26,8 @@ define([
 		//queryStore = new Memory({ data: resultItems });
 		queryData = results;
 		queryColumns = querySelect.options[selected].displayColumns;
-		//currently hardcoded, intended for invasive species query
-		//TODO: map to .json before release
 		var grid = new Grid({
 			columns: queryColumns
-		//	columns: queryColumns
 		//	collection: queryStore
 		}, "basicGrid");
 		grid.renderArray(resultItems);
@@ -88,6 +86,43 @@ define([
 					return;
 				}
 				Results.addNode(queryData);
+			});
+			on(dom.byId("queryTestBtn"), "click", function () {
+				var query = new Query();
+				query.where = "1=1";
+				query.returnGeometry = true;
+				query.outFields = ["*"];
+				var queryTask = new QueryTask("https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer/0");
+				var def = queryTask.execute(query);
+				var query2 = new Query();
+				query2.where = "SUBBASIN = 'WER' or SUBBASIN = 'CER' or SUBBASIN = 'EER'";
+				query2.returnGeometry = true;
+				query2.outFields = ["*"];
+				var queryTask2 = new QueryTask("https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_subbasins/MapServer/0");
+				var def2 = queryTask2.execute(query2);
+				all({ def, def2}).then(function(results){
+					var hsiGeo = results["def"], subBasinGeo = results["def2"], basinHSI = [];
+					for(var i = 0; i < subBasinGeo.features.length; i++) {
+						var layer = {
+							"basin name" : subBasinGeo.features[i].attributes.SUBBASIN,
+							"HSI": []
+						};
+						for(var j = 0; j < hsiGeo.features.length; j++) {
+							var inter = GeometryEngine.intersect(subBasinGeo.features[i].geometry, hsiGeo.features[j].geometry);
+							if(inter){
+								inter = GeometryEngine.planarArea(inter);
+							} else {
+								inter = 0;
+							}
+							layer.HSI.push({
+								"Class": hsiGeo.features[j].attributes.Class,
+								"Area (sq. km)": inter//GeometryEngine.planarArea(GeometryEngine.intersect(subBasinGeo.features[i].geometry, hsiGeo.features[j].geometry))
+							});
+						}
+						basinHSI[i] = layer;
+					}
+					console.log(basinHSI);
+				});
 			});
 		}
 	};

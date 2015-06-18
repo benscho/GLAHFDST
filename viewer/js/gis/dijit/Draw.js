@@ -136,9 +136,10 @@ define([
 				console.log("deactivating toolbar");
 				if(this.currGraphic){
 					var newGraphic = new Graphic(this.currGraphic.geometry);
-					newGraphic.setAttributes({"text": this.currGraphic});
-					this.currGraphic.attr("point", newGraphic);
+					//newGraphic.setAttributes({"text": this.currGraphic});
+					//this.currGraphic.attr("point", newGraphic);
 					this.pointGraphics.add(newGraphic);
+					this.currGraphic = newGraphic;
 				}
 				this.editToolbar.deactivate();
 			}));
@@ -184,7 +185,8 @@ define([
         },
 		editGraphic: function (evt) {
 			if (evt.graphic.symbol) {
-				this.pointGraphics.remove(evt.graphic.attributes.point);
+				//this.pointGraphics.remove(evt.graphic.attributes.point);
+				this.pointGraphics.remove(this.currGraphic);
 				this.editToolbar.activate(31, evt.graphic);
 				this.currGraphic = evt.graphic;
 			} else {
@@ -250,8 +252,10 @@ define([
             this.endDrawing();
             this.connectMapClick();
             this.drawModeTextNode.innerText = 'None';
+			this.currGraphic = null;
         },
         stopDrawing: function () {
+			this.currGraphic = null;
             this.drawToolbar.deactivate();
             this.drawModeTextNode.innerText = 'None';
             this.connectMapClick();

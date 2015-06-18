@@ -45,5 +45,227 @@
 				"0":"3,900+"
 			}
 		]
+	},
+	{
+		"name": "Ice Cover Duration (days)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"<10"
+			},
+			{
+				"0":"11-50"
+			},
+			{
+				"0":"51-100"
+			},
+			{
+				"0":">100"
+			}
+		]
+	},
+	{
+		"name": "Geomorphology",
+		"type": "heading"
+	},
+	{
+		"name": "Depth (m)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"0-3"
+			},
+			{
+				"0":"3-5"
+			},
+			{
+				"0":"5-15"
+			},
+			{
+				"0":"15-30"
+			}
+		]
+	},
+	{
+		"name": "Substrate (types)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"Fine"
+			},
+			{
+				"0":"Coarse"
+			},
+			{
+				"0":"Very Coarse"
+			}
+		]
+	},
+	{
+		"name": "Shoreline Classification",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"Artificial"
+			},
+			{
+				"0":"Natural High Slope"
+			},
+			{
+				"0":"Natural Low Slope"
+			}
+		]
+	},
+	{
+		"name": "Shoreline Sinuosity",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"0-0.425"
+			},
+			{
+				"0":"0.425-0.775"
+			},
+			{
+				"0":">0.775"
+			}
+		]
+	},
+	{
+		"name": "Shoreline Hardening",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"Yes"
+			},
+			{
+				"0":"No"
+			}
+		]
+	},
+	{
+		"name": "Biological",
+		"type": "heading"
+	},
+	{
+		"name": "Submerged Aquatic Veg.",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"0"
+			},
+			{
+				"0":"<50%"
+			},
+			{
+				"0":">50%"
+			}
+		]
+	},
+	{
+		"name": "Mechanical",
+		"type": "heading"
+	},
+	{
+		"name":"Circulation (m/s)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"0-0.031"
+			},
+			{
+				"0":"0.031-0.05"
+			},
+			{
+				"0":"0.05-0.14"
+			},
+			{
+				"0":"0.14+"
+			}
+		]
+	},
+	{
+		"name":"Wave Height (m, mean)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"<0.276"
+			},
+			{
+				"0":"0.276-0.439"
+			},
+			{
+				"0":"0.439-0.764"
+			},
+			{
+				"0":"0.764+"
+			}
+		]
+	},
+	{
+		"name":"Wave Height (m, max)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"<3"
+			},
+			{
+				"0":"3-3.6"
+			},
+			{
+				"0":">3.6"
+			}
+		]
+	},
+	{
+		"name":"Upwelling (days per year)",
+		"URL": "",
+		"layer": "0",
+		"type": "radio",
+		"param": "",
+		"choices": [
+			{
+				"0":"<10"
+			},
+			{
+				"0":"11-50"
+			},
+			{
+				"0":"51-100"
+			},
+			{
+				"0":">100"
+			}
+		]
 	}
 ]

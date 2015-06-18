@@ -92,6 +92,12 @@ define([
                     popup: swipeMenu
                 }));
             }
+			
+			// color picker
+			if (controlOptions.colorChange === true || (controller.colorChange === true && controlOptions.colorChange !== false)) {
+			
+			}
+			
             // metadata link
             // service url
             if (controlOptions.metadataUrl === true && layer.url) {
