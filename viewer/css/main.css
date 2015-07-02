@@ -355,12 +355,11 @@ body, html {
 	overflow: auto;
 }
 
-#toolbarTop{
-	height: 20px;
-}
-
-#toolbar_parent{
-
+.toolbarOption{
+	float: left;
+	padding-top: .5em;
+	padding-left: 2em;
+	padding-right: 2em;
 }
 
 /* end of GLAHF DST overrides */

@@ -13,30 +13,40 @@
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body class="dbootstrap">
-        <div class="appHeader">
-            <div class="headerLogo">
-                <img alt="logo" src="images/rocket-logo.png" height="54" />
-            </div>
-            <div class="headerTitle">
-                <span id="headerTitleSpan">
-                    Great Lakes Aquatic Habitat Framework
-                </span>
-                <div id="subHeaderTitleSpan" class="subHeaderTitle">
-                    Decision Support Tool
-                </div>
-            </div>
-            <div class="search">
-                <div id='geocodeDijit'>
-                </div>
-            </div>
-            <div class="headerLinks">
-                <div id="helpDijit">
-                </div>
-            </div>
+        <div id="toolbar">
+			<!--<div class="toolbarOption">
+				<i class="fa fa-bars fa-3x"></i><br/>
+				<center>Layers</center>
+			</div>
+			<div class="toolbarOption">
+				<i class="fa fa-pencil-square-o fa-3x"></i><br/>
+				<center>Draw</center>
+			</div>
+			<div class="toolbarOption">
+				<i class="fa fa-search fa-3x"></i><br/>
+				<center>Search</center>
+			</div>
+			<div class="toolbarOption">
+				<i class="fa fa-floppy-o fa-3x"></i><br/>
+				<center>Save</center>
+			</div>
+			<div class="toolbarOption">
+				<i class="fa fa-print fa-3x"></i><br/>
+				<center>Print</center>
+			</div>
+			<div class="toolbarOption">
+				<i class="fa fa-file fa-3x"></i><br/>
+				<center>Export</center>
+			</div>
+			<div class="toolbarOption">
+				<i class="fa fa-cog fa-3x"></i><br/>
+				<center>Measure</center>
+			</div>
+			<div class="toolbarOption">
+				<i class="fa fa-info-circle fa-3x"></i><br/>
+				<center>Help</center>
+			</div>-->
         </div>
-		<div style="width: 100%; height: 100%">
-			<div id = "tab-container"></div>
-		</div>
         <script type="text/javascript">
             var dojoConfig = {
                 async: true,
@@ -54,7 +64,7 @@
 					location: '//cdn.rawgit.com/SitePen/dgrid/v0.4.0'
 				},{
 					name: 'dstore',
-					location: '//cdn.rawgit.com/SitePen/dstore/master/'
+					location: '//cdn.rawgit.com/SitePen/dstore/v1.1.0'
 				}]
             };
         </script>

@@ -516,10 +516,10 @@ define([
 					})
 				}
 			},
-			legend: {
+			/*legend: {
 				include: true,
 				id: 'legend',
-				type: 'titlePane',
+				type: 'toolbarOption',
 				path: 'esri/dijit/Legend',
 				title: 'Legend',
 				open: false,
@@ -528,13 +528,13 @@ define([
 					map: true,
 					legendLayerInfos: true
 				}
-			},
+			},*/
 			layerControl: {
 				include: true,
 				id: 'layerControl',
-				type: 'titlePane',
+				type: 'toolbarOption',
 				path: 'gis/dijit/LayerControl',
-				title: 'Layers',
+				title: '<i class="fa fa-bars fa-3x"></i><br/>Layers',
 				open: false,
 				position: 0,
 				options: {
@@ -545,7 +545,7 @@ define([
 					overlayReorder: true
 				}
 			},
-			bookmarks: {
+			/*bookmarks: {
 				include: true,
 				id: 'bookmarks',
 				type: 'titlePane',
@@ -555,7 +555,7 @@ define([
 				position: 2,
 				options: 'config/bookmarks'
 			},
-			/*find: {
+			find: {
 				include: true,
 				id: 'find',
 				type: 'titlePane',
@@ -569,17 +569,16 @@ define([
 			draw: {
 				include: true,
 				id: 'draw',
-				type: 'titlePane',
-				canFloat: true,
+				type: 'toolbarOption',
 				path: 'gis/dijit/Draw',
-				title: 'Draw',
+				title: '<i class="fa fa-pencil-square-o fa-3x"></i><br/>Draw',
 				open: false,
 				position: 4,
 				options: {
 					map: true,
 					mapClickMode: true
 				}
-			},
+			}/*,
 			interactiveDraw: {
 				include: true,
 				id: 'idraw',
@@ -594,7 +593,7 @@ define([
 					mapClickMode: true
 				}
 			},
-			/*measure: {
+			measure: {
 				include: true,
 				id: 'measurement',
 				type: 'titlePane',
@@ -628,7 +627,7 @@ define([
 					defaultFormat: 'PDF',
 					defaultLayout: 'Letter ANSI A Landscape'
 				}
-			},*/
+			},
 			criteria: {
 				include: true,
 				id: 'criteria',
@@ -708,8 +707,7 @@ define([
 				path: 'gis/dijit/Help',
 				title: 'Help',
 				options: {}
-			}
-
+			}*/
 		}
 	};
 });

@@ -12,6 +12,7 @@ define([
 	'dojo/_base/lang',
 	'dojo/text!./templates/mapOverlay.html',
 	'gis/dijit/FloatingWidgetDialog',
+	'gis/dijit/ToolbarOption',
 	'put-selector',
 	'dojo/aspect',
 	'dojo/has',
@@ -27,7 +28,7 @@ define([
 	'./Results',
 	'./Metadata'
 ], function (Map, dom, domStyle, domGeom, domClass, on, array, BorderContainer, ContentPane, FloatingTitlePane, lang, mapOverlay,
-	FloatingWidgetDialog, put, aspect, has, topic, PopupMobile, Menu, TabContainer, Dialog, request, IdentityManager, BasicPane, AdvancedPane, Results, Metadata) {
+	FloatingWidgetDialog, ToolbarOption, put, aspect, has, topic, PopupMobile, Menu, TabContainer, Dialog, request, IdentityManager, BasicPane, AdvancedPane, Results, Metadata) {
 
 	return {
 		legendLayerInfos: [],
@@ -35,23 +36,17 @@ define([
 		identifyLayerInfos: [],
 		layerControlLayerInfos: [],
 		panes: {
-			left: {
+			/*left: {
 				id: 'sidebarLeft',
 				placeAt: 'outer',
 				collapsible: true,
 				region: 'left'
-			},
+			},*/
 			center: {
 				id: 'mapCenter',
 				placeAt: 'outer',
 				region: 'center',
 				content: mapOverlay
-			},
-			top: {
-				id: 'toolbarTop',
-				placeAt: 'outer',
-				collapsible: true,
-				region: 'top'
 			}
 		},
 		collapseButtons: {},
@@ -135,63 +130,14 @@ define([
 		},
 		// setup all the sidebar panes
 		initPanes: function () {
-			var tabs = new TabContainer({
-				style: "height: 100%; width: 100%;"
-			}, "tab-container");
-					
-			tabs.startup();
-			
-			/*var query = new TabContainer({
-				title: "Query",
-				id: "Query",
-				nested: true
-			});*/
-			
-			var resultsTab = new ContentPane({
-				title: "Results",
-				id: "Results",
-				content: "Results page placeholder."
-			});
-			
 			var key, panes = this.config.panes || {};
 			for (key in this.panes) {
 				if (this.panes.hasOwnProperty(key)) {
 					panes[key] = lang.mixin(this.panes[key], panes[key]);
 				}
 			}
-
-			this.panes.outer = new BorderContainer({
-				title: "Viewer",
-				id: 'borderContainerOuter',
-				design: 'sidebar',
-				gutters: false
-			});
 			
-			var basic = new ContentPane({
-				title: "Query",
-				id: "Basic",
-				content: "This is the basic Query page."
-			});
-			
-			/*var advanced = new ContentPane({
-				title: "Advanced",
-				id: "Advanced",
-				content: "This is the advanced Query page."
-			});
-			
-			var splash = new ContentPane({
-				title: "Splash",
-				id: "Splash",
-				content: "This is the splash page."
-			});*/
-			
-			var metadata = new ContentPane({
-				title: "Metadata",
-				id: "Metadata",
-				content: "This is the default Metadata content."
-			});
-			
-			var dialogSplash = new Dialog({
+			/*var dialogSplash = new Dialog({
 				title: "Welcome to the Great Lakes Aquatic Habitat Explorer!",
 				style: "width: 300px; height: 300px;",
 				content: "This tool allows you to view habitat suitability maps for various species, as well as explore areas by selecting your own criteria. Please select how you would like to begin: <br>" +
@@ -199,36 +145,13 @@ define([
 						"<button type=\"button\" data-dojo-type=\"dijit/form/Button\">Custom Habitat Suitability Mapping</button></center>"
 			});
 			
-			/*query.addChild(basic);
-			query.addChild(advanced);
+			dialogSplash.show();*/
 			
-			tabs.addChild(splash);*/
-			tabs.addChild(this.panes.outer);
-			tabs.addChild(basic);
-			tabs.addChild(resultsTab);
-			tabs.addChild(metadata);
-			
-			dialogSplash.show();
-
-			/*request.get("/js/viewer/templates/splash.html").then(function (results) {
-				splash.set("content", results);
-			});*/
-			request.get("/js/viewer/templates/basic.html").then(function (results) {
-				basic.set("content", results);
-				BasicPane.initBasic();
-			});			
-			/*request.get("/js/viewer/templates/advanced.html").then(function (results) {
-				advanced.set("content", results);
-				AdvancedPane.initAdvanced();
-			});*/
-			request.get("/js/viewer/templates/results.html").then(function (results) {
-				resultsTab.set("content", results);
-				Results.initResults();
-			});
-			request.get("/js/viewer/templates/metadata.html").then(function (results) {
-				metadata.set("content", results);
-				Metadata.initMeta();
-			});
+			this.panes.outer = new BorderContainer({
+				id: 'borderContainerOuter',
+				design: 'sidebar',
+				gutters: false
+			}).placeAt(document.body);
 			
 			var options, placeAt, type;
 			for (key in panes) {
@@ -553,10 +476,22 @@ define([
 			}
 			return cp;
 		},
+		_createToolbarWidget: function (parentId, content) {
+			var tp, options = {
+					content: content
+				};
+			if (parentId) {
+				options.id = parentId;
+			}
+			tp = new ToolbarOption(options);
+			tp.placeAt(dojo.byId("toolbar"));
+			tp.startup();
+			return tp;
+		},
 		widgetLoader: function (widgetConfig, position) {
 			var parentId, pnl;
 			// only proceed for valid widget types
-			var widgetTypes = ['titlePane', 'contentPane', 'floating', 'domNode', 'invisible', 'map'];
+			var widgetTypes = ['titlePane', 'contentPane', 'floating', 'domNode', 'invisible', 'map', 'toolbarOption'];
 			if (array.indexOf(widgetTypes, widgetConfig.type) < 0) {
 				this.handleError({
 					source: 'Controller',
@@ -566,7 +501,7 @@ define([
 			}
 
 			// build a titlePane or floating widget as the parent
-			if ((widgetConfig.type === 'titlePane' || widgetConfig.type === 'contentPane' || widgetConfig.type === 'floating') && (widgetConfig.id && widgetConfig.id.length > 0)) {
+			if ((widgetConfig.type === 'titlePane' || widgetConfig.type === 'contentPane' || widgetConfig.type === 'floating' || widgetConfig.type === 'toolbarOption') && (widgetConfig.id && widgetConfig.id.length > 0)) {
 				parentId = widgetConfig.id + '_parent';
 				if (widgetConfig.type === 'titlePane') {
 					pnl = this._createTitlePaneWidget(parentId, widgetConfig.title, position, widgetConfig.open, widgetConfig.canFloat, widgetConfig.placeAt);
@@ -574,6 +509,8 @@ define([
 					pnl = this._createContentPaneWidget(parentId, widgetConfig.title, widgetConfig.className, widgetConfig.region, widgetConfig.placeAt);
 				} else if (widgetConfig.type === 'floating') {
 					pnl = this._createFloatingWidget(parentId, widgetConfig.title);
+				} else if (widgetConfig.type === 'toolbarOption') {
+					pnl = this._createToolbarWidget(parentId, widgetConfig.title);
 				}
 				widgetConfig.parentWidget = pnl;
 			}
@@ -587,9 +524,6 @@ define([
 		},
 		createWidget: function (widgetConfig, options, WidgetClass) {
 			// set any additional options
-			if(widgetConfig.id === 'navtools'){
-				console.log("found navtools widget");
-			}
 			options.id = widgetConfig.id + '_widget';
 			options.parentWidget = widgetConfig.parentWidget;
 
@@ -630,6 +564,9 @@ define([
 				this[widgetConfig.id] = new WidgetClass(options, put('div')).placeAt(pnl.containerNode);
 			} else if (widgetConfig.type === 'domNode') {
 				this[widgetConfig.id] = new WidgetClass(options, widgetConfig.srcNodeRef);
+			} else if (widgetConfig.type === 'toolbarOption') {
+				console.log("detected a toolbarOption");
+//				this[widgetConfig.id] = new WidgetClass(options, pnl.containerNode);
 			} else {
 				this[widgetConfig.id] = new WidgetClass(options);
 			}
