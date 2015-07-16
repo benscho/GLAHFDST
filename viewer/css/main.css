@@ -53,7 +53,7 @@ body, html {
 }
 #borderContainerOuter {
     position: absolute;
-    top: 70px;
+    top: 100px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -351,15 +351,78 @@ body, html {
 /* end media queries bootstrap style */
 
 /* GLAHF DST overrides */
-#Metadata{
-	overflow: auto;
+#toolbar {
+	height:100px;
 }
 
-.toolbarOption{
+.toolbarOption {
 	float: left;
 	padding-top: .5em;
 	padding-left: 2em;
 	padding-right: 2em;
 }
 
+.esriSimpleSliderTL  {
+	top: 65px;
+	right: 19px;
+	left: initial;
+}
+
+#layerControl_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#draw_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#search_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#save_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#print_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#extract_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#measurement_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#criteria_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+#help_widget {
+	height: 100%;
+	background-color: white;
+	display: none;
+}
+
+.selected {
+	color: blue;
+}
 /* end of GLAHF DST overrides */

@@ -27,6 +27,8 @@ define([
                     this.onLayoutChange(this.parentWidget.open);
                 })));
             }
+			//make sure that measurement dijit is hidden
+			this.measure.hide();
         },
         checkMeasureTool: function () {
             // no measurement tool is active

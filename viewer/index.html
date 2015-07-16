@@ -13,40 +13,10 @@
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body class="dbootstrap">
-        <div id="toolbar">
-			<!--<div class="toolbarOption">
-				<i class="fa fa-bars fa-3x"></i><br/>
-				<center>Layers</center>
-			</div>
-			<div class="toolbarOption">
-				<i class="fa fa-pencil-square-o fa-3x"></i><br/>
-				<center>Draw</center>
-			</div>
-			<div class="toolbarOption">
-				<i class="fa fa-search fa-3x"></i><br/>
-				<center>Search</center>
-			</div>
-			<div class="toolbarOption">
-				<i class="fa fa-floppy-o fa-3x"></i><br/>
-				<center>Save</center>
-			</div>
-			<div class="toolbarOption">
-				<i class="fa fa-print fa-3x"></i><br/>
-				<center>Print</center>
-			</div>
-			<div class="toolbarOption">
-				<i class="fa fa-file fa-3x"></i><br/>
-				<center>Export</center>
-			</div>
-			<div class="toolbarOption">
-				<i class="fa fa-cog fa-3x"></i><br/>
-				<center>Measure</center>
-			</div>
-			<div class="toolbarOption">
-				<i class="fa fa-info-circle fa-3x"></i><br/>
-				<center>Help</center>
-			</div>-->
-        </div>
+		<div class="headerLogo">
+			<img alt="logo" src="images/GLAHF_Logo.png" height="95" style="float:left;">
+		</div>
+        <div id="toolbar"></div>
         <script type="text/javascript">
             var dojoConfig = {
                 async: true,
@@ -59,10 +29,10 @@
                 },{
                     name: 'gis',
                     location: location.pathname.replace(/[^\/]+$/, '') + 'js/gis'
-                },{
+                },/*{
 					name: 'dgrid',
 					location: '//cdn.rawgit.com/SitePen/dgrid/v0.4.0'
-				},{
+				},*/{
 					name: 'dstore',
 					location: '//cdn.rawgit.com/SitePen/dstore/v1.1.0'
 				}]

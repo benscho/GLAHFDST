@@ -7,6 +7,7 @@ define([
 	'esri/symbols/SimpleFillSymbol',
 	'esri/graphic',
 	'esri/geometry/Polygon',
+	'esri/Color',
 
 	'dstore/Memory',
 	
@@ -28,11 +29,13 @@ define([
 	'dijit/_WidgetsInTemplateMixin',
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
-], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, Memory,
+], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, Color, Memory,
 				on, dom, request, declare, lang, all, topic, Form, RadioButton, ComboBox, TextBox, Button, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+		referenceLayers: [],
+		queryID: 0,
 		widgetsInTemplate: true,
 		templateString: criteriaTemplate,
 		postCreate: function () {
@@ -69,15 +72,15 @@ define([
 			this.polygonRenderer.addValue({
 				value: 1,
 				symbol: new SimpleFillSymbol({
-					color: "00DBFF",
+					color: new Color("99FF33"),
 					outline: {
-						color: "00DBFF",
+						color: new Color("99FF33"),
 						width: 1,
 						type: 'esriSLS',
 						style: 'esriSLSSolid'
 					},
 					type: 'esriSFS',
-					style: 'esriSFSHorizontal'
+					style: 'esriSFSSolid'
 				}),
 				label: 'Polygons that meet criteria',
 				description: 'Polygons that meet criteria'
@@ -91,7 +94,14 @@ define([
 				handleAs: "json"
 			}).then(function (results) {
 				for(var i in results) {
-					if (results[i].type === "select") {
+					/*if (results[i].type === "reference") { //commented out for now, eventually implement subbasins and classification zones as reference layers
+						this.referenceLayers[i] = {
+							name: results[i].name,
+							id: "criteria-"+i,
+							URL: results[i].URL,
+							param: results[i].param
+						};
+					} else*/ if (results[i].type === "select") {
 						var myStore = new Memory({
 							data: [
 								{name:"Options...", id:"option"}
@@ -121,14 +131,15 @@ define([
 						textbox.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
 					} else if (results[i].type === "radio") {
-						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:<br/>";
+						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:<br/><form id=\"criteria-"+ i + "\" name=\"" + results[i].name + "\" URL=\""
+							+ results[i].URL + "\" param=\"" + results[i].param + "\" + layer=\"" + results[i].layer + "\"></form>";
 						for(var j in results[i].choices){
-							dom.byId('criteriaOptions').innerHTML += "<input type=\"radio\" name=\"" + results[i].name + "\" value=\"" + results.name + "\">" + results[i].choices[j][0] + "</input>";
+							dom.byId("criteria-" + i).innerHTML += "<input type=\"radio\" name=\"" + results[i].name + "\" value=\"" + results[i].choices[j][1] + "\">" + results[i].choices[j][0];
 						}
 						//form.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
 					} else if (results[i].type === "heading") {
-						dom.byId('criteriaOptions').innerHTML += "<h4>" + results[i].name + "</h4>";
+						dom.byId('criteriaOptions').innerHTML += "<h4 id=\"criteria-"+ i + "\" name=\"header\">" + results[i].name + "</h4>";
 					} else { //result.type not recognized
 						console.log("ERROR: Unrecognized results[i].type: " + results[i]);
 					}
@@ -143,11 +154,21 @@ define([
 				var curCriteria = dom.byId("criteria-" + i);
 				if (!curCriteria) {
 					break;
+				} else if ((curCriteria.attributes.name.value === "header") || (curCriteria.attributes.param.value === "SUBBASIN")) {
+					i++;
+					continue;
 				}
-				var curURL = this.criteriaObjs[i].URL;
+				else if (!document.querySelector('input[name=\"' + curCriteria.name + '\"]:checked')) {
+					i++;
+					continue;
+				}
+				var curVal = document.querySelector('input[name=\"' + curCriteria.name + '\"]:checked').value;
+				var curParam = curCriteria.attributes.param.value;
+				var curURL = curCriteria.attributes.URL.value;
+				var curLayer = curCriteria.attributes.layer.value;
 				var query = new Query();
-				var queryTask = new QueryTask(curURL);
-				query.where = this.criteriaObjs[i].param + " like '%" + curCriteria.value + "%'";
+				var queryTask = new QueryTask(curURL + "/" + curLayer);
+				query.where = curParam + "=" + curVal;
 				query.outFields = ["*"];
 				query.returnGeometry = true;
 				criteriaDeferreds.push(queryTask.execute(query));
@@ -179,7 +200,9 @@ define([
 							}	
 						}
 					}
-		
+					//need to display results
+					//arbitrary # system, but also want area per geometry, Lake, Sub-basin, mgmt zone, and possible suitability score
+					//possibly use attributetables?
 					var graphic = new Graphic(curIntersection, null, { ren: 1 });
 					this.polygonGraphics.add(graphic);
 					this.map.setExtent(curIntersection.getExtent());
@@ -193,6 +216,27 @@ define([
 			this.clearCriteria();
 			var graphic = new Graphic(new Polygon(data.geometry), null, { ren: 1 });
 			this.polygonGraphics.add(graphic);
+		},
+		createFeatureTable: function () {
+            var attributeTable = registry.byId('attributesContainer_widget');
+            this.queryID = this.queryID + 1;
+
+            var tables = [
+                {
+                    title: "Criteria results" + ' ' + this.queryID,
+                    topicID: this.queryID,
+                    queryOptions: {
+                        queryParameters: {
+                            url: this.selectionIdentifyLayerDijit.item.url + '/' + this.selectionIdentifyLayerDijit.item.subID,
+                            maxAllowableOffset: 100,
+                            where: this.objectiidfield + " IN (" + this.ids + " )"
+                        },
+                        idProperty: this.objectiidfield
+                    }
+                }
+            ];
+
+            var table = attributeTable.addTab(tables[0]);
 		}
 	});
 });

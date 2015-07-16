@@ -1,4 +1,6 @@
-.dijitContentPane{
-	height: 70px;
+.dbootstrap .dijitContentPane{
+	height: auto;
 	float: left;
+	padding-left: 1em;
+	padding-right: 1em;
 }

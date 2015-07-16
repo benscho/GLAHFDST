@@ -137,16 +137,6 @@ define([
 				}
 			}
 			
-			/*var dialogSplash = new Dialog({
-				title: "Welcome to the Great Lakes Aquatic Habitat Explorer!",
-				style: "width: 300px; height: 300px;",
-				content: "This tool allows you to view habitat suitability maps for various species, as well as explore areas by selecting your own criteria. Please select how you would like to begin: <br>" +
-						"<center><button type=\"button\" data-dojo-type=\"dijit/form/Button\">View Existing Habitat Suitability</button>" + 
-						"<button type=\"button\" data-dojo-type=\"dijit/form/Button\">Custom Habitat Suitability Mapping</button></center>"
-			});
-			
-			dialogSplash.show();*/
-			
 			this.panes.outer = new BorderContainer({
 				id: 'borderContainerOuter',
 				design: 'sidebar',
@@ -565,8 +555,8 @@ define([
 			} else if (widgetConfig.type === 'domNode') {
 				this[widgetConfig.id] = new WidgetClass(options, widgetConfig.srcNodeRef);
 			} else if (widgetConfig.type === 'toolbarOption') {
-				console.log("detected a toolbarOption");
-//				this[widgetConfig.id] = new WidgetClass(options, pnl.containerNode);
+//				console.log("detected a toolbarOption");
+				this[widgetConfig.id] = new WidgetClass(options, widgetConfig.srcNodeRef);
 			} else {
 				this[widgetConfig.id] = new WidgetClass(options);
 			}

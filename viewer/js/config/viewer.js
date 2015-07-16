@@ -40,7 +40,7 @@ define([
             logo: false,
 			sliderStyle: 'small'
 		},
-		// panes: {
+		panes: {
 		// 	left: {
 		// 		splitter: true
 		// 	},
@@ -51,13 +51,16 @@ define([
 		// 		splitter: true,
 		// 		collapsible: true
 		// 	},
-		// 	bottom: {
-		// 		id: 'sidebarBottom',
-		// 		placeAt: 'outer',
-		// 		splitter: true,
-		// 		collapsible: true,
-		// 		region: 'bottom'
-		// 	},
+		 	bottom: {
+		 		id: 'sidebarBottom',
+		 		placeAt: 'outer',
+		 		splitter: true,
+		 		collapsible: true,
+		 		region: 'bottom',
+				open: true,
+                style: 'height:200px;',
+                content: '<div id="attributesContainer"></div>'
+		 	}
 		// 	top: {
 		// 		id: 'sidebarTop',
 		// 		placeAt: 'outer',
@@ -65,66 +68,12 @@ define([
 		// 		splitter: true,
 		// 		region: 'top'
 		// 	}
-		// },
+		},
 		// collapseButtonsPane: 'center', //center or outer
 
 		// operationalLayers: Array of Layers to load on top of the basemap: valid 'type' options: 'dynamic', 'tiled', 'feature'.
 		// The 'options' object is passed as the layers options for constructor. Title will be used in the legend only. id's must be unique and have no spaces.
 		// 3 'mode' options: MODE_SNAPSHOT = 0, MODE_ONDEMAND = 1, MODE_SELECTION = 2
-/*		operationalLayers: [{
-			type: 'feature',
-			url: 'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/MeetUpHomeTowns/FeatureServer/0',
-			title: 'STLJS Meetup Home Towns',
-			options: {
-				id: 'meetupHometowns',
-				opacity: 1.0,
-				visible: true,
-				outFields: ['*'],
-				mode: 0
-			},
-			editorLayerInfos: {
-				disableGeometryUpdate: false
-			}
-		}, {
-			type: 'feature',
-			url: 'http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/SanFrancisco/311Incidents/FeatureServer/0',
-			title: 'San Francisco 311 Incidents',
-			options: {
-				id: 'sf311Incidents',
-				opacity: 1.0,
-				visible: true,
-				outFields: ['req_type', 'req_date', 'req_time', 'address', 'district'],
-				mode: 0
-			}
-		}, {
-			type: 'dynamic',
-			url: 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/PublicSafety/PublicSafetyOperationalLayers/MapServer',
-			title: 'Louisville Public Safety',
-			options: {
-				id: 'louisvillePubSafety',
-				opacity: 1.0,
-				visible: true,
-				imageParameters: imageParameters
-			},
-			identifyLayerInfos: {
-				layerIds: [2, 4, 5, 8, 12, 21]
-			}
-		}, {
-			type: 'dynamic',
-			url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/DamageAssessment/MapServer',
-			title: 'Damage Assessment',
-			options: {
-				id: 'DamageAssessment',
-				opacity: 1.0,
-				visible: true,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				swipe: true,
-				metadataUrl: true,
-				expanded: true
-			}
-		}],*/
 		operationalLayers: [{
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_glb_basin_boundary_black/MapServer',
@@ -534,7 +483,8 @@ define([
 				id: 'layerControl',
 				type: 'toolbarOption',
 				path: 'gis/dijit/LayerControl',
-				title: '<i class="fa fa-bars fa-3x"></i><br/>Layers',
+				title: '<i class="fa fa-bars fa-4x"></i><br/>Layers',
+				srcNodeRef: 'layerToolbar',
 				open: false,
 				position: 0,
 				options: {
@@ -545,79 +495,87 @@ define([
 					overlayReorder: true
 				}
 			},
-			/*bookmarks: {
+			criteria: {
 				include: true,
-				id: 'bookmarks',
-				type: 'titlePane',
-				path: 'gis/dijit/Bookmarks',
-				title: 'Bookmarks',
-				open: false,
-				position: 2,
-				options: 'config/bookmarks'
-			},
-			find: {
-				include: true,
-				id: 'find',
-				type: 'titlePane',
+				id: 'criteria',
+				type: 'toolbarOption',
 				canFloat: true,
-				path: 'gis/dijit/Find',
-				title: 'Find',
+				path: 'gis/dijit/Criteria',
+				title: '<i class="fa fa-check-square-o fa-4x"></i><br/>Criteria',
+				srcNodeRef: 'criteriaToolbar',
 				open: false,
-				position: 3,
-				options: 'config/find'
-			},*/
+				position: 1,
+				options: {
+					map: true
+				}
+			},
 			draw: {
 				include: true,
 				id: 'draw',
 				type: 'toolbarOption',
 				path: 'gis/dijit/Draw',
-				title: '<i class="fa fa-pencil-square-o fa-3x"></i><br/>Draw',
+				title: '<i class="fa fa-pencil-square-o fa-4x"></i><br/>Draw',
+				srcNodeRef: 'drawToolbar',
+				open: false,
+				position: 2,
+				options: {
+					map: true,
+					mapClickMode: true
+				}
+			},
+			search: {
+				include: true,
+				id: 'search',
+				type: 'toolbarOption',
+				path: 'gis/dijit/Search',
+				title: '<i class="fa fa-search fa-4x"></i><br/>Search',
+				srcNodeRef: 'searchToolbar',
+				open: false,
+				position: 3,
+				options: 'config/search'
+			},
+			save: {
+				include: true,
+				id: 'save',
+				type: 'toolbarOption',
+				canFloat: true,
+				path: 'gis/dijit/Save',
+				title: '<i class="fa fa-floppy-o fa-4x"></i><br/>Save',
+				srcNodeRef: 'saveToolbar',
 				open: false,
 				position: 4,
 				options: {
-					map: true,
-					mapClickMode: true
-				}
-			}/*,
-			interactiveDraw: {
-				include: true,
-				id: 'idraw',
-				type: 'titlePane',
-				canFloat: true,
-				path: 'gis/dijit/InteractiveDraw',
-				title: 'Interactive Draw',
-				open: false,
-				position: 5,
-				options: {
-					map: true,
-					mapClickMode: true
+					map: true
 				}
 			},
-			measure: {
-				include: true,
-				id: 'measurement',
-				type: 'titlePane',
-				canFloat: true,
-				path: 'gis/dijit/Measurement',
-				title: 'Measurement',
-				open: false,
-				position: 6,
-				options: {
-					map: true,
-					mapClickMode: true,
-					defaultAreaUnit: units.SQUARE_MILES,
-					defaultLengthUnit: units.MILES
-				}
-			},
+			attributesTable: {
+                include: true,
+                id: 'attributesContainer',
+                type: 'domNode',
+                srcNodeRef: 'attributesContainer',
+                path: 'gis/dijit/AttributesTable',
+                options: {
+                    map: true,
+                    mapClickMode: true,
+                    // use a tab container for multiple tables or
+                    // show only a single table
+                    useTabs: true,
+                    // used to open the sidebar after a query has completed
+                    sidebarID: 'sidebarBottom',
+                    // optional tables to load when the widget is first instantiated
+                    tables: []
+                }
+            },
 			print: {
 				include: true,
 				id: 'print',
-				type: 'titlePane',
+				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Print',
-				title: 'Print',
+				title: '<i class="fa fa-print fa-4x"></i><br/>Print',
+				srcNodeRef: 'printToolbar',
 				open: false,
-				position: 7,
+				position: 5,
 				options: {
 					map: true,
 					printTaskURL: 'https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task',
@@ -628,28 +586,16 @@ define([
 					defaultLayout: 'Letter ANSI A Landscape'
 				}
 			},
-			criteria: {
-				include: true,
-				id: 'criteria',
-				type: 'titlePane',
-				canFloat: true,
-				path: 'gis/dijit/Criteria',
-				title: 'Habitat Characteristics and Criteria',
-				open: false,
-				position: 9,
-				options: {
-					map: true
-				}
-			},
 			extract: {
 				include: true,
 				id: 'extract',
-				type: 'titlePane',
+				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Extract',
-				title: 'Export',
+				title: '<i class="fa fa-file fa-4x"></i><br/>Export',
+				srcNodeRef: 'extractToolbar',
 				open: false,
-				position: 10,
+				position: 6,
 				options: {
 					map: true,
 					extractTaskURL: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/Extract_Test/GPServer/Extract%20Data%20Task',
@@ -657,37 +603,24 @@ define([
 					defaultLayer: ' Incident Points'
 				}
 			},
-			save: {
+			measure: {
 				include: true,
-				id: 'save',
-				type: 'titlePane',
+				id: 'measurement',
+				type: 'toolbarOption',
 				canFloat: true,
-				path: 'gis/dijit/Save',
-				title: 'Save',
+				path: 'gis/dijit/Measurement',
+				title: '<i class="fa fa-cog fa-4x"></i><br/>Measure',
+				srcNodeRef: 'measureToolbar',
 				open: false,
-				position: 11,
+				position: 7,
 				options: {
-					map: true
+					map: true,
+					mapClickMode: true,
+					defaultAreaUnit: units.SQUARE_MILES,
+					defaultLengthUnit: units.MILES
 				}
 			},
-			toolbar: {
-				include: true, // false will not load widget
-				id: 'toolbar',
-				type: 'contentPane', // can be contentPane
-				canFloat: false, // if contentPane, use false
-				path: 'gis/dijit/Toolbar',
-				title: 'Toolbar', // title will appear if type: titlePane
-				open: false, // option only applies if type: titlePane
-				position: 12, // use your position value as needed
-				placeAt: 'top', // right or left if type: titlePane, can use top or bottom if type: contentPane
-				options: { // map and mapClickMode are required to use the widget
-					identifyLayerInfos: true,
-					map: true, // required
-					mapClickMode: true, // required
-					mapRightClickMenu: true // optional, can use right click context tools
-				}
-			},
-			suitability: {
+			/*suitability: {
 				include: true,
 				id: 'suitability',
 				type: 'titlePane',
@@ -699,15 +632,18 @@ define([
 				options:{
 					map: true
 				}
-			},
+			},*/
 			help: {
 				include: true,
 				id: 'help',
-				type: 'floating',
+				type: 'toolbarOption',
 				path: 'gis/dijit/Help',
-				title: 'Help',
+				title: '<i class="fa fa-info-circle fa-4x"></i><br/>Help',
+				srcNodeRef: 'helpToolbar',
+				open: false,
+				position: 8,
 				options: {}
-			}*/
+			}
 		}
 	};
 });

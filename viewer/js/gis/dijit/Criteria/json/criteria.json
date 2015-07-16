@@ -1,69 +1,47 @@
 [
 	{
+		"name": "Subbasin",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_subbasins/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "SUBBASIN",
+		"choices": [
+			{
+				"0": "On",
+				"1": "true"
+			},
+			{
+				"0": "Off",
+				"1": "false"
+			}
+		]
+	},
+	{
 		"name": "Hydrology",
 		"type": "heading"
 	},
 	{
-		"name": "Watersheds (km^2)",
-		"URL": "",
+		"name": "Tributary Influence",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/le_trib_influence/MapServer",
 		"layer": "0",
 		"type": "radio",
-		"param": "",
+		"param": "gridcode",
 		"choices": [
 			{
-				"0":"0-12"
+				"0": "Minimal",
+				"1": "1"
 			},
 			{
-				"0":"121-250"
+				"0": "Small",
+				"1": "2"
 			},
 			{
-				"0":"251-7500"
+				"0": "Medium",
+				"1": "3"
 			},
 			{
-				"0":">7500"
-			}
-		]
-	},
-	{
-		"name": "Temperature/Energy",
-		"type": "heading"
-	},
-	{
-		"name": "Vertical Temp. (deg-days, C)",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"<0"
-			},
-			{
-				"0":"0-3,000"
-			},
-			{
-				"0":"3,900+"
-			}
-		]
-	},
-	{
-		"name": "Ice Cover Duration (days)",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"<10"
-			},
-			{
-				"0":"11-50"
-			},
-			{
-				"0":"51-100"
-			},
-			{
-				"0":">100"
+				"0": "Large",
+				"1": "4"
 			}
 		]
 	},
@@ -72,114 +50,23 @@
 		"type": "heading"
 	},
 	{
-		"name": "Depth (m)",
-		"URL": "",
+		"name": "Substrate",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/gl_substrate_2015_v1b/MapServer",
 		"layer": "0",
 		"type": "radio",
-		"param": "",
+		"param": "glahf_subs_simple",
 		"choices": [
 			{
-				"0":"0-3"
+				"0": "Fine",
+				"1": "fine"
 			},
 			{
-				"0":"3-5"
+				"0":"Coarse",
+				"1":"coarse"
 			},
 			{
-				"0":"5-15"
-			},
-			{
-				"0":"15-30"
-			}
-		]
-	},
-	{
-		"name": "Substrate (types)",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"Fine"
-			},
-			{
-				"0":"Coarse"
-			},
-			{
-				"0":"Very Coarse"
-			}
-		]
-	},
-	{
-		"name": "Shoreline Classification",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"Artificial"
-			},
-			{
-				"0":"Natural High Slope"
-			},
-			{
-				"0":"Natural Low Slope"
-			}
-		]
-	},
-	{
-		"name": "Shoreline Sinuosity",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"0-0.425"
-			},
-			{
-				"0":"0.425-0.775"
-			},
-			{
-				"0":">0.775"
-			}
-		]
-	},
-	{
-		"name": "Shoreline Hardening",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"Yes"
-			},
-			{
-				"0":"No"
-			}
-		]
-	},
-	{
-		"name": "Biological",
-		"type": "heading"
-	},
-	{
-		"name": "Submerged Aquatic Veg.",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"0"
-			},
-			{
-				"0":"<50%"
-			},
-			{
-				"0":">50%"
+				"0":"Very Coarse",
+				"1":"very coarse"
 			}
 		]
 	},
@@ -188,83 +75,27 @@
 		"type": "heading"
 	},
 	{
-		"name":"Circulation (m/s)",
-		"URL": "",
+		"name":"Upwelling",
+		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/le_upwelling/MapServer/",
 		"layer": "0",
 		"type": "radio",
-		"param": "",
+		"param": "gridcode",
 		"choices": [
 			{
-				"0":"0-0.031"
+				"0": "None",
+				"1": "1"
 			},
 			{
-				"0":"0.031-0.05"
+				"0":"Low",
+				"1": "2"
 			},
 			{
-				"0":"0.05-0.14"
+				"0":"Medium",
+				"1": "3"
 			},
 			{
-				"0":"0.14+"
-			}
-		]
-	},
-	{
-		"name":"Wave Height (m, mean)",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"<0.276"
-			},
-			{
-				"0":"0.276-0.439"
-			},
-			{
-				"0":"0.439-0.764"
-			},
-			{
-				"0":"0.764+"
-			}
-		]
-	},
-	{
-		"name":"Wave Height (m, max)",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"<3"
-			},
-			{
-				"0":"3-3.6"
-			},
-			{
-				"0":">3.6"
-			}
-		]
-	},
-	{
-		"name":"Upwelling (days per year)",
-		"URL": "",
-		"layer": "0",
-		"type": "radio",
-		"param": "",
-		"choices": [
-			{
-				"0":"<10"
-			},
-			{
-				"0":"11-50"
-			},
-			{
-				"0":"51-100"
-			},
-			{
-				"0":">100"
+				"0":"High",
+				"1": "4"
 			}
 		]
 	}

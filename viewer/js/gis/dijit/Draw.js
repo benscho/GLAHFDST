@@ -51,8 +51,6 @@ define([
             this.drawToolbar.on('draw-end', lang.hitch(this, 'onDrawToolbarDrawEnd'));
 
             this.createGraphicLayers();
-
-			//this.viewEdit = new ViewEdit();
 			
             this.own(topic.subscribe('mapClickMode/currentSet', lang.hitch(this, 'setMapClickMode')));
             if (this.parentWidget && this.parentWidget.toggleable) {
