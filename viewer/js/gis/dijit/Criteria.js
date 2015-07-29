@@ -134,7 +134,7 @@ define([
 						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:<br/><form id=\"criteria-"+ i + "\" name=\"" + results[i].name + "\" URL=\""
 							+ results[i].URL + "\" param=\"" + results[i].param + "\" + layer=\"" + results[i].layer + "\"></form>";
 						for(var j in results[i].choices){
-							dom.byId("criteria-" + i).innerHTML += "<input type=\"radio\" name=\"" + results[i].name + "\" value=\"" + results[i].choices[j][1] + "\">" + results[i].choices[j][0];
+							dom.byId("criteria-" + i).innerHTML += "<div style=\"float:left;\"><input type=\"radio\" name=\"" + results[i].name + "\" value=\"" + results[i].choices[j][1] + "\"/>" + results[i].choices[j][0] + "</div>";
 						}
 						//form.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br/>";
@@ -187,7 +187,9 @@ define([
 					for(var i in results) {
 						layerGeo = []; //zero out layerGeo
 						for(var j in results[i].features) {
-							layerGeo.push(GeometryEngine.intersect(results[i].features[j].geometry, curIntersection));
+							if (GeometryEngine.intersects(results[i].features[j].geometry, curIntersection)){
+								layerGeo.push(GeometryEngine.intersect(results[i].features[j].geometry, curIntersection));
+							}
 						}
 						curIntersection = GeometryEngine.union(layerGeo);
 					}
