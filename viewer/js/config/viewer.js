@@ -523,7 +523,7 @@ define([
 					mapClickMode: true
 				}
 			},
-			search: {
+			/*search: {
 				include: true,
 				id: 'search',
 				type: 'toolbarOption',
@@ -533,7 +533,7 @@ define([
 				open: false,
 				position: 3,
 				options: 'config/search'
-			},
+			},*/
 			save: {
 				include: true,
 				id: 'save',

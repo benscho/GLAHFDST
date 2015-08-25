@@ -51,6 +51,9 @@ define([
 			for (var i in layers) {
 				if (!layers[i].suspended) {
 					if (layers[i].url) {
+						if (layers[i].id === "layer0") {
+							continue;
+						}
 						var insert = {
 							id: layers[i].id,
 							url: layers[i].url
@@ -94,14 +97,12 @@ define([
 			this.geoLayerDB.get(this.slot).then(function (results) {
 				topic.publish("load/data", results);
 			});
-			topic.publish("load/clear"); //clear map of current graphics
+			//topic.publish("load/clear"); //clear map of current graphics, NYI
 			this.graphicLayerDB.get(this.slot).then(function (results) {
 				for (var i in results.layers) {
 					var prefix = results.layers[i].id.split("_");
 					if (prefix[0] === 'drawGraphics') {
 						topic.publish("load/draw", results.layers[i]);
-					} else if (prefix[0] === 'idrawGraphics') {
-						topic.publish("load/idraw", results.layers[i]);
 					} else if (prefix[0] === 'criteria') {
 						topic.publish("load/criteria", results.layers[i]);
 					} else { //unsupported data
