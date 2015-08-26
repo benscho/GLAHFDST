@@ -1,22 +1,5 @@
 [
 	{
-		"name": "Subbasin",
-		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_subbasins/MapServer",
-		"layer": "0",
-		"type": "radio",
-		"param": "SUBBASIN",
-		"choices": [
-			{
-				"0": "On",
-				"1": "true"
-			},
-			{
-				"0": "Off",
-				"1": "false"
-			}
-		]
-	},
-	{
 		"name": "Hydrology",
 		"type": "heading"
 	},
@@ -58,15 +41,15 @@
 		"choices": [
 			{
 				"0": "Fine",
-				"1": "fine"
+				"1": "'fine'"
 			},
 			{
 				"0":"Coarse",
-				"1":"coarse"
+				"1":"'coarse'"
 			},
 			{
 				"0":"Very Coarse",
-				"1":"very coarse"
+				"1":"'very coarse'"
 			}
 		]
 	},

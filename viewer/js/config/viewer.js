@@ -547,7 +547,7 @@ define([
 				options: {
 					map: true
 				}
-			},
+			}/*,
 			attributesTable: {
                 include: true,
                 id: 'attributesContainer',
@@ -565,7 +565,7 @@ define([
                     // optional tables to load when the widget is first instantiated
                     tables: []
                 }
-            },
+            }*/,
 			print: {
 				include: true,
 				id: 'print',

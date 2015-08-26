@@ -8,6 +8,10 @@ define([
 	'esri/graphic',
 	'esri/geometry/Polygon',
 	'esri/Color',
+	'esri/SpatialReference',
+	'esri/units',
+	'esri/tasks/Geoprocessor',
+	'esri/tasks/GeometryService',
 
 	'dstore/Memory',
 	
@@ -19,6 +23,11 @@ define([
 	'dojo/promise/all',
 	'dojo/topic',
 	
+	'dgrid-test/Grid',
+	
+	'dijit/layout/ContentPane',
+	'dijit/layout/TabContainer',
+	'dijit/registry',
 	'dijit/form/Form',
 	'dijit/form/RadioButton',
 	'dijit/form/ComboBox',
@@ -29,8 +38,8 @@ define([
 	'dijit/_WidgetsInTemplateMixin',
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
-], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, Color, Memory,
-				on, dom, request, declare, lang, all, topic, Form, RadioButton, ComboBox, TextBox, Button, _WidgetBase, _TemplatedMixin,
+], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, Memory,
+				on, dom, request, declare, lang, all, topic, Grid, ContentPane, TabContainer, registry, Form, RadioButton, ComboBox, TextBox, Button, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -39,6 +48,11 @@ define([
 		widgetsInTemplate: true,
 		templateString: criteriaTemplate,
 		postCreate: function () {
+			var tabContainer = new TabContainer({
+				style: "height:100%; width:100%;",
+				id: "tabContainer"
+			}).placeAt('sidebarBottom');
+			tabContainer.startup();
 			this.inherited(arguments);
 			this.initCriteria();
 		},
@@ -148,13 +162,23 @@ define([
 			this.geoInfo = new Memory({ idProperty: 'id', data: []});
 			topic.subscribe("load/criteria", lang.hitch(this, this.loadCriteria));
 		},
+		constructBaseGeometry: function (results) {
+			var layerGeo = []; //needed if more than one obj in a given layer
+			//first, construct base case
+			//for us, that is every obj in the first layer
+			var displayField;
+			for(var i in results[0].features) {
+				layerGeo.push(results[0].features[i].geometry);
+			}
+			return GeometryEngine.union(layerGeo);
+		},
 		runInvestigation: function (polygonGraphics) {
-			var criteriaDeferreds = [], i = 0, result;		
+			var i = 0, result, criteriaDeferreds = [], criteriaURLs = ""; 
 			while (true) {
 				var curCriteria = dom.byId("criteria-" + i);
 				if (!curCriteria) {
 					break;
-				} else if ((curCriteria.attributes.name.value === "header") || (curCriteria.attributes.param.value === "SUBBASIN")) {
+				} else if (curCriteria.attributes.name.value === "header") {
 					i++;
 					continue;
 				}
@@ -166,33 +190,48 @@ define([
 				var curParam = curCriteria.attributes.param.value;
 				var curURL = curCriteria.attributes.URL.value;
 				var curLayer = curCriteria.attributes.layer.value;
-				var query = new Query();
+				/*var query = new Query();
 				var queryTask = new QueryTask(curURL + "/" + curLayer);
 				query.where = curParam + "=" + curVal;
 				query.outFields = ["*"];
 				query.returnGeometry = true;
-				criteriaDeferreds.push(queryTask.execute(query));
+				query.maxAllowableOffset = 1000;
+				criteriaDeferreds.push(queryTask.execute(query));*/
+				var url = curURL + "/" + curLayer + "/query?where=" + curParam + "=" + curVal + "&f=json";
+				criteriaURLs += url + ",";
 				i++;
 			}
-			all(criteriaDeferreds).then(
+			criteriaURLs = criteriaURLs.slice(0, -1); //trim last ,
+			var drawnGeo = {};
+			var params = {
+				//"polygon": drawnGeo,
+				"Layers": criteriaURLs
+			};
+			console.log(params);
+			gp = new Geoprocessor("https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/Criteria/GPServer/Criteria");
+			gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
+			/*all(criteriaDeferreds).then(
 				lang.hitch(this, function (results) {
 					var layerGeo = []; //needed if more than one obj in a given layer
 					//first, construct base case
 					//for us, that is every obj in the first layer
-					var  displayField;
+					var displayField;
 					for(var i in results[0].features){
 							layerGeo.push(results[0].features[i].geometry);
 					}
-					var curIntersection = GeometryEngine.union(layerGeo);
-					for(var i in results) {
-						layerGeo = []; //zero out layerGeo
-						for(var j in results[i].features) {
-							if (GeometryEngine.intersects(results[i].features[j].geometry, curIntersection)){
-								layerGeo.push(GeometryEngine.intersect(results[i].features[j].geometry, curIntersection));
+					var curIntersection = constructBaseGeometry(results);//GeometryEngine.union(layerGeo);
+					if (results.length > 1) {
+						for(var i in results) {
+							layerGeo = []; //zero out layerGeo
+							for(var j in results[i].features) {
+								if (GeometryEngine.intersects(results[i].features[j].geometry, curIntersection)){
+									layerGeo.push(GeometryEngine.intersect(results[i].features[j].geometry, curIntersection));
+								}
 							}
+							curIntersection = GeometryEngine.union(layerGeo);
 						}
-						curIntersection = GeometryEngine.union(layerGeo);
 					}
+					console.log("done processing intersections");
 					
 					for(var i in results){
 						displayField = results[i].displayFieldName;
@@ -202,14 +241,71 @@ define([
 							}	
 						}
 					}
+					var useDrawn = false; //FOR TESTING! to be replaced with radio or checkbox
+					var curGeo, //currently active geometry - drawn or previous criteria results
+						newGeo; //new geometry we're getting from the query
+					if (useDrawn) { //check if user has selected to use drawn graphics
+						var layers = this.map.getLayersVisibleAtScale(), j;
+						for (j = 0; j < layers.length; j++) {
+							var prefix = layers[j].id.split("_");
+							if(prefix === 'drawnGraphics') {
+								if(layers[j].graphics){
+									curGeo.addRing(layers[j].Graphics);
+								}
+							}
+						}
+					}
+					else if (this.polygonGraphics.graphics) { //if we have graphics in criteria and user wants to iterate
+						
+					}
+					else if (this.polygonGraphics.graphics) { //we have graphics in criteria but user wants to restart
+						
+					}
+					else { //no graphics anywhere! we're starting anew
+						curGeo = new Polygon(new SpatialReference({wkid:102100}));
+						newGeo = new Polygon(new SpatialReference({wkid:102100}));
+						curGeo.addRing([
+							[-8939064.8907999992,5250835.0367999971],
+							[-8939111.8277000003,5250856.8774000034],
+							[-8939070.5055,5250886.1327000037],
+							[-8939064.8907999992,5250835.0367999971]
+						]);
+						newGeo.addRing([
+							[-8936480.0787000004,5250901.3295999989],
+							[-8936433.1667999998,5250879.4804999977],
+							[-8936474.4569000006,5250850.2289000005],
+							[-8936480.0787000004,5250901.3295999989]
+						]);
+					}
+					var geoservice = new GeometryService("https://arcgisdev.lsa.umich.edu/arcgis/rest/services/Utilities/Geometry/GeometryServer");
+					//geoservice.intersect(curGeo, newGeo, this.criteriaComplete, this.criteriaFailed);
 					//need to display results
 					//arbitrary # system, but also want area per geometry, Lake, Sub-basin, mgmt zone, and possible suitability score
 					//possibly use attributetables?
-					var graphic = new Graphic(curIntersection, null, { ren: 1 });
-					this.polygonGraphics.add(graphic);
-					this.map.setExtent(curIntersection.getExtent());
+					/*var graphic = new Graphic(curIntersection, null, { ren: 1 });
+					if (curIntersection.rings.length > 0){
+						this.polygonGraphics.add(graphic);
+						this.map.setExtent(curIntersection.getExtent());
+						this.createFeatureTable(curIntersection);
+					}
 				})
-			);
+			);*/
+		},
+		criteriaComplete: function (jobInfo) {
+			console.log("succeeded!");
+			gp = new Geoprocessor("https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/Criteria/GPServer/Criteria");
+			gp.getResultData(jobInfo.jobId, "outputFC", lang.hitch(this, function (results) {
+				console.log("retrived results");
+				this.polygonGraphics.add(results.value.features[0].geometry, null, { ren: 1 }); //TODO: Multiple result polygons
+			}), function (error) {
+				console.log("failure to return results");
+			});
+		},
+		criteriaStatus: function (info) {
+			console.log("status: " + info);
+		},
+		criteriaFailed: function (error) {
+			console.log("failed: " + error);
 		},
 		clearCriteria: function () {
 			this.polygonGraphics.clear();
@@ -219,26 +315,41 @@ define([
 			var graphic = new Graphic(new Polygon(data.geometry), null, { ren: 1 });
 			this.polygonGraphics.add(graphic);
 		},
-		createFeatureTable: function () {
-            var attributeTable = registry.byId('attributesContainer_widget');
+		createFeatureTable: function (polygons) {
+            //var attributeTable = registry.byId('attributesContainer_widget');
+			var tabContainer = registry.byId('tabContainer');
             this.queryID = this.queryID + 1;
-
-            var tables = [
-                {
-                    title: "Criteria results" + ' ' + this.queryID,
-                    topicID: this.queryID,
-                    queryOptions: {
-                        queryParameters: {
-                            url: this.selectionIdentifyLayerDijit.item.url + '/' + this.selectionIdentifyLayerDijit.item.subID,
-                            maxAllowableOffset: 100,
-                            where: this.objectiidfield + " IN (" + this.ids + " )"
-                        },
-                        idProperty: this.objectiidfield
-                    }
-                }
-            ];
-
-            var table = attributeTable.addTab(tables[0]);
+			var columns = [ //start simple, add lake, subbasin, zone after we get it working
+				{
+					field: "number",
+					label: "#"
+				},
+				{
+					field: "area",
+					label: "Area (km^2)"
+				}
+			];
+			
+			var processedResults = [];
+			for(var i=0;i<polygons.rings.length;i++) {
+				var result = [];
+				result.number = i+1;
+				result.polygon = new Polygon(new SpatialReference(102100));
+				result.polygon.addRing(polygons.rings[i]);
+				result.area = GeometryEngine.geodesicArea(result.polygon);
+				processedResults[i] = result;
+			}
+			
+			var grid = new Grid({
+				id: this.queryID,
+				columns: columns
+			});
+			grid.renderArray(processedResults);
+			var cp = new ContentPane({
+				title: "Criteria " + this.queryID,
+				content: grid
+			});
+			tabContainer.addChild(cp);
 		}
 	});
 });

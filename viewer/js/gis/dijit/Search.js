@@ -1009,7 +1009,7 @@ define([
 
 
         createFeatureTable: function () {
-            var attributeTable = dijit.byId('attributesContainer_widget');
+        //    var attributeTable = dijit.byId('attributesContainer_widget');
             this.queryID = this.queryID + 1;
 
             var tables = [
@@ -1027,7 +1027,7 @@ define([
                 }
             ];
 
-            var table = attributeTable.addTab(tables[0]);
+        //    var table = attributeTable.addTab(tables[0]);
 
         },
 

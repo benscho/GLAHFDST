@@ -7,7 +7,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <title>GLAHF DST</title>
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13compact/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14compact/esri/css/esri.css">
         <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/theme/dbootstrap/dbootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -29,10 +29,10 @@
                 },{
                     name: 'gis',
                     location: location.pathname.replace(/[^\/]+$/, '') + 'js/gis'
-                },/*{
-					name: 'dgrid',
+                },{
+					name: 'dgrid-test',
 					location: '//cdn.rawgit.com/SitePen/dgrid/v0.4.0'
-				},*/{
+				},{
 					name: 'dstore',
 					location: '//cdn.rawgit.com/SitePen/dstore/v1.1.0'
 				}]
@@ -43,7 +43,7 @@
         <![endif]-->
 		<!--TODO: REMOVE THIS BEFORE RELEASE! 
 		<script src="http://localhost:8081/target/target-script-min.js"></script> -->
-        <script type="text/javascript" src="http://js.arcgis.com/3.13compact/"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.14compact/"></script>
         <script type="text/javascript">
             // get the config file from the url if present
             var file = 'config/viewer', s = window.location.search, q = s.match(/config=([^&]*)/i);
