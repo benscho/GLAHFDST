@@ -1,0 +1,24 @@
+[  
+    {  
+        "name":"Walleye Suitability",
+        "options":[  
+            {  
+                "name":"By Lake"
+            },
+            {  
+                "name":"By Depth"
+            }
+        ]
+    },
+	{
+		"name":"Trout Suitability",
+		"options":[
+			{
+				"name":"By Lake"
+			},
+			{
+				"name":"By Depth"
+			}
+		]
+	}
+]

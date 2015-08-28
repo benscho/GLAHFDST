@@ -23,10 +23,9 @@ define([
 	'dojo/promise/all',
 	'dojo/topic',
 	
-	'dgrid-test/Grid',
+	'dgrid/Grid',
 	
 	'dijit/layout/ContentPane',
-	'dijit/layout/TabContainer',
 	'dijit/registry',
 	'dijit/form/Form',
 	'dijit/form/RadioButton',
@@ -39,7 +38,7 @@ define([
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
 ], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, Memory,
-				on, dom, request, declare, lang, all, topic, Grid, ContentPane, TabContainer, registry, Form, RadioButton, ComboBox, TextBox, Button, _WidgetBase, _TemplatedMixin,
+				on, dom, request, declare, lang, all, topic, Grid, ContentPane, registry, Form, RadioButton, ComboBox, TextBox, Button, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -48,11 +47,6 @@ define([
 		widgetsInTemplate: true,
 		templateString: criteriaTemplate,
 		postCreate: function () {
-			var tabContainer = new TabContainer({
-				style: "height:100%; width:100%;",
-				id: "tabContainer"
-			}).placeAt('sidebarBottom');
-			tabContainer.startup();
 			this.inherited(arguments);
 			this.initCriteria();
 		},
@@ -315,7 +309,7 @@ define([
 			var graphic = new Graphic(new Polygon(data.geometry), null, { ren: 1 });
 			this.polygonGraphics.add(graphic);
 		},
-		createFeatureTable: function (polygons) {
+		/*createFeatureTable: function (polygons) {
             //var attributeTable = registry.byId('attributesContainer_widget');
 			var tabContainer = registry.byId('tabContainer');
             this.queryID = this.queryID + 1;
@@ -350,6 +344,6 @@ define([
 				content: grid
 			});
 			tabContainer.addChild(cp);
-		}
+		}*/
 	});
 });

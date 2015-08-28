@@ -523,7 +523,7 @@ define([
 					mapClickMode: true
 				}
 			},
-			/*search: {
+			search: {
 				include: true,
 				id: 'search',
 				type: 'toolbarOption',
@@ -532,8 +532,10 @@ define([
 				srcNodeRef: 'searchToolbar',
 				open: false,
 				position: 3,
-				options: 'config/search'
-			},*/
+				options: {
+					map: true
+				}
+			},
 			save: {
 				include: true,
 				id: 'save',
@@ -547,13 +549,13 @@ define([
 				options: {
 					map: true
 				}
-			}/*,
-			attributesTable: {
+			},
+			table: {
                 include: true,
-                id: 'attributesContainer',
+                id: 'table',
                 type: 'domNode',
-                srcNodeRef: 'attributesContainer',
-                path: 'gis/dijit/AttributesTable',
+                srcNodeRef: 'table',
+                path: 'gis/dijit/Table',
                 options: {
                     map: true,
                     mapClickMode: true,
@@ -565,7 +567,7 @@ define([
                     // optional tables to load when the widget is first instantiated
                     tables: []
                 }
-            }*/,
+            },
 			print: {
 				include: true,
 				id: 'print',
