@@ -17,7 +17,8 @@ define([
 				if (selected) {
 					domStyle.set(selected.domNode, "color", "black");
 					domStyle.set(dojo.byId(selected.id.slice(0,-6) + "widget"), "display", "none");
-					domStyle.set(dojo.byId(selected.id.slice(0, -6) + "widget"), "z-index", "40");
+					//domStyle.set(dojo.byId(selected.id.slice(0,-6) + "widget"), "z-index", "0");
+					//domStyle.set(dojo.byId(selected.id.slice(0,-6) + "widget"), "visibility", "hidden");
 					if (selected.id === 'measurement_parent') {
 						registry.byId("measurement_widget").measure.hide();
 					}
@@ -29,7 +30,8 @@ define([
 					measurementWidget.measure.show();
 				}
 				domStyle.set(dojo.byId(widgetName), "display", "block");
-				domStyle.set(dojo.byId(widgetName), "z-index", "50");
+				//domStyle.set(dojo.byId(widgetName), "z-index", "50");
+				//domStyle.set(dojo.byId(widgetName), "visibility", "visible");
 				selected = this;
 			}));
 		},

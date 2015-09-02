@@ -131,10 +131,10 @@ define([
 			topic.subscribe('load/clear', lang.hitch(this, this.clearGraphics));
 			this.editToolbar = new Edit(this.map);
 			this.map.on("click", lang.hitch(this, function (evt) {
-				console.log("deactivating toolbar");
+				//console.log("deactivating toolbar");
 				if(this.currGraphic){
 					var newGraphic = new Graphic(this.currGraphic.geometry);
-					//newGraphic.setAttributes({"text": this.currGraphic});
+					newGraphic.setAttributes({"text": this.currGraphic});
 					//this.currGraphic.attr("point", newGraphic);
 					this.pointGraphics.add(newGraphic);
 					this.currGraphic = newGraphic;
@@ -142,7 +142,7 @@ define([
 				this.editToolbar.deactivate();
 			}));
 			this.pointGraphics.on("click", lang.hitch(this, function (evt) {
-				console.log("clicked on a point graphic");
+				//console.log("clicked on a point graphic");
 				if(evt.graphic.attributes){
 					this.editGraphic(evt);
 				} else {
@@ -245,6 +245,7 @@ define([
 			} else {
 				this.pointGraphics.add(graphic);
 			}
+			this.connectMapClick();
         },
         clearGraphics: function () {
             this.endDrawing();

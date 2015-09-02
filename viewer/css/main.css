@@ -425,4 +425,20 @@ body, html {
 .selected {
 	color: blue;
 }
+
+#layerToolbar {
+	width:300px;
+	height:100%;
+}
+
+#searchToolbar {
+	width: 330px;
+	height: 600px;
+	visibility: hidden;
+}
+
+#measureToolbar {
+	width: 300px;
+	background-color: white;
+}
 /* end of GLAHF DST overrides */

@@ -108,6 +108,22 @@ define([
 			}
 		}, {
 			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_classification_zones/MapServer',
+			title: 'Classification Zones (arcpub)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'classpub',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Classification Zones.',
+				url: ''
+			}			
+		}, {
+			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_aquatic_invasive_species_glansis/MapServer',
 			title: 'Aquatic Invasive Species',
 			noLegend: false,
@@ -523,7 +539,7 @@ define([
 					mapClickMode: true
 				}
 			},
-			search: {
+			/*search: {
 				include: true,
 				id: 'search',
 				type: 'toolbarOption',
@@ -535,7 +551,37 @@ define([
 				options: {
 					map: true
 				}
-			},
+			},*/
+			search: {
+                include: true,
+                id: 'search',
+                type: 'toolbarOption',
+				 srcNodeRef: 'searchToolbar',
+                canFloat: false,
+                path: 'gis/dijit/Search',
+                title: '<i class="fa fa-search fa-4x"></i><br/>Search',
+                open: false,
+                position: 3,
+                options: 'config/search'
+            },
+            attributesTable: {
+                include: true,
+                id: 'attributesContainer',
+                type: 'domNode',
+                srcNodeRef: 'attributesContainer',
+                path: 'gis/dijit/AttributesTable',
+                options: {
+                    map: true,
+                    mapClickMode: true,
+                    // use a tab container for multiple tables or
+                    // show only a single table
+                    useTabs: true,
+                    // used to open the sidebar after a query has completed
+                    sidebarID: 'sidebarBottom',
+                    // optional tables to load when the widget is first instantiated
+                    tables: []
+                }
+            },
 			save: {
 				include: true,
 				id: 'save',
@@ -550,7 +596,7 @@ define([
 					map: true
 				}
 			},
-			table: {
+			/*table: {
                 include: true,
                 id: 'table',
                 type: 'domNode',
@@ -567,7 +613,7 @@ define([
                     // optional tables to load when the widget is first instantiated
                     tables: []
                 }
-            },
+            },*/
 			print: {
 				include: true,
 				id: 'print',
