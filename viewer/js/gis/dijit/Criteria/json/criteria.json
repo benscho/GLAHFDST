@@ -1,11 +1,12 @@
 [
 	{
 		"name": "Hydrology",
-		"type": "heading"
+		"type": "heading",
+		"description": "Criteria related to the movement, distribution, and quality of water in the Great Lakes."
 	},
 	{
-		"name": "Tributary Influence",
-		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/le_trib_influence/MapServer",
+		"name": "Watershed Influence",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_watershed_influence_4classes/MapServer",
 		"layer": "0",
 		"type": "radio",
 		"param": "gridcode",
@@ -26,15 +27,62 @@
 				"0": "Large",
 				"1": "4"
 			}
-		]
+		],
+		"description": "Influence of the Watershed on a specific area."
+	},
+	{
+		"name": "Temperature Energy",
+		"type": "heading",
+		"description": "Data relating to the temperature of the water."
+	},
+	{
+		"name": "Cumulative degree-days",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_cdd/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "cddClassDescription",
+		"choices": [
+			{
+				"0": "Cold",
+				"1": "'cold'"
+			},
+			{
+				"0": "Cool",
+				"1": "'cool'"
+			},
+			{
+				"0": "Warm",
+				"1": "'warm'"
+			}
+		],
+		"description": "Data relating to the weather derivative statistic."
+	},
+	{
+		"name": "Ice cover duration (days)",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_ice_duration/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "daysOfIceRange",
+		"choices": [
+			{
+				"0": "31 - 60",
+				"1": "'31 - 60'"
+			},
+			{
+				"0": "61 - 90",
+				"1": "'61 - 90'"
+			}
+		],
+		"description": "Data related to the Ice covering."
 	},
 	{
 		"name": "Geomorphology",
-		"type": "heading"
+		"type": "heading",
+		"description": "Criteria related to topographic and bathymetric features."
 	},
 	{
 		"name": "Substrate",
-		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/gl_substrate_2015_v1b/MapServer",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_substrate/MapServer",
 		"layer": "0",
 		"type": "radio",
 		"param": "glahf_subs_simple",
@@ -51,15 +99,134 @@
 				"0":"Very Coarse",
 				"1":"'very coarse'"
 			}
-		]
+		],
+		"description": "The material that exists at the bottom of the water body. Fine represents objects of X size, Coarse of Y size, and Very Coarse of Z size."
+	},
+	{
+		"name": "Depth (m)",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_depth/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "DepthClass",
+		"choices": [
+			{
+				"0": "Coastal",
+				"1": "'Coastal / very shallow'"
+			},
+			{
+				"0": "Shallow nearshore",
+				"1": "'Shallow nearshore'"
+			},
+			{
+				"0": "Deep nearshore",
+				"1": "'Deep nearshore'"
+			},
+			{
+				"0": "Very shallow offshore",
+				"1": "'Very shallow offshore'"
+			},
+			{
+				"0": "Shallow offshore",
+				"1": "'Shallow offshore'"
+			}
+		],
+		"description": "The distance from the surface of the water to the lake floor."
+	},
+	{
+		"name": "Shoreline classification",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_shoreline_classification/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "gridcode",
+		"choices": [
+			{
+				"0": "Artificial",
+				"1": "1"
+			},
+			{
+				"0": "Coarse grain flat coast",
+				"1": "2"
+			},
+			{
+				"0": "Coastal wetland/riparian zone",
+				"1": "3"
+			},
+			{
+				"0": "Mixed beach",
+				"1": "4"
+			},
+			{
+				"0": "Rocky cliffs/bluffs",
+				"1": "5"
+			},
+			{
+				"0": "Sand beach",
+				"1": "6"
+			},
+			{
+				"0": "Sediment scarp",
+				"1": "7"
+			}
+		],
+		"description": "Classification of the great lakes shoreline."
+	},
+	{
+		"name": "Shoreline sinuosity",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_sinuosity/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "gridcode",
+		"choices": [
+			{
+				"0": "Low",
+				"1": "3"
+			},
+			{
+				"0": "Moderate",
+				"1": "2"
+			},
+			{
+				"0": "High",
+				"1": "3"
+			}
+		],
+		"description": "Measure of the sinuosity index for the shoreline. Low is a sinuosity value of X, Moderate of Y, High of Z."
+	},
+	{
+		"name": "Biological",
+		"type": "heading",
+		"description": "Biological criteria."
+	},
+	{
+		"name": "Submerged aquatic vegetation",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_sav/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "gridcode",
+		"choices": [
+			{
+				"0": "Sand/uncolonized",
+				"1": "3"
+			},
+			{
+				"0": "Light SAV",
+				"1": "2"
+			},
+			{
+				"0": "Dense SAV",
+				"1": "1"
+			}
+		],
+		"description": "Data from MTRI."
 	},
 	{
 		"name": "Mechanical",
-		"type": "heading"
+		"type": "heading",
+		"description": "Criteria related to movement of the water within the Great Lakes."
 	},
 	{
-		"name":"Upwelling",
-		"URL": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/le_upwelling/MapServer/",
+		"name": "Upwelling",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_upwelling/MapServer",
 		"layer": "0",
 		"type": "radio",
 		"param": "gridcode",
@@ -80,6 +247,73 @@
 				"0":"High",
 				"1": "4"
 			}
-		]
+		],
+		"description": "The cyclic motion of colder water towards the surface as warmer water sinks. Low represents X degree of upwelling, Medium represents Y degree, High represents Z degree."
+	},
+	{
+		"name": "Circulation (m/s)",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_circulation_magnitude/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "gridcode",
+		"choices": [
+			{
+				"0": "Low",
+				"1": "1"
+			},
+			{
+				"0": "Moderate",
+				"1": "2"
+			},
+			{
+				"0": "High",
+				"1": "3"
+			}
+		],
+		"description": "Rate at which the water is flowing offshore. Low is X m/s, Moderate is Y m/s, and High is Z m/s."
+	},
+	{
+		"name": "Wave height, mean",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_wave_height_spring_mean/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "gridcode",
+		"choices": [
+			{
+				"0": "Low",
+				"1": "1"
+			},
+			{
+				"0": "Moderate",
+				"1": "2"
+			},
+			{
+				"0": "High",
+				"1": "3"
+			}
+		],
+		"description": "Mean wave height for spring."
+	},
+	{
+		"name": "Wave height, max",
+		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_wave_height_spring_max/MapServer",
+		"layer": "0",
+		"type": "radio",
+		"param": "gridcode",
+		"choices": [
+			{
+				"0": "Low",
+				"1": "1"
+			},
+			{
+				"0": "Moderate",
+				"1": "2"
+			},
+			{
+				"0": "High",
+				"1": "3"
+			}
+		],
+		"description": "Max wave height for spring."
 	}
 ]

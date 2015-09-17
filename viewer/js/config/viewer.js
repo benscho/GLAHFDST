@@ -24,7 +24,7 @@ define([
 		defaultMapClickMode: 'identify',
 		// map options, passed to map constructor. see: https://developers.arcgis.com/javascript/jsapi/map-amd.html#map1
 		mapOptions: {
-			basemap: 'satellite',
+			basemap: 'gray',
 			extent: new Extent({
 				xmin: -10625145,
 				ymin: 5020496,
@@ -74,7 +74,7 @@ define([
 		// operationalLayers: Array of Layers to load on top of the basemap: valid 'type' options: 'dynamic', 'tiled', 'feature'.
 		// The 'options' object is passed as the layers options for constructor. Title will be used in the legend only. id's must be unique and have no spaces.
 		// 3 'mode' options: MODE_SNAPSHOT = 0, MODE_ONDEMAND = 1, MODE_SELECTION = 2
-		operationalLayers: [{
+		operationalLayers: [/*{
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_glb_basin_boundary_black/MapServer',
 			title: 'Great Lakes Basin',
@@ -106,39 +106,54 @@ define([
 				about: '<b>Summary:</b> GLAHF GLB Basins.',
 				url: ''
 			}
-		}, {
+		},*/
+		{
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_classification_zones/MapServer',
-			title: 'Classification Zones (arcpub)',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology/MapServer',
+			title: 'Hydrology',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'classpub',
+				id: 'hydro',
 				opacity: 1.0,
-				visible: false,
+				visible: true,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Classification Zones.',
-				url: ''
-			}			
-		}, {
-			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_aquatic_invasive_species_glansis/MapServer',
-			title: 'Aquatic Invasive Species',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'aquaticinvasivespecies',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b>Aquatic Invasive Species GLANSIS.',
-				url: 'http://www.eregulations.com/michigan/fishing/great-lakes-trout-salmon-regulations/'
+				about: '<b>Summary:</b> GLAHF Hydrology.'
 			}
 		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_biological/MapServer',
+			title: 'Biological',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'biological',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b>Biological layers. Includes GLANSIS Invasive species occurences, MTRI Submerged aquatic vegetation, and USGS Phragmites.',
+				url: ''
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_geomorphology/MapServer',
+			title: 'Geomorphology',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'geomorph',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> Geomorphology layers. Includes Depth (m), Shoreline sinuosity and classification, and substrate.'
+			}
+		}, /*{
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_bathymetry_noaa/MapServer',
 			title: 'Bathymetry',
@@ -186,23 +201,23 @@ define([
 				about: '<b>Summary:</b> 2010 GLINPO Diporeia.',
 				url: ''
 			}
-		}, {
+		}, */{
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_land_cover_2000_2001_nlcd_solris_plo/MapServer',
-			title: 'Land Cover',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape/MapServer',
+			title: 'Landscape',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'landcover',
+				id: 'landscape',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> 2000-2001 NLCD Solris Land Cover data.',
+				about: '<b>Summary:</b> 2000-2001 NLCD Solris Land Cover data, 2003 GLCWC coastal wetlands, 2011/2012 NCLD Solris land cover, USGS quaternary geologic atlas, USGS bedrock geology',
 				url: ''
 			}
-		}, {
+		}, /*{
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/benscho_glahf_subbasins_purple/MapServer',
 			title: 'Sub-Basins',
@@ -233,36 +248,66 @@ define([
 				about: '<b>Summary:</b> GLAHF Substrate data.',
 				url: 'http://www.michigan.gov/dnr/1,1607,7-153-10371_14793-30538--,00.html'
 			}
-		}, {
+		},*/ {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_watershed_boundaries_gray/MapServer',
-			title: 'Watershed Boundaries',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/mi_boundaries/MapServer',
+			title: 'Boundaries',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'watershedbound',
+				id: 'boundaries',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Watershed Boundaries',
+				about: '<b>Summary:</b> GLAHF Boundaries. Contains management units, Watersheds, Counties, and TRS.',
 				url: ''
 			}
-		}, {
+		}, /*{
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/benscho_glahf_pour_points_green/MapServer',
 			title: 'Watershed Pour Points',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'boundary',
+				id: 'pourpoints',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF Watershed Pour Points.'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_upwelling_2011/MapServer',
+			title: 'Upwelling',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'upwelling',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF 2011 Upwelling.'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_spring_rate_warming_2011/MapServer',
+			title: 'Spring Rate of Warming',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'warming',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF 2011 Spring Rate of Warming.'
 			}
 		}, {
 			type: 'dynamic',
@@ -324,37 +369,7 @@ define([
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF Walleye Temperature.'
 			}
-		}, {
-			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_upwelling_2011/MapServer',
-			title: 'Upwelling',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'upwelling',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF 2011 Upwelling.'
-			}
-		}, {
-			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_spring_rate_warming_2011/MapServer',
-			title: 'Spring Rate of Warming',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'warming',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF 2011 Spring Rate of Warming.'
-			}
-		}],
+		}*/],
 		// set include:true to load. For titlePane type set position the the desired order in the sidebar
 		widgets: {
 			growler: {
@@ -517,7 +532,7 @@ define([
 				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Criteria',
-				title: '<i class="fa fa-check-square-o fa-4x"></i><br/>Criteria',
+				title: '<i class="fa fa-check-square-o fa-4x"></i><br/>Habitat<br>Criteria',
 				srcNodeRef: 'criteriaToolbar',
 				open: false,
 				position: 1,
@@ -646,7 +661,7 @@ define([
 				position: 6,
 				options: {
 					map: true,
-					extractTaskURL: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/Extract_Test/GPServer/Extract%20Data%20Task',
+					extractTaskURL: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/ExtractData/GPServer/Extract%20Data%20Task',
 					defaultFormat: 'Shapefile - SHP - .shp',
 					defaultLayer: ' Incident Points'
 				}

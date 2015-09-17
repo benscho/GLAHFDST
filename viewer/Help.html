@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>GLAHF DST: Help</title>
+	<link rel="stylesheet" href="css/help.css" media="screen" type="text/css">
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body class="claro">
+	<div class="title"><center><img alt="logo" src="images/GLAHF_Logo.png" height="95">Help & Support</center></div>
+	<div class="flexOuter">
+		<div id="tc" data-dojo-type="dijit/layout/TabContainer" data-dojo-props="style: { height: '500px', width: '800px' }">
+			<div data-dojo-type="dijit/layout/ContentPane" title="Overview" data-dojo-props="selected:true">
+				Welcome to the Great Lakes Habitat Explorer! This website includes a data viewer that  allows you to view a variety of spatial information related to aquatic habitats in the Great Lakes at user defined extents. The website also includes a habitat suitability explorer with features that allow you to search for habitat areas which meet your criteria, annotate the habitat map, as well as search, export, and print the data. This information page provides a brief overview of the main features.
+				<br>
+				The Great Lakes Aquatic Habitat Explorer allows users to view and query spatial data layers, search for habitat that meet your criteria, zoom to different locations in the Great Lakes, add annotations to your map, and save and print the map that you created.
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Map Area">
+				This feature allows the user to define and scale the area for the data viewing. The map area shown below the toolbar has the following features:
+				<ul>
+					<li>Select a Basemap</li>
+					<li>Zoom Buttons</li>
+					<li>Home Button</li>
+					<li>Zoom to a location provided by your browser (accuracy varies by device)</li>
+					<li>Scale Bar (bottom left)</li>
+					<li>Insert Inset Map (viewed by clicking the arrow at the bottom right of the map area)</li>
+				</ul>
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Layers">
+				This feature lists the spatial data layers available for viewing. The layers function allows the user to:
+				<ul>
+					<li>Select the layers of interest by clicking the checkbox</li>
+					<li>View the symbology for a layer by clicking the plus sign next to the layer name</li>
+					<li>By clicking on the menu icon, users can:</li>
+					<ul>
+						<li>Adjust the order the layers are displayed</li>
+						<li>Zoom to a layer</li>
+						<li>Adjust the transparency of the layer</li>
+						<li>View the layer metadata</li>
+					</ul>
+				</ul>
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Habitat Criteria">
+				This function allows the user to select combinations of spatial data with ecologically defined criteria to identify areas of habitat that meet those criteria. The available criteria are organized by headings and the criteria are listed below the data headings. Information about the criteria and how they were defined are available from the small information icon.
+				<br>
+				To use the function, select options for the layers you would like to include in your investigation. At the bottom, select whether you are interested in areas which match any or all of the criteria, and click “investigate” to see the results. The clear button removes the results from the map.
+				<br>
+				The tool will allow you to investigate any criteria, regardless of whether the resulting area is actually suitable habitat for any plant or animal species. Scientifically validated habitat maps can be viewed in the layers tool.
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Draw">
+				This function allows you to sketch shapes or add annotations to the map. To use the tool, select the desired shape, and click the text checkbox if you would like a label included. Draw the shapes as follows:
+				<ul>
+					<li>Point - click once on the map. Points can also be moved by clicking on them and dragging.</li>
+					<li>Circle -  click and hold, and drag to increase the diameter of the circle.</li>
+					<li>Polyline (line made up of multiple straight segments) - click once to start the line, and click to add vertices (corners), and double click to end the line.</li>
+					<li>Freehand Polyline -  click and hold, and drag in the desired shape.
+					<li>Polygon (shape with straight sides) - click once to start, click to add vertices (corners), and double click to close.</li>
+					<li>Freehand Polygon - click and hold, and drag the cursor in the desired shape.</li>
+				</ul>
+				After you are happy with the object you have added, click stop drawing. At this point you can save your map or print it.  The clear button removes all of the objects which have been added.
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Search">
+				The search function allows you to select specific features from any layer and navigate the map in several ways. The resulting queries will display a list of the matching features in a table shown at the bottom of the window (except for the address query). Click on different rows to see corresponding features highlighted on the map. Close the results tab when finished.
+				<ul>
+					<li>Attributes - This function displays the attributes for the selected layer, shows the values, and allows you to build a SQL query of the attributes for the selected layer. Your query can include multiple attribute fields.</li>
+					<li>Spatial - This function allows you to draw an object, and select all the features in the target layer that intersect the drawn object. The search can be conducted to include a buffer around the object you add.</li>
+					<li>Address - Zoom to the location for a street address, or city and state/province.</li>
+					<li>Selection - Displays the features in the target layer which intersect with another layer.</li>
+				</ul>
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Save">
+				The save tool allows you to save the active layers, zoom extent, and any drawings in your browser’s cache. Therefore, this tool is useful for when you will return to the tool on the same device, but does not allow you to share your file with a colleague. You can save three different maps, and maps saved to a slot will overwrite any existing map.
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Print">
+				This tool allows you to produce a map which can be downloaded, printed, or shared. To use it, select a title, file format, layout, and adjust any other settings.
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Export">
+				This tool allows you to export the data for some of the layers shown in the website. To use it, select the desired format and the layer you would like to extract. Users interested in bulk download of the GLAHF framework or data can obtain that from the GLAHF website, or by contacting the GLAHF research team.
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" title="Measure">
+				The measure tool allows you to measure the area contained in a polygon, distance, or view the longitude and latitude of any location on the map. Distances and shapes shown on the map will be slightly bent, because the shortest distance between two points on a map using the Mercator projection is not a straight line!
+			</div>
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="isDebug: 1, async: 1, parseOnLoad: 1"></script>
+	<script>
+		require([
+			"dijit/form/Button",
+			"dijit/layout/ContentPane",
+			"dijit/layout/TabContainer",
+			"dojo/domReady!"
+		], function(){
+			
+		});
+	</script>
+</body>
+</html>

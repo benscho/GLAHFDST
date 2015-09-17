@@ -53,7 +53,7 @@ body, html {
 }
 #borderContainerOuter {
     position: absolute;
-    top: 100px;
+    top: 107.5px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -352,7 +352,7 @@ body, html {
 
 /* GLAHF DST overrides */
 #toolbar {
-	height:100px;
+	height:107.5px;
 }
 
 .toolbarOption {
@@ -368,6 +368,12 @@ body, html {
 	left: initial;
 }
 
+.toolbarPane {
+	border-radius: 0px 0px 10px;
+	padding: 10px;
+	width: 300px;
+}
+
 #layerControl_widget {
 	height: 100%;
 	background-color: white;
@@ -375,13 +381,14 @@ body, html {
 }
 
 #draw_widget {
-	height: 100%;
+	height: 140px;
 	background-color: white;
 	display: none;
 }
 
 #search_widget {
-	height: 100%;
+	height: 600px;
+	width: 330px;
 	background-color: white;
 	display: none;
 }
@@ -405,15 +412,17 @@ body, html {
 }
 
 #measurement_widget {
-	height: 100%;
+	height: 225px;
 	background-color: white;
 	display: none;
+	width: 300px;
 }
 
 #criteria_widget {
-	height: 100%;
 	background-color: white;
 	display: none;
+	height: 600px;
+	overflow-y: scroll;
 }
 
 #help_widget {

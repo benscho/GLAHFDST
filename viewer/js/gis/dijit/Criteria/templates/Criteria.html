@@ -1,12 +1,11 @@
 <div class="gis_CriteriaDijit">
-	<center>Criteria</center>
+	<h2><center>Habitat Criteria</center></h2>
+	<p>Select one or more criteria and then hit "Investigate" to highlight a section of the map that satisfies the criteria.</p>
+	<p>Note: Selecting 5 or more datasets may take a long time to process.</p>
 	<div id="criteriaOptions"></div>
-	<div class = "critRadio">
-		Return areas that satisfy:<br>
-		<input type="radio" name="critOp" id="critAny" value="union"><label for="critAny">ANY of these criteria</label><br>
-		<input type="radio" name="critOp" id="critAll" value="intersection"><label for="critAll">ALL of these criteria</label>
-	</div>
 	<button type="button" id="investigate" data-dojo-type="dijit/form/Button" data-dojo-attach-event="onClick:runInvestigation">Investigate</button>
 	<button type="button" id="clearCrit" data-dojo-type="dijit/form/Button" data-dojo-attach-event="onClick:clearCriteria">Clear</button>
-	<div id="criteriaResults"></div>
+	<br>
+	<input id="criteriaCheck" name="criteriaCheck" data-dojo-type="dijit/form/CheckBox" value="geometry"/> <label for="criteriaCheck">Use current geometry</label>
+	<i class="fa fa-cog fa-spin fa-3x" id="criteriaSpinner" style="display:none;"></i>
 </div>
