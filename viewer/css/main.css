@@ -375,13 +375,14 @@ body, html {
 }
 
 #layerControl_widget {
-	height: 100%;
+	max-height: 80vh;
+	overflow-y: scroll;
 	background-color: white;
 	display: none;
 }
 
 #draw_widget {
-	height: 140px;
+	height: 215px;
 	background-color: white;
 	display: none;
 }

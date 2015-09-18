@@ -27,6 +27,8 @@ define([
 	
 	'dgrid/Grid',
 	
+	'dijit/popup',
+	'dijit/TooltipDialog',
 	'dijit/layout/ContentPane',
 	'dijit/registry',
 	'dijit/form/Form',
@@ -42,7 +44,7 @@ define([
 	'xstyle/css!./Criteria/css/Criteria.css'
 ], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol,
 			Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, Memory,
-			domStyle, on, dom, request, declare, lang, all, topic, ioQuery, Grid, ContentPane, registry, Form,
+			domStyle, on, dom, request, declare, lang, all, topic, ioQuery, Grid, popup, TooltipDialog, ContentPane, registry, Form,
 			RadioButton, ComboBox, TextBox, Button, CheckBox, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
@@ -104,6 +106,7 @@ define([
 			request.get("js/gis/dijit/Criteria/json/criteria.json", {
 				handleAs: "json"
 			}).then(function (results) {
+				var toolTips = [];
 				for(var i in results) {
 					if (results[i].type === "select") {
 						var myStore = new Memory({
@@ -135,14 +138,32 @@ define([
 						textbox.startup();
 						dom.byId('criteriaOptions').innerHTML += "<br>";
 					} else if (results[i].type === "radio") {
-						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:&nbsp;<i class=\"fa fa-info fa-2\" title=\"" + results[i].description + "\"></i>" 
+						toolTips[i] = new TooltipDialog({
+							content: results[i].description,
+							onMouseLeave: function() {
+								popup.close(toolTips[this.id.slice(0,-3)]);
+							}
+						});
+						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:&nbsp;<i class=\"fa fa-info fa-3\" id=\"crit-" + i + "-id\"></i>" 
 							+ "<br><div data-dojo-type=\"dijit/form/Form\" id=\"criteria-" + i + "\" name=\"" + results[i].name + "\" URL=\"" + results[i].URL + "\" param=\"" + results[i].param
 							+ "\" layer=\"" + results[i].layer + "\"></div>";
+						on(dom.byId("crit-"+ i + "-id"), "mouseover", function() {
+							popup.open({
+								popup: toolTips[this.id.slice(0,-3)],
+								around: dom.byId("crit-" + this.id.slice(0,-3) + "-id")
+							});
+						});
 						for(var j in results[i].choices){
 							dom.byId("criteria-" + i).innerHTML += "<input type=\"radio\" name=\"" 
 							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\"></input>" + results[i].choices[j][0];
 						}
 					} else if (results[i].type === "heading") {
+						toolTips[i] = new TooltipDialog({
+							content: results[i].description,
+							onMouseLeave: function() {
+								popup.close(toolTips[this.id.slice(0,-3)]);
+							}
+						});
 						dom.byId('criteriaOptions').innerHTML += "<h4 id=\"criteria-"+ i + "\" name=\"header\">" + results[i].name + "</h4>";
 					} else { //result.type not recognized
 						console.log("ERROR: Unrecognized results[i].type: " + results[i]);
@@ -187,22 +208,31 @@ define([
 				this.polygonGraphics.clear();
 			}
 			console.log(params);
-			gp = new Geoprocessor("https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/Criteria/GPServer/Criteria");
+			gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaSpinner"), "display", "inline");
 		},
 		criteriaComplete: function (jobInfo) {
-			console.log("succeeded!");
-			gp = new Geoprocessor("https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/Criteria/GPServer/Criteria");
+			domStyle.set(dojo.byId("criteriaSpinner"), "display", "none");
+			gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			gp.getResultData(jobInfo.jobId, "outputFC", lang.hitch(this, function (results) {
 				console.log("retrived results");
-				for(var i in results.value.features) {
-					var graphic = new Graphic(results.value.features[i].geometry, null, { ren: 1 });
-					this.polygonGraphics.add(graphic);
+				if (results.value.features.length === 0) {
+					alert("Criteria Investigation returned no results!");
+					return;
 				}
-				domStyle.set(dojo.byId("criteriaSpinner"), "display", "none");
+				var critPoly = new Polygon(new SpatialReference({wkid:3857}));
+				for(var i in results.value.features) {
+					for(var j in results.value.features[i].geometry.rings){
+						critPoly.addRing(results.value.features[i].geometry.rings[j]);
+					}
+				}
+				var graphic = new Graphic(critPoly, null, { ren: 1 });
+				this.polygonGraphics.add(graphic);
+				this.map.setExtent(critPoly.getExtent());
 			}), function (error) {
 				console.log("failure to return results");
+				console.log(error);
 			});
 		},
 		criteriaStatus: function (info) {

@@ -35,7 +35,7 @@ define([
 				}
 			}),
 			zoom: 7,
-            minZoom: 7,
+            minZoom: 5,
             maxZoom: 16,
             logo: false,
 			sliderStyle: 'small'
@@ -248,7 +248,7 @@ define([
 				about: '<b>Summary:</b> GLAHF Substrate data.',
 				url: 'http://www.michigan.gov/dnr/1,1607,7-153-10371_14793-30538--,00.html'
 			}
-		},*/ {
+		}, {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/mi_boundaries/MapServer',
 			title: 'Boundaries',
@@ -264,7 +264,7 @@ define([
 				about: '<b>Summary:</b> GLAHF Boundaries. Contains management units, Watersheds, Counties, and TRS.',
 				url: ''
 			}
-		}, /*{
+		}, {
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/benscho_glahf_pour_points_green/MapServer',
 			title: 'Watershed Pour Points',
