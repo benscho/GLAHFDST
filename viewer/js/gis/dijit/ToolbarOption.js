@@ -13,6 +13,7 @@ define([
 		postCreate: function () {
 			this.inherited(arguments);
 			domStyle.set(this.domNode, "textAlign", "center");
+			domStyle.set(this.domNode, "cursor", "pointer");
 			this.on('click', lang.hitch(this, function () {
 				var widgetName = this.id.slice(0,-6) + "widget";
 				if (widgetName === "help_widget") {

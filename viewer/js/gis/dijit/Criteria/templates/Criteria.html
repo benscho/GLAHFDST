@@ -7,5 +7,10 @@
 	<button type="button" id="clearCrit" data-dojo-type="dijit/form/Button" data-dojo-attach-event="onClick:clearCriteria">Clear</button>
 	<br>
 	<input id="criteriaCheck" name="criteriaCheck" data-dojo-type="dijit/form/CheckBox" value="geometry"/> <label for="criteriaCheck">Use current geometry</label>
+	<br/>
+	Display results that satisfy:
+	<br/>
+	<input type="radio" name="criteriaInclusive" value="intersect" checked/>All Criteria
+	<input type="radio" name="criteriaInclusive" value="union"/>Any Criteria
 	<i class="fa fa-cog fa-spin fa-3x" id="criteriaSpinner" style="display:none;"></i>
 </div>

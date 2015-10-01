@@ -8,7 +8,7 @@
 		"name": "Watershed Influence",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_watershed_influence_4classes/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{
@@ -39,7 +39,7 @@
 		"name": "Cumulative degree-days",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_cdd/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "cddClassDescription",
 		"choices": [
 			{
@@ -61,7 +61,7 @@
 		"name": "Ice cover duration (days)",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_ice_duration/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "daysOfIceRange",
 		"choices": [
 			{
@@ -84,7 +84,7 @@
 		"name": "Substrate",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_substrate/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "glahf_subs_simple",
 		"choices": [
 			{
@@ -106,7 +106,7 @@
 		"name": "Depth (m)",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_depth/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "DepthClass",
 		"choices": [
 			{
@@ -136,7 +136,7 @@
 		"name": "Shoreline classification",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_shoreline_classification/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{
@@ -174,7 +174,7 @@
 		"name": "Shoreline sinuosity",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_sinuosity/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{
@@ -201,7 +201,7 @@
 		"name": "Submerged aquatic vegetation",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_sav/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{
@@ -228,7 +228,7 @@
 		"name": "Upwelling",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_upwelling/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{
@@ -254,7 +254,7 @@
 		"name": "Circulation (m/s)",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_circulation_magnitude/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{
@@ -276,7 +276,7 @@
 		"name": "Wave height, mean",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_wave_height_spring_mean/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{
@@ -298,7 +298,7 @@
 		"name": "Wave height, max",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_wave_height_spring_max/MapServer",
 		"layer": "0",
-		"type": "radio",
+		"type": "checkbox",
 		"param": "gridcode",
 		"choices": [
 			{

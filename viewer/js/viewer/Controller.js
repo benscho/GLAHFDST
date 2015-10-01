@@ -23,12 +23,8 @@ define([
 	'dijit/Dialog',
 	'dojo/request',
 	'esri/IdentityManager',
-	'./BasicPane',
-	'./AdvancedPane',
-	'./Results',
-	'./Metadata'
 ], function (Map, dom, domStyle, domGeom, domClass, on, array, BorderContainer, ContentPane, FloatingTitlePane, lang, mapOverlay,
-	FloatingWidgetDialog, ToolbarOption, put, aspect, has, topic, PopupMobile, Menu, TabContainer, Dialog, request, IdentityManager, BasicPane, AdvancedPane, Results, Metadata) {
+	FloatingWidgetDialog, ToolbarOption, put, aspect, has, topic, PopupMobile, Menu, TabContainer, Dialog, request, IdentityManager) {
 
 	return {
 		legendLayerInfos: [],

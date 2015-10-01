@@ -362,10 +362,13 @@ body, html {
 	padding-right: 2em;
 }
 
+#mapCenter_zoom_slider {
+	left: auto;
+}
+
 .esriSimpleSliderTL  {
 	top: 65px;
 	right: 19px;
-	left: initial;
 }
 
 .toolbarPane {
