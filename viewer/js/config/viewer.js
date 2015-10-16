@@ -108,6 +108,24 @@ define([
 			}
 		},*/
 		{
+			type: 'Dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology/MapServer',
+			title: 'Test Header',
+			noLegend: false,
+			collapsed: true,
+			subLayers: false,
+			options: {
+				id: 'testheader',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> Who knows.',
+				metadataUrl: true,
+				expanded: true
+			}
+		}, {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology/MapServer',
 			title: 'Hydrology',
@@ -120,7 +138,9 @@ define([
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Hydrology.'
+				about: '<b>Summary:</b> GLAHF Hydrology.',
+				metadataUrl: true,
+                expanded: true
 			}
 		}, {
 			type: 'dynamic',
@@ -136,7 +156,8 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b>Biological layers. Includes GLANSIS Invasive species occurences, MTRI Submerged aquatic vegetation, and USGS Phragmites.',
-				url: ''
+				url: '',
+				metadataUrl: true
 			}
 		}, {
 			type: 'dynamic',
@@ -151,7 +172,8 @@ define([
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Geomorphology layers. Includes Depth (m), Shoreline sinuosity and classification, and substrate.'
+				about: '<b>Summary:</b> Geomorphology layers. Includes Depth (m), Shoreline sinuosity and classification, and substrate.',
+				metadataUrl: true
 			}
 		}, /*{
 			type: 'dynamic',
@@ -215,22 +237,24 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> 2000-2001 NLCD Solris Land Cover data, 2003 GLCWC coastal wetlands, 2011/2012 NCLD Solris land cover, USGS quaternary geologic atlas, USGS bedrock geology',
-				url: ''
+				url: '',
+				metadataUrl: true
 			}
-		}, /*{
+		}/*, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/benscho_glahf_subbasins_purple/MapServer',
-			title: 'Sub-Basins',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_cdd/MapServer',
+			title: 'Cumulative Degree Days',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'subbasins',
+				id: 'lecdd',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Sub-basins.'
+				about: '<b>Summary:</b> Occurrence points of fish Species of the Greatest Conservation Need (SGCN) from Fish Atlas',
+				url: 'http://www.michigan.gov/dnr/1,1607,7-153-10371_14793-30538--,00.html'
 			}
 		}, {
 			type: 'dynamic',
@@ -397,16 +421,6 @@ define([
 					}
 				}
 			},
-			/*identify: {
-				include: true,
-				id: 'identify',
-				type: 'titlePane',
-				path: 'gis/dijit/Identify',
-				title: 'Identify',
-				open: false,
-				position: 3,
-				options: 'config/identify'
-			},*/
 			basemaps: {
 				include: true,
 				id: 'basemaps',
@@ -571,7 +585,7 @@ define([
                 include: true,
                 id: 'search',
                 type: 'toolbarOption',
-				 srcNodeRef: 'searchToolbar',
+				srcNodeRef: 'searchToolbar',
                 canFloat: false,
                 path: 'gis/dijit/Search',
                 title: '<i class="fa fa-search fa-4x"></i><br/>Search',
@@ -597,6 +611,17 @@ define([
                     tables: []
                 }
             },
+			identify: {
+				include: true,
+				id: 'identify',
+				type: 'toolbarOption',
+				path: 'gis/dijit/Identify',
+				title: '<i class="fa fa-info fa-4x"></i><br/>Identify',
+				srcNodeRef: 'identifyToolbar',
+				open: false,
+				position: 3,
+				options: 'config/identify'
+			},
 			save: {
 				include: true,
 				id: 'save',
@@ -701,7 +726,7 @@ define([
 				id: 'help',
 				type: 'toolbarOption',
 				path: 'gis/dijit/Help',
-				title: '<i class="fa fa-info-circle fa-4x"></i><br/>Help',
+				title: '<i class="fa fa-question-circle fa-4x"></i><br/>Help',
 				srcNodeRef: 'helpToolbar',
 				open: false,
 				position: 8,

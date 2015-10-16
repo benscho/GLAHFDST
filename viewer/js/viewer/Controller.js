@@ -246,7 +246,7 @@ define([
 				osm: 'OpenStreetMap',
 				tiled: 'ArcGISTiledMapService',
 				wms: 'WMS',
-				wmts: 'WMTS' //untested
+				wmts: 'WMTS' //untested,
 			};
 			// loading all the required modules first ensures the layer order is maintained
 			var modules = [];

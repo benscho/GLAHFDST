@@ -129,7 +129,7 @@ define([
 						});*/
 						for(var j in results[i].choices){
 							dom.byId("criteria-" + i).innerHTML += "<input type=\"checkbox\" name=\"" 
-							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\"></input>" + results[i].choices[j][0];
+							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\"></input>" + results[i].choices[j][0] + "<br/>";
 						}
 					} else if (results[i].type === "heading") {
 						toolTips[i] = new TooltipDialog({

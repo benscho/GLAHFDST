@@ -390,6 +390,11 @@ body, html {
 	display: none;
 }
 
+#identify_widget {
+	background-color: white;
+	display: none;
+}
+
 #search_widget {
 	height: 600px;
 	width: 330px;

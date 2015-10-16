@@ -148,6 +148,7 @@ define([
         },
         // create layer control and add to appropriate _container
         _addControl: function (layerInfo, LayerControl) {
+			var subLayerOptions = layerInfo.subLayers || true;
             var layerControl = new LayerControl({
                 controller: this,
                 layer: (typeof layerInfo.layer === 'string') ? this.map.getLayer(layerInfo.layer) : layerInfo.layer, // check if we have a layer or just a layer id
@@ -158,7 +159,7 @@ define([
                     noTransparency: null,
                     swipe: null,
                     expanded: false,
-                    sublayers: true
+                    sublayers: subLayerOptions
                 }, layerInfo.controlOptions)
             });
             layerControl.startup();
