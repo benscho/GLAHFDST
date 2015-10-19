@@ -31,8 +31,8 @@ define([
 					this.containerNode.resize();
 				})));
 			} else {
-				var help = domConstruct.place(this.html, this.domTarget);
-				on(help, 'click', lang.hitch(this.parentWidget, 'show'));
+				//var help = domConstruct.place(this.html, this.domTarget);
+				//on(help, 'click', lang.hitch(this.parentWidget, 'show'));
 			}
 		},
 		onOpen: function () {

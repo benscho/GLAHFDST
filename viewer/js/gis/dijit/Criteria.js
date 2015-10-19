@@ -169,7 +169,7 @@ define([
 			}
 			var queryType = document.querySelector("input[name='criteriaInclusive']:checked").value;
 			for (var i in selected) {
-				if (i === "length") {
+				if (i === "length" || i === "item") {
 					break;
 				}
 				var parent = selected[i].parentNode;
