@@ -1,0 +1,19 @@
+[
+	{
+		"name": "Test",
+		"label": "Test",
+		"value": "testvalue",
+		"url": "http://www.google.com",
+		"param": "test",
+		"options": [
+			{
+				"label": "Foo",
+				"value": "foo"
+			},
+			{
+				"label": "Bar",
+				"value": "bar"
+			}
+		]
+	}
+]

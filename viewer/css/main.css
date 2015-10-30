@@ -351,6 +351,18 @@ body, html {
 /* end media queries bootstrap style */
 
 /* GLAHF DST overrides */
+.hidden {
+	display: none;
+}
+
+.groupLabel {
+	font-size: 15px;
+}
+
+.expandNode {
+	width: 20px;
+}
+
 #toolbar {
 	height:107.5px;
 }
@@ -396,8 +408,8 @@ body, html {
 }
 
 #search_widget {
-	height: 600px;
-	width: 330px;
+	height: 150px;
+	width: 150px;
 	background-color: white;
 	display: none;
 }

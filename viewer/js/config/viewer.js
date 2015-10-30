@@ -74,9 +74,9 @@ define([
 		// operationalLayers: Array of Layers to load on top of the basemap: valid 'type' options: 'dynamic', 'tiled', 'feature'.
 		// The 'options' object is passed as the layers options for constructor. Title will be used in the legend only. id's must be unique and have no spaces.
 		// 3 'mode' options: MODE_SNAPSHOT = 0, MODE_ONDEMAND = 1, MODE_SELECTION = 2
-		operationalLayers: [/*{
+		operationalLayers: [{
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_glb_basin_boundary_black/MapServer',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_gl_basin_boundary/MapServer',
 			title: 'Great Lakes Basin',
 			noLegend: false,
 			collapsed: true,
@@ -88,61 +88,75 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF GLB Great Lakes Basin Extent.',
-				url: ''
+				url: '',
+				parent: 'Hydrology'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_benscho_boundaries_darkgray/MapServer',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_subbasins/MapServer',
+			title: 'Sub-basins',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'subbasins',
+				opacity: 1.0,
+				visible: true,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Watershed Sub-basins.',
+				parent: 'Hydrology'
+			}			
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer',
 			title: 'Lake Basin Boundaries',
 			noLegend: false,
 			collapsed: true,
 			options: {
 				id: 'lakebasin',
 				opacity: 1.0,
-				visible: true,
+				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF GLB Basins.',
-				url: ''
+				url: '',
+				parent: 'Hydrology'
 			}
-		},*/
-		{
-			type: 'Dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology/MapServer',
-			title: 'Test Header',
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_pourpoints/MapServer',
+			title: 'Pour Points',
 			noLegend: false,
 			collapsed: true,
-			subLayers: false,
 			options: {
-				id: 'testheader',
+				id: 'pourpoints',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Who knows.',
-				metadataUrl: true,
-				expanded: true
+				about: '<b>Summary:</b> GLAHF Watershed Pour Points.',
+				parent: 'Hydrology'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology/MapServer',
-			title: 'Hydrology',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_watersheds/MapServer',
+			title: 'Watersheds',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'hydro',
+				id: 'watersheds',
 				opacity: 1.0,
-				visible: true,
+				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Hydrology.',
-				metadataUrl: true,
-                expanded: true
-			}
-		}, {
+				about: '<b>Summary:</b> GLAHF Watersheds.',
+				parent: 'Hydrology'
+			}			
+		},/* {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_biological/MapServer',
 			title: 'Biological',
@@ -175,7 +189,7 @@ define([
 				about: '<b>Summary:</b> Geomorphology layers. Includes Depth (m), Shoreline sinuosity and classification, and substrate.',
 				metadataUrl: true
 			}
-		}, /*{
+		}, {
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_bathymetry_noaa/MapServer',
 			title: 'Bathymetry',
@@ -223,7 +237,7 @@ define([
 				about: '<b>Summary:</b> 2010 GLINPO Diporeia.',
 				url: ''
 			}
-		}, */{
+		}, {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape/MapServer',
 			title: 'Landscape',
@@ -240,7 +254,7 @@ define([
 				url: '',
 				metadataUrl: true
 			}
-		}/*, {
+		}, {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_cdd/MapServer',
 			title: 'Cumulative Degree Days',
@@ -290,21 +304,6 @@ define([
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/benscho_glahf_pour_points_green/MapServer',
-			title: 'Watershed Pour Points',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'pourpoints',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Watershed Pour Points.'
-			}
-		}, {
-			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_upwelling_2011/MapServer',
 			title: 'Upwelling',
 			noLegend: false,
@@ -333,7 +332,7 @@ define([
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF 2011 Spring Rate of Warming.'
 			}
-		}, {
+		},*/ {
 			type: 'dynamic',
 			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer',
 			title: 'Walleye HSI',
@@ -346,7 +345,8 @@ define([
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye HSI.'
+				about: '<b>Summary:</b> GLAHF Walleye HSI.',
+				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
@@ -361,7 +361,8 @@ define([
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye Bathymetry.'
+				about: '<b>Summary:</b> GLAHF Walleye Bathymetry.',
+				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
@@ -376,7 +377,8 @@ define([
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye Secchi.'
+				about: '<b>Summary:</b> GLAHF Walleye Secchi.',
+				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
@@ -391,9 +393,28 @@ define([
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye Temperature.'
+				about: '<b>Summary:</b> GLAHF Walleye Temperature.',
+				parent: 'Walleye'
 			}
-		}*/],
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_bathymetry_noaa/MapServer',
+			title: 'Bathymetry',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'bathymetry',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF NOAA Bathymetry.',
+				parent: 'Geomorphology',
+				slider: true,
+				sliderUrl: './Bathymetry.html'
+			}
+		}],
 		// set include:true to load. For titlePane type set position the the desired order in the sidebar
 		widgets: {
 			growler: {
@@ -580,7 +601,7 @@ define([
 				options: {
 					map: true
 				}
-			},*/
+			},
 			search: {
                 include: true,
                 id: 'search',
@@ -610,7 +631,21 @@ define([
                     // optional tables to load when the widget is first instantiated
                     tables: []
                 }
-            },
+            },*/
+			search: {
+				include: true,
+				id: 'search',
+				type: 'toolbarOption',
+				srcNodeRef: 'searchToolbar',
+				canFloat: false,
+				path: 'gis/dijit/Search',
+				title: '<i class="fa fa-search fa-4x"></i><br/>Search',
+				open: false,
+				position: 3,
+				options: {
+					map: true
+				}
+			},
 			identify: {
 				include: true,
 				id: 'identify',

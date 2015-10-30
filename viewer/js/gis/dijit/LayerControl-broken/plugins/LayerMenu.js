@@ -5,7 +5,6 @@ define([
     'dijit/PopupMenuItem',
     'dijit/MenuSeparator',
     './Transparency',
-	'./About',
     'dojo/i18n!./../nls/resource'
 ], function (
     declare,
@@ -14,7 +13,6 @@ define([
     PopupMenuItem,
     MenuSeparator,
     Transparency,
-	About,
     i18n
 ) {
     return declare(Menu, {
@@ -29,7 +27,7 @@ define([
                 layerType = control._layerType,
                 menu = this;
             //reorder menu items
-            /*if ((layerType === 'vector' && controller.vectorReorder) || (layerType === 'overlay' && controller.overlayReorder)) {
+            if ((layerType === 'vector' && controller.vectorReorder) || (layerType === 'overlay' && controller.overlayReorder)) {
                 control._reorderUp = new MenuItem({
                     label: i18n.moveUp,
                     onClick: function () {
@@ -45,7 +43,7 @@ define([
                 });
                 menu.addChild(control._reorderDown);
                 menu.addChild(new MenuSeparator());
-            }*/
+            }
             // toggle all dynamic sublayers
             if (control._dynamicToggleMenuItems) {
                 control._dynamicToggleMenuItems(menu);
@@ -94,6 +92,12 @@ define([
                     popup: swipeMenu
                 }));
             }
+			
+			// color picker
+			if (controlOptions.colorChange === true || (controller.colorChange === true && controlOptions.colorChange !== false)) {
+			
+			}
+			
             // metadata link
             // service url
             if (controlOptions.metadataUrl === true && layer.url) {
@@ -120,33 +124,6 @@ define([
             if (lastChild && lastChild.isInstanceOf(MenuSeparator)) {
                 menu.removeChild(lastChild);
             }
-			// About
-			if (controlOptions.about !== null) {
-				menu.addChild(new About({
-                    label: '<i class="icon-question-sign"></i> About',
-                    layer: layer,
-					layerDescription: controlOptions.about,
-					layerDescriptionUrl: controlOptions.url
-                }));
-                /*menu.addChild(new MenuItem({
-                    label: 'About',
-                    onClick: function () {
-						alert(controlOptions.about);
-						console.debug(controlOptions);
-						
-						
-                    }
-                }));*/
-            }
-			//Slider View
-			if (controlOptions.slider !== null) {
-				menu.addChild(new MenuItem({
-					label: "Slider View",
-					onClick: function () {
-						window.open(controlOptions.sliderUrl, '_blank');
-					}
-				}))
-			}
         }
     });
 });

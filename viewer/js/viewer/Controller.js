@@ -257,7 +257,7 @@ define([
 				} else {
 					this.handleError({
 						source: 'Controller',
-						error: 'Layer type "' + layer.type + '"" isnot supported: '
+						error: 'Layer type "' + layer.type + '"" is not supported: '
 					});
 				}
 			}, this);

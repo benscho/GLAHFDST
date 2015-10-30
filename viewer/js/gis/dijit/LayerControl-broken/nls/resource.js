@@ -18,8 +18,6 @@ define({
         layerSwipeHorizontal: 'Horizontal',
         layerSwipeScope: 'Scope',
         dynamicSublayersOn: 'Turn On All Sublayers',
-        dynamicSublayersOff: 'Turn Off All Sublayers',
-		about: 'About',
-		slider: 'Slider View'
+        dynamicSublayersOff: 'Turn Off All Sublayers'
     }
 });

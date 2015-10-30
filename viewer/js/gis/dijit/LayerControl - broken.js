@@ -3,10 +3,8 @@ define([
     'dojo/_base/array',
     'dojo/_base/lang',
     'dojo/topic',
-	'dojo/on',
     'dojo/dom-attr',
     'dojo/dom-construct',
-	'dojo/dom-class',
     'dijit/_WidgetBase',
     'dijit/_Container',
     'dijit/layout/ContentPane',
@@ -14,23 +12,25 @@ define([
     'esri/tasks/ProjectParameters',
     'esri/config',
     'require',
+	'esri/layers/ImageParameters',
+	'esri/layers/ArcGISDynamicMapServiceLayer',
     'xstyle/css!./LayerControl/css/LayerControl.css'
 ], function (
     declare,
     array,
     lang,
     topic,
-	on,
     domAttr,
     domConst,
-	domClass,
     WidgetBase,
     Container,
     ContentPane,
     Button,
     ProjectParameters,
     esriConfig,
-    require
+    require,
+	ImageParameters,
+	Dynamic
 ) {
     var LayerControl = declare([WidgetBase, Container], {
         map: null,
@@ -147,19 +147,41 @@ define([
                     if (control) {
                         require([control], lang.hitch(this, '_addControl', layerInfo));
                     }
-                }, this);
-				this.createGroup();
+                }, this)
                 this._checkReorder();
             }));
+			topic.subscribe("load/data", lang.hitch(this, this.showLayers));
         },
         // create layer control and add to appropriate _container
         _addControl: function (layerInfo, LayerControl) {
 			var layerParent = layerInfo.controlOptions.parent;
-			var layerHasSlider = layerInfo.controlOptions.slider;
-			if (layerHasSlider) {
-				console.log("found a layer with a slider");
+			if (layerParent !== this.currentParent) {
+				//end of this group, ship it
+				
+				if (layerParent) {
+					var imageParameters = new ImageParameters();
+					imageParameters.format = 'png32';
+					var layerOptions = {
+						id: this.currentParent,
+						opacity: 1,
+						visible: true,
+						imageParameters: imageParameters
+					};
+					
+					this.createGroup(layerInfo, layerOptions, LayerControl);
+					//lang.hitch(this, 'createGroup', layerOptions);
+					
+					//zero out currentGroup
+					this.currentGroup = [];
+					//add this as the new currentParent, start our new group
+					this.currentParent = layerParent;
+				}
 			}
-            var layerControl = new LayerControl({
+			if (layerParent === this.currentParent) {
+					this.currentGroup.push(layerInfo);
+					console.log("adding a layer to the group");
+			}
+            /*var layerControl = new LayerControl({
                 controller: this,
                 layer: (typeof layerInfo.layer === 'string') ? this.map.getLayer(layerInfo.layer) : layerInfo.layer, // check if we have a layer or just a layer id
                 layerTitle: layerInfo.title,
@@ -172,19 +194,6 @@ define([
                     sublayers: true
                 }, layerInfo.controlOptions)
             });
-			if (layerParent) {
-				console.log("found a layer with a parent; hiding it");
-				domClass.add(layerControl.domNode, "hidden");
-				if (layerParent !== this.currentParent) {
-					
-					if (this.currentParent !== '') {
-						this.createGroup();
-					}
-					this.currentGroup = [];
-					this.currentParent = layerParent;
-				}
-				this.currentGroup.push(layerControl.domNode.id);
-			}
             layerControl.startup();
             if (this.separated) {
                 if (layerControl._layerType === 'overlay') {
@@ -194,7 +203,7 @@ define([
                 }
             } else {
                 this.addChild(layerControl, 'first');
-            }
+            }*/
         },
         // move control up in controller and layer up in map
         _moveUp: function (control) {
@@ -271,6 +280,9 @@ define([
                 }
             }*/
         },
+		_changeColor: function (control) {
+		
+		},
         // zoom to layer
         _zoomToLayer: function (layer) {
             if (layer.declaredClass === 'esri.layers.KMLLayer') {
@@ -376,28 +388,46 @@ define([
                 });
             }
         },
-		createGroup: function () {
-			var group = new ContentPane();
-			var groupContent = "<table class='layerControlTable'><tbody><tr><td class='expandNode'><i class='fa fa-plus-square-o layerControlIcon' id='"
-			+ this.currentParent + "-expand'></td></i><td class='layerControlLabel'><span class='groupLabel'>" + this.currentParent + "</span>"
-			+ "</td><td class='layerControlTableUpdate'></td><td class='layerControlTableMenu'><i class='fa fa-bars layerControlMenuIcon'></i></td></tr></tbody></table>";
-			group.set('content', groupContent);
-			group.set('id', this.currentParent);
-			group.set('children', this.currentGroup);
-			group.startup();
-			this._overlayContainer.addChild(group, 'first');
-			domClass.replace(dojo.byId(this.currentParent), "layerControl", "dijitContentPane");
-			on(dojo.byId(this.currentParent + "-expand"), 'click', function(event) {
-				domClass.toggle(dojo.byId(this.id), "fa-plus-square-o");
-				domClass.toggle(dojo.byId(this.id), "fa-minus-square-o");
-				var curId = this.id.slice(0,-7);
-				var children = dojo.byId(curId).attributes[3].value.split(",");
-				array.forEach(children, function(child) {
-					domClass.toggle(dojo.byId(child), "hidden");
-					domClass.toggle(dojo.byId(child), "layerControlIndent");
-				});
-				console.log("clicked an expand node");
+		// show specific layers while hiding others
+		//   takes array of layers to show (layerId and url)
+		// TODO: clean up code so it doesn't look ugly
+		showLayers: function (argLayers) {
+			var layers = this._vectorContainer.getChildren();
+			var layers2 = this._overlayContainer.getChildren();
+			this.hideAllLayers();
+			this.map.setExtent(new esri.geometry.Extent(argLayers.extent));
+			for(var i in layers) {
+				for(var j in argLayers.layers) {
+					if (layers[i].layer.id === argLayers.layers[j].id) {
+						layers[i].layer.show();
+					}
+				}
+			}
+			for(var i in layers2) {
+				for(var j in argLayers.layers) {
+					if (layers2[i].layer.id === argLayers.layers[j].id) {
+						layers2[i].layer.show();
+					}
+				}
+			}
+		},
+		createGroup: function (layerInfo, layerOptions, LayerControl) {
+			var l = new Dynamic('https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology/MapServer', layerOptions);
+			l.layerInfos = this.currentGroup;
+			var layerControl = new LayerControl({
+				controller: this,
+				layer: l,
+				layerTitle: this.currentParent,
+				controlOptions: lang.mixin({
+					noLegend: null,
+					noZoom: null,
+					noTransparency: null,
+					swipe: null,
+					expanded: false,
+					sublayers: true
+				}, layerInfo.controlOptions)
 			});
+			this._overlayContainer.addChild(layerControl, 'first');
 		}
     });
     return LayerControl;
