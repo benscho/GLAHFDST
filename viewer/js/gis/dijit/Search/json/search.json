@@ -1,18 +1,23 @@
 [
 	{
-		"name": "Test",
-		"label": "Test",
-		"value": "testvalue",
-		"url": "http://www.google.com",
-		"param": "test",
+		"name": "Walleye",
+		"label": "Walleye Habitat",
+		"index": "0",
+		"value": "walleyehsi",
 		"options": [
 			{
-				"label": "Foo",
-				"value": "foo"
+				"label": "By Suitability",
+				"value": "1",
+				"param": "1",
+				"url": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer",
+				"index": "0"
 			},
 			{
-				"label": "Bar",
-				"value": "bar"
+				"label": "By Lake",
+				"value": "bar",
+				"param": "test",
+				"url": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer",
+				"index": "1"
 			}
 		]
 	}

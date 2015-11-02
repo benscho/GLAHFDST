@@ -156,9 +156,6 @@ define([
         _addControl: function (layerInfo, LayerControl) {
 			var layerParent = layerInfo.controlOptions.parent;
 			var layerHasSlider = layerInfo.controlOptions.slider;
-			if (layerHasSlider) {
-				console.log("found a layer with a slider");
-			}
             var layerControl = new LayerControl({
                 controller: this,
                 layer: (typeof layerInfo.layer === 'string') ? this.map.getLayer(layerInfo.layer) : layerInfo.layer, // check if we have a layer or just a layer id
@@ -173,7 +170,7 @@ define([
                 }, layerInfo.controlOptions)
             });
 			if (layerParent) {
-				console.log("found a layer with a parent; hiding it");
+				//console.log("found a layer with a parent; hiding it");
 				domClass.add(layerControl.domNode, "hidden");
 				if (layerParent !== this.currentParent) {
 					
@@ -184,6 +181,12 @@ define([
 					this.currentParent = layerParent;
 				}
 				this.currentGroup.push(layerControl.domNode.id);
+			}
+			if (layerHasSlider) {
+				//console.log("found a layer with a slider");
+				//var node = document.querySelector(layerControl.id + " .layerControlTableLabel");
+				//var newNode = domConst.toDom('<i class="fa fa-sliders" style="float:right;"></i>');
+				//domConst.place(newNode, node, "after");
 			}
             layerControl.startup();
             if (this.separated) {
