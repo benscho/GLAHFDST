@@ -24,7 +24,7 @@ define([
 		defaultMapClickMode: 'identify',
 		// map options, passed to map constructor. see: https://developers.arcgis.com/javascript/jsapi/map-amd.html#map1
 		mapOptions: {
-			basemap: 'gray',
+			basemap: 'satellite',
 			extent: new Extent({
 				xmin: -10625145,
 				ymin: 5020496,
@@ -156,155 +156,219 @@ define([
 				about: '<b>Summary:</b> GLAHF Watersheds.',
 				parent: 'Hydrology'
 			}			
-		},/* {
+		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_biological/MapServer',
-			title: 'Biological',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_biological_glansis/MapServer',
+			title: 'Invasive Species',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'biological',
+				id: 'glansis',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b>Biological layers. Includes GLANSIS Invasive species occurences, MTRI Submerged aquatic vegetation, and USGS Phragmites.',
-				url: '',
-				metadataUrl: true
+				about: '<b>Summary:</b> GLANSIS Invasive Species occurences.',
+				parent: 'Biological'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_geomorphology/MapServer',
-			title: 'Geomorphology',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_biological_phragmites_usgs/MapServer',
+			title: 'Phragmites',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'geomorph',
+				id: 'phragmites',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Geomorphology layers. Includes Depth (m), Shoreline sinuosity and classification, and substrate.',
-				metadataUrl: true
-			}
+				about: '<b>Summary:</b> GLAHF Phragmites.',
+				parent: 'Biological'
+			}			
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_bathymetry_noaa/MapServer',
-			title: 'Bathymetry',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_biological_sav_mtri/MapServer',
+			title: 'MTRI SAV',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'bathymetry',
+				id: 'mtrisav',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> NOAA Bathymetry.',
-				url: 'http://www.eregulations.com/michigan/fishing/great-lakes-trout-salmon-regulations/'
+				about: '<b>Summary:</b> MTRI Submerged Aquatic Vegetation.',
+				parent: 'Biological'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_tributary_influence_3classes/MapServer',
-			title: 'Tributaries',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_geomorphology_depth/MapServer',
+			title: 'Depth',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'tributaries',
+				id: 'depth',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Tributary & Interfluve influence.',
-				url: 'http://www.eregulations.com/michigan/fishing/great-lakes-trout-salmon-regulations/'
+				about: '<b>Summary:</b> GLAHF Depth.',
+				parent: 'Geomorphology',
+				slider: true,
+				sliderUrl: './Bathymetry.html'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_diporeia_2010_glinpo/MapServer',
-			title: 'Diporeia',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_geomorphology_shoreline_classification/MapServer',
+			title: 'Shoreline Classification',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'diporeia',
+				id: 'shorelineclass',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> 2010 GLINPO Diporeia.',
-				url: ''
+				about: '<b>Summary:</b> GLAHF Shoreline Classification.',
+				parent: 'Geomorphology'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape/MapServer',
-			title: 'Landscape',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_geomorphology_shoreline_sinuosity/MapServer',
+			title: 'Shoreline Sinuosity',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'landscape',
+				id: 'shorelinesinu',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> 2000-2001 NLCD Solris Land Cover data, 2003 GLCWC coastal wetlands, 2011/2012 NCLD Solris land cover, USGS quaternary geologic atlas, USGS bedrock geology',
-				url: '',
-				metadataUrl: true
+				about: '<b>Summary:</b> GLAHF Shoreline Sinuosity.',
+				parent: 'Geomorphology'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_cdd/MapServer',
-			title: 'Cumulative Degree Days',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'lecdd',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Occurrence points of fish Species of the Greatest Conservation Need (SGCN) from Fish Atlas',
-				url: 'http://www.michigan.gov/dnr/1,1607,7-153-10371_14793-30538--,00.html'
-			}
-		}, {
-			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_substrate/MapServer',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_geomorphology_substrate/MapServer',
 			title: 'Substrate',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'sgcn',
+				id: 'substrate',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Substrate data.',
-				url: 'http://www.michigan.gov/dnr/1,1607,7-153-10371_14793-30538--,00.html'
-			}
+				about: '<b>Summary:</b> GLAHF Substrate.',
+				parent: 'Geomorphology'
+			}			
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/mi_boundaries/MapServer',
-			title: 'Boundaries',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape_bedrock_geology/MapServer',
+			title: 'Bedrock Geology',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'boundaries',
+				id: 'bedrockgeo',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Boundaries. Contains management units, Watersheds, Counties, and TRS.',
-				url: ''
+				about: '<b>Summary:</b> GLAHF Bedrock Geology.',
+				parent: 'Landscape'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_upwelling_2011/MapServer',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape_coastal_wetlands/MapServer',
+			title: 'Coastal Wetlands',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'coastalwetlands',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Coastal Wetlands.',
+				parent: 'Landscape'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape_landcover_2011_2012/MapServer',
+			title: 'Landcover (2010-2011)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'landcover2010',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Landcover for 2010-2011.',
+				parent: 'Landscape'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape_landcover_2000_2001/MapServer',
+			title: 'Landcover (2000-2001)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'landcover2000',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Landcover for 2000-2001.',
+				parent: 'Landscape'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape_quaternary_geology/MapServer',
+			title: 'Quarternary Geology',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'quartgeo',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Quarternary Geology.',
+				parent: 'Landscape'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_mechanical_energy_circulation_magnitude_spring_mean/MapServer',
+			title: 'Circulation Mag. (Spring)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'circmax',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Mean Circulation Magnitude for Spring.',
+				parent: 'Mechanical Energy'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_mechanical_energy_upwelling/MapServer',
 			title: 'Upwelling',
 			noLegend: false,
 			collapsed: true,
@@ -315,104 +379,200 @@ define([
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF 2011 Upwelling.'
+				about: '<b>Summary:</b> GLAHF Upwelling.',
+				parent: 'Mechanical Energy'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_spring_rate_warming_2011/MapServer',
-			title: 'Spring Rate of Warming',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_mechanical_energy_wave_height_spring_max/MapServer',
+			title: 'Wave Height (Max)',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'warming',
+				id: 'wavemax',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF 2011 Spring Rate of Warming.'
+				about: '<b>Summary:</b> GLAHF Maximum Wave Height (Spring).',
+				parent: 'Mechanical Energy'
 			}
-		},*/ {
+		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer',
-			title: 'Walleye HSI',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_mechanical_energy_wave_height_spring_mean/MapServer',
+			title: 'Wave Height (Mean)',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'walleyehsi',
+				id: 'wavemean',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye HSI.',
+				about: '<b>Summary:</b> GLAHF Mean Wave Height (Spring).',
+				parent: 'Mechanical Energy'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_temperature_energy_cdd/MapServer',
+			title: 'Cumulative Degree Days',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'cdd',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Cumulative Degree Days.',
+				parent: 'Temperature Energy'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_temperature_energy_ice_duration/MapServer',
+			title: 'Ice Duration',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'iceduration',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Ice Duration.',
+				parent: 'Temperature Energy'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_temperature_energy_surface_temp_spring/MapServer',
+			title: 'Spring Temperature',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'surfacetempspring',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Spring Surface Temperature.',
+				parent: 'Temperature Energy'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_temperature_energy_surface_temp_summer/MapServer',
+			title: 'Summer Temperature',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'surfacetempsummer',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Summer Surface Temperature.',
+				parent: 'Temperature Energy'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_adult_bottom/MapServer',
+			title: 'Adult Walleye HSI (bottom)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'walleyehsiadultbottom',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Adult Walleye HSI for the lake bottom.',
 				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi_bathymetry/MapServer',
-			title: 'Walleye Bathymetry',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_adult_surface/MapServer',
+			title: 'Adult Walleye HSI (surface)',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'walleyebathy',
+				id: 'walleyehsiadultsurface',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye Bathymetry.',
+				about: '<b>Summary:</b> GLAHF Adult Walleye HSI for the lake surface.',
 				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi_secchi/MapServer',
-			title: 'Walleye Secchi',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_all_bottom/MapServer',
+			title: 'Walleye HSI (bottom)',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'walleyesecchi',
+				id: 'walleyehsioverallbottom',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye Secchi.',
+				about: '<b>Summary:</b> GLAHF Overall Walleye HSI for the lake bottom.',
 				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi_temp/MapServer',
-			title: 'Walleye Temperature',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_all_surface/MapServer',
+			title: 'Walleye HSI (surface)',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'walleyetemp',
+				id: 'walleyehsioverallsurface',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Walleye Temperature.',
+				about: '<b>Summary:</b> GLAHF Overall Walleye HSI for the lake surface.',
 				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_bathymetry_noaa/MapServer',
-			title: 'Bathymetry',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_juvenile_bottom/MapServer',
+			title: 'Juvenile Walleye HSI (bottom)',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'bathymetry',
+				id: 'walleyehsijuvenilebottom',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF NOAA Bathymetry.',
-				parent: 'Geomorphology',
-				slider: true,
-				sliderUrl: './Bathymetry.html'
+				about: '<b>Summary:</b> GLAHF Juvenile Walleye HSI for the lake bottom.',
+				parent: 'Walleye'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_juvenile_surface/MapServer',
+			title: 'Juvenile Walleye HSI (surface)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'walleyehsijuvenilesurface',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> GLAHF Juvenile Walleye HSI for the lake surface.',
+				parent: 'Walleye'
 			}
 		}],
 		// set include:true to load. For titlePane type set position the the desired order in the sidebar
@@ -743,6 +903,20 @@ define([
 					defaultLengthUnit: units.MILES
 				}
 			},
+			locate: {
+				include: true,
+				id: 'locate',
+				type: 'toolbarOption',
+				canFloat: true,
+				path: 'gis/dijit/Locate',
+				title: '<i class="fa fa-location-arrow fa-4x"></i><br/>Locate',
+				srcNodeRef: 'locateToolbar',
+				open: false,
+				position: 8,
+				options: {
+					map: true
+				}
+			},
 			/*suitability: {
 				include: true,
 				id: 'suitability',
@@ -764,7 +938,7 @@ define([
 				title: '<i class="fa fa-question-circle fa-4x"></i><br/>Help',
 				srcNodeRef: 'helpToolbar',
 				open: false,
-				position: 8,
+				position: 9,
 				options: {}
 			}
 		}

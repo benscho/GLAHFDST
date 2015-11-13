@@ -1,23 +1,36 @@
 [
 	{
-		"name": "Walleye",
-		"label": "Walleye Habitat",
+		"name": "Basins",
+		"label": "Basins",
 		"index": "0",
-		"value": "walleyehsi",
+		"value": "0",
+		"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
+		"value": "1",
+		"param": "1",
 		"options": [
 			{
-				"label": "By Suitability",
+				"label": "Overall",
 				"value": "1",
 				"param": "1",
-				"url": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer",
-				"index": "0"
+				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
+				"index": "0",
+				"grouping": "false"
 			},
 			{
-				"label": "By Lake",
-				"value": "bar",
-				"param": "test",
-				"url": "https://arcgisdev.lsa.umich.edu/arcgis/rest/services/IFR/glahf_dss_le_walleye_hsi/MapServer",
-				"index": "1"
+				"label": "By Basin",
+				"value": "1",
+				"param": "1",
+				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
+				"index": "1",
+				"grouping": "true"
+			},
+			{
+				"label": "By Subbasin",
+				"value": "1",
+				"param": "1",
+				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
+				"index": "2",
+				"grouping": "true"
 			}
 		]
 	}

@@ -139,7 +139,7 @@ define([
                 }));*/
             }
 			//Slider View
-			if (controlOptions.slider !== null) {
+			if (controlOptions.slider) {
 				menu.addChild(new MenuItem({
 					label: "Slider View",
 					onClick: function () {
