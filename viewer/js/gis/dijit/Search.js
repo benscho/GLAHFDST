@@ -11,6 +11,10 @@ define([
 	'dijit/_WidgetBase',
 	'dijit/_TemplatedMixin',
 	'dijit/_WidgetsInTemplateMixin',
+	'dijit/layout/ContentPane',
+	'dijit/layout/TabContainer',
+	
+	'dgrid/Grid',
 	
 	'esri/tasks/query',
 	'esri/tasks/QueryTask',
@@ -26,62 +30,22 @@ define([
 	'dojo/text!./Search/templates/Search.html',
 	'xstyle/css!./Search/css/Search.css'
 ], function (declare, lang, Array, ioQuery, request, on, Select, registry, _WidgetBase,
-	_TemplatedMixin, _WidgetsInTemplateMixin, Query, QueryTask, Polygon, GeometryEngine,
-	FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Color, Graphic, SpatialReference, SearchTemplate) {
+	_TemplatedMixin, _WidgetsInTemplateMixin, ContentPane, TabContainer, Grid, Query, QueryTask,
+	Polygon, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol, Color, Graphic,
+	SpatialReference, SearchTemplate) {
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 		widgetsInTemplate: true,
 		templateString: SearchTemplate,
 		postCreate: function() {
 			this.inherited(arguments);
-
+			this.number = 0;
 			this.topics = [];
 			this.queries = [];
-			//FOR VALIDATION OF AREAS
-			this.polygonGraphics = new FeatureLayer({
-				layerDefinition: {
-					geometryType: 'esriGeometryPolygon',
-					fields: [{
-						name: 'OBJECTID',
-						type: 'esriFieldTypeOID',
-						alias: 'OBJECTID',
-						domain: null,
-						editable: false,
-						nullable: false
-					}, {
-						name: 'ren',
-						type: 'esriFieldTypeInteger',
-						alias: 'ren',
-						domain: null,
-						editable: true,
-						nullable: false
-					}]
-				},
-				featureSet: null
-			}, {
-				id: 'search_poly',
-				title: 'Search Graphics',
-				mode: FeatureLayer.MODE_SNAPSHOT
+			this.resultsPane = new TabContainer({
+				style: "height: 100%; width: 100%;"
 			});
-			this.polygonRenderer = new UniqueValueRenderer(new SimpleFillSymbol(), 'ren', null, null, ', ');
-			this.polygonRenderer.addValue({
-				value: 1,
-				symbol: new SimpleFillSymbol({
-					color: new Color("99FF33"),
-					outline: {
-						color: new Color("99FF33"),
-						width: 1,
-						type: 'esriSLS',
-						style: 'esriSLSSolid'
-					},
-					type: 'esriSFS',
-					style: 'esriSFSSolid'
-				}),
-				label: 'Polygons that meet search criteria',
-				description: 'Polygons that meet search criteria'
-            });
-            this.polygonGraphics.setRenderer(this.polygonRenderer);
-            this.map.addLayer(this.polygonGraphics);
-			//END VALIDATION
+			this.resultsPane.placeAt("sidebarBottom");
+			this.resultsPane.startup();
 			request.get("js/gis/dijit/Search/json/search.json", {
 				handleAs: "json"
 			}).then(lang.hitch(this, function (results) {
@@ -137,7 +101,7 @@ define([
 					var poly = new Polygon(results.features[i].geometry);
 					curData.polygon = poly;
 					curData.area = GeometryEngine.geodesicArea(poly, 'square-kilometers');
-					curData.attributes = results.features[i].attributes;
+					curData.lake = results.features[i].attributes.LAKE;
 					resultsData.push(curData);
 				}
 			}
@@ -147,13 +111,28 @@ define([
 					resultsGeometry.addRing(results.features[i].geometry);
 				}
 				resultsData.push(resultsGeometry);
-			}		
-			/*var searchPoly = new Polygon(new SpatialReference({wkid:3857}));
-			for (var j in results.features[0].geometry.rings) {
-				searchPoly.addRing(results.features[0].geometry.rings[j]);
 			}
-			var graphic = new Graphic(searchPoly, null, { ren: 1 });
-			this.polygonGraphics.add(graphic);*/
+			this.number++;
+			var columns = [
+				{
+					field: "lake",
+					label: "Lake"
+				},
+				{
+					field: "area",
+					label: "Area (km^2)"
+				}
+			];
+			var grid = new Grid({
+				columns: columns
+			});
+			grid.renderArray(resultsData);
+			var cp = new ContentPane({
+				id: "search-" + this.number,
+				title: "Search " + this.number,
+				content: grid
+			});
+			this.resultsPane.addChild(cp);
 			console.log("finished processing search results");
 		},
 		changeQueries: function (event) {

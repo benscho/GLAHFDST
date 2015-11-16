@@ -749,49 +749,6 @@ define([
 					mapClickMode: true
 				}
 			},
-			/*search: {
-				include: true,
-				id: 'search',
-				type: 'toolbarOption',
-				path: 'gis/dijit/Search',
-				title: '<i class="fa fa-search fa-4x"></i><br/>Search',
-				srcNodeRef: 'searchToolbar',
-				open: false,
-				position: 3,
-				options: {
-					map: true
-				}
-			},
-			search: {
-                include: true,
-                id: 'search',
-                type: 'toolbarOption',
-				srcNodeRef: 'searchToolbar',
-                canFloat: false,
-                path: 'gis/dijit/Search',
-                title: '<i class="fa fa-search fa-4x"></i><br/>Search',
-                open: false,
-                position: 3,
-                options: 'config/search'
-            },
-            attributesTable: {
-                include: true,
-                id: 'attributesContainer',
-                type: 'domNode',
-                srcNodeRef: 'attributesContainer',
-                path: 'gis/dijit/AttributesTable',
-                options: {
-                    map: true,
-                    mapClickMode: true,
-                    // use a tab container for multiple tables or
-                    // show only a single table
-                    useTabs: true,
-                    // used to open the sidebar after a query has completed
-                    sidebarID: 'sidebarBottom',
-                    // optional tables to load when the widget is first instantiated
-                    tables: []
-                }
-            },*/
 			search: {
 				include: true,
 				id: 'search',
@@ -831,24 +788,6 @@ define([
 					map: true
 				}
 			},
-			/*table: {
-                include: true,
-                id: 'table',
-                type: 'domNode',
-                srcNodeRef: 'table',
-                path: 'gis/dijit/Table',
-                options: {
-                    map: true,
-                    mapClickMode: true,
-                    // use a tab container for multiple tables or
-                    // show only a single table
-                    useTabs: true,
-                    // used to open the sidebar after a query has completed
-                    sidebarID: 'sidebarBottom',
-                    // optional tables to load when the widget is first instantiated
-                    tables: []
-                }
-            },*/
 			print: {
 				include: true,
 				id: 'print',
@@ -869,7 +808,7 @@ define([
 					defaultLayout: 'Letter ANSI A Landscape'
 				}
 			},
-			extract: {
+			/*extract: {
 				include: true,
 				id: 'extract',
 				type: 'toolbarOption',
@@ -885,7 +824,7 @@ define([
 					defaultFormat: 'Shapefile - SHP - .shp',
 					defaultLayer: ' Incident Points'
 				}
-			},
+			},*/
 			measure: {
 				include: true,
 				id: 'measurement',
@@ -917,19 +856,6 @@ define([
 					map: true
 				}
 			},
-			/*suitability: {
-				include: true,
-				id: 'suitability',
-				type: 'titlePane',
-				canFloat: false,
-				path: 'gis/dijit/Suitability',
-				title: 'Habitat Suitability Maps',
-				open: false,
-				position: 12,
-				options:{
-					map: true
-				}
-			},*/
 			help: {
 				include: true,
 				id: 'help',
