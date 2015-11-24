@@ -460,7 +460,9 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF Spring Surface Temperature.',
-				parent: 'Temperature Energy'
+				parent: 'Temperature Energy',
+				slider: true,
+				sliderUrl: './Springtemp.html'
 			}
 		}, {
 			type: 'dynamic',
@@ -476,7 +478,9 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF Summer Surface Temperature.',
-				parent: 'Temperature Energy'
+				parent: 'Temperature Energy',
+				slider: true,
+				sliderUrl: './Summertemp.html'
 			}
 		}, {
 			type: 'dynamic',
@@ -709,7 +713,7 @@ define([
 				id: 'layerControl',
 				type: 'toolbarOption',
 				path: 'gis/dijit/LayerControl',
-				title: '<i class="fa fa-bars fa-4x"></i><br/>Layers',
+				title: '<i class="fa fa-list fa-4x"></i><br/>Layers',
 				srcNodeRef: 'layerToolbar',
 				open: false,
 				position: 0,

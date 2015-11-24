@@ -82,14 +82,15 @@ html, body, #map
 		ImageServiceParameters, MosaicRule, RasterFunction, DimensionalDefinition
 	) {
 		parser.parse();
-		var curMin, curMax, rasterURL = 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_bathymetry/ImageServer';
+		var curMin, curMax, rasterURL = 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_surface_temp_summer/ImageServer';
 		
 		var slider = registry.byId("pixelSlider");
-		var sliderMin = 0;
-		var sliderMax = 405;
+		var sliderMin = 12;
+		var sliderMax = 26;
 		slider.minimum = sliderMin;
 		slider.maximum = sliderMax;
 		slider.value = [sliderMin, sliderMax];
+		slider.discreteValues = 15;
 		
 		slider.on("mouseup", setPixelFilter);
 		slider.on("change", setPixelFilter);
@@ -197,7 +198,7 @@ html, body, #map
 			curMin = Math.floor(val[0]);
 			curMax = Math.floor(val[1]);
 			if (val) {
-				dom.byId("pixelVal").innerHTML = "Currently displaying locations with depth from " + curMin + " to " + curMax + "m";
+				dom.byId("pixelVal").innerHTML = "Currently displaying locations with summer surface temperature from " + curMin + " to " + curMax + "C";
 			}
 			else {
 				dom.byId("pixelVal").innerHTML = "Currently displaying all depths.";
@@ -214,7 +215,7 @@ html, body, #map
             Loading...
         </div>
         <div id="footer" class="shadow">   
-            <span style='font-weight: 600; font-size: 130%;' id='elevSpan'>Great Lakes Bathymetry</span><br><br>
+            <span style='font-weight: 600; font-size: 130%;' id='elevSpan'>Great Lakes Surface Temperature</span><br><br>
             <div id='pixelVal'></div>
             <div id="pixelSlider" data-dojo-type="dojox/form/HorizontalRangeSlider" data-dojo-props="showButtons:'false', intermediateChanges:'false', slideDuration:'0'">
                 <div data-dojo-type="dijit/form/HorizontalRule" data-dojo-props='container:"bottomDecoration", count:2, style:{height:"5px"}'></div>

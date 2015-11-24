@@ -5,16 +5,15 @@
 		"index": "0",
 		"value": "0",
 		"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
-		"value": "1",
 		"param": "1",
 		"options": [
 			{
 				"label": "Overall",
-				"value": "1",
+				"value": "0",
 				"param": "1",
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
 				"index": "0",
-				"grouping": "false"
+				"canned": "true"
 			},
 			{
 				"label": "By Basin",
@@ -22,15 +21,15 @@
 				"param": "1",
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
 				"index": "1",
-				"grouping": "true"
+				"canned": "true"
 			},
 			{
 				"label": "By Subbasin",
-				"value": "1",
+				"value": "2",
 				"param": "1",
-				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
+				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_subbasins/MapServer/0",
 				"index": "2",
-				"grouping": "true"
+				"canned": "true"
 			}
 		]
 	}

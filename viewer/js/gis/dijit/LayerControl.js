@@ -41,7 +41,7 @@ define([
             checked: 'fa-check-square-o',
             unchecked: 'fa-square-o',
             update: 'fa-refresh',
-            menu: 'fa-bars',
+            menu: 'fa-ellipsis-v',
             folder: 'fa-folder-o',
             folderOpen: 'fa-folder-open-o'
         },
@@ -183,7 +183,8 @@ define([
 				this.currentGroup.push(layerControl.domNode.id);
 			}
 			if (layerHasSlider) {
-				//console.log("found a layer with a slider");
+				console.log("found a layer with a slider");
+				domClass.replace(layerControl.menuNode, "fa-sliders", "fa-ellipsis-v");
 				//var node = document.querySelector(layerControl.id + " .layerControlTableLabel");
 				//var newNode = domConst.toDom('<i class="fa fa-sliders" style="float:right;"></i>');
 				//domConst.place(newNode, node, "after");

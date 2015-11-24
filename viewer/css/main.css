@@ -391,7 +391,7 @@ body, html {
 }
 
 #layerControl_widget {
-	max-height: 80vh;
+	max-height: 100%;
 	overflow-y: scroll;
 	background-color: white;
 	display: none;
@@ -441,9 +441,9 @@ body, html {
 }
 
 #criteria_widget {
+	max-height: 100%;
 	background-color: white;
 	display: none;
-	height: 600px;
 	overflow-y: scroll;
 }
 

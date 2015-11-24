@@ -132,3 +132,8 @@
 .layerControlDijit .esriLegendServiceLabel {
     display: none;
 }
+
+.fa-ellipsis-v{
+	padding-right: 5px;
+	padding-left: 5px;
+}

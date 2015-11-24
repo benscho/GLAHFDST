@@ -77,23 +77,50 @@ define([
 				alert("There is already a query in progress! Please wait for the current query to finish before launching another.");
 				return;
 			}
-			var topicIndex = registry.byId("topicSelect").tabIndex;
-			var queryIndex = registry.byId("querySelect").tabIndex;
+			var topicIndex = registry.byId("topicSelect").value;
+			var queryIndex = registry.byId("querySelect").value;
 			var selectedTopic = this.topics[topicIndex];
 			var selectedQuery = this.queries[queryIndex];
-			var query = new Query();
-			var queryTask = new QueryTask(selectedQuery.url);
-			query.where = selectedQuery.param + "=" + selectedQuery.value;
-			query.outFields = ["*"];
-			query.returnGeometry = true;
-			this.grouping = selectedQuery.grouping;
-			this.queryInProgress = true;
-			console.log("launching search");
-			queryTask.execute(query, lang.hitch(this,this.searchResults));
+			if (selectedQuery.canned) {
+				request.get("js/gis/dijit/Search/json/search-canned.json", {
+					handleAs: "json"
+				}).then(lang.hitch(this, function(results) {
+					var curRes = results[topicIndex].options[queryIndex];
+					this.number++;
+					var grid = new Grid({
+						columns: curRes.columns
+					});
+					grid.renderArray(curRes.data);
+					var cp = new ContentPane({
+						id: "search-" + this.number,
+						title: "Search " + this.number,
+						content: grid
+					});
+					this.resultsPane.addChild(cp);
+					this.queryInProgress = false;
+				}));
+			}
+			else {
+				var query = new Query();
+				var queryTask = new QueryTask(selectedQuery.url);
+				query.where = selectedQuery.param + "=" + selectedQuery.param;
+				query.outFields = ["*"];
+				query.returnGeometry = true;
+				this.grouping = selectedQuery.grouping;
+				this.queryInProgress = true;
+				this.columns = selectedQuery.columns;
+				this.curVariable = selectedQuery.variable;
+				console.log("launching search");
+				queryTask.execute(query, lang.hitch(this,this.searchResults));
+			}
 		},
 		searchResults: function (results) {
 			console.log("search results received");
 			this.queryInProgress = false;
+			if(results.features === 0) {
+				alert("No data found!");
+				return;
+			}
 			var resultsData = [];
 			if (this.grouping) {
 				for(var i in results.features) {
@@ -101,7 +128,7 @@ define([
 					var poly = new Polygon(results.features[i].geometry);
 					curData.polygon = poly;
 					curData.area = GeometryEngine.geodesicArea(poly, 'square-kilometers');
-					curData.lake = results.features[i].attributes.LAKE;
+					curData.value = results.features[i].attributes[this.curVariable];
 					resultsData.push(curData);
 				}
 			}
@@ -113,18 +140,8 @@ define([
 				resultsData.push(resultsGeometry);
 			}
 			this.number++;
-			var columns = [
-				{
-					field: "lake",
-					label: "Lake"
-				},
-				{
-					field: "area",
-					label: "Area (km^2)"
-				}
-			];
 			var grid = new Grid({
-				columns: columns
+				columns: this.columns
 			});
 			grid.renderArray(resultsData);
 			var cp = new ContentPane({

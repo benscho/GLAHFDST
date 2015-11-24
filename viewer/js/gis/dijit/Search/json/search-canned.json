@@ -1,0 +1,172 @@
+[
+	{
+		"index": "0",
+		"value": "0",
+		"options": [
+			{
+				"value": "1",
+				"index": "0",
+				"columns": [
+					{
+						"field": "basin",
+						"label": "Basin"
+					},
+					{
+						"field": "area",
+						"label": "Area (km^2)"
+					}
+				],
+				"data": [
+					{
+						"basin": "Total",
+						"area": "780084.13"
+					}
+				]
+			},
+			{
+				"value": "1",
+				"index": "1",
+				"columns": [
+					{
+						"field": "lake",
+						"label": "Basin"
+					},
+					{
+						"field": "area",
+						"label": "Area (km^2)"
+					}
+				],
+				"data": [
+					{
+						"lake": "Superior",
+						"area": "223468.27"
+					},
+					{
+						"lake": "Huron",
+						"area": "193187.20"
+					},
+					{
+						"lake": "Ontario",
+						"area": "85199.23"
+					},
+					{
+						"lake": "Erie",
+						"area": "103666.40"
+					},
+					{
+						"lake": "Michigan",
+						"area": "174563.03"
+					}
+				]
+			},
+			{
+				"value": "1",
+				"index": "2",
+				"columns": [
+					{
+						"field": "subbasin",
+						"label": "Subbasin"
+					},
+					{
+						"field": "area",
+						"label": "Area (km^2)"
+					}
+				],
+				"data": [
+					{
+						"subbasin": "Green Bay",
+						"area": "46778.62"
+					},
+					{
+						"subbasin": "Western Lake Erie",
+						"area": "38857.33"
+					},
+					{
+						"subbasin": "Central Lake Erie",
+						"area": "29620.88"
+					},
+					{
+						"subbasin": "Eastern Lake Erie",
+						"area": "16680.71"
+					},
+					{
+						"subbasin": "Northern Lake Huron",
+						"area": "19498.24"
+					},
+					{
+						"subbasin": "Eastern Lake Huron",
+						"area": "15085.63"
+					},
+					{
+						"subbasin": "Central Lake Huron",
+						"area": "28553.91"
+					},
+					{
+						"subbasin": "Southern Lake Michigan",
+						"area": "54746.92"
+					},
+					{
+						"subbasin": "Central Lake Michigan",
+						"area": "29293.41"
+					},
+					{
+						"subbasin": "North Central Lake Michigan",
+						"area": "31874.96"
+					},
+					{
+						"subbasin": "Northern Lake Michigan",
+						"area": "11870.85"
+					},
+					{
+						"subbasin": "Western Lake Ontario",
+						"area": "6734.98"
+					},
+					{
+						"subbasin": "Eastern Lake Ontario",
+						"area": "46915.60"
+					},
+					{
+						"subbasin": "Western Lake Superior",
+						"area": "24571.98"
+					},
+					{
+						"subbasin": "Central Lake Superior",
+						"area": "110697.51"
+					},
+					{
+						"subbasin": "Eastern Lake Superior",
+						"area": "78100.95"
+					},
+					{
+						"subbasin": "Lake St. Clair",
+						"area": "18508.68"
+					},
+					{
+						"subbasin": "Niagara River",
+						"area": "3404.46"
+					},
+					{
+						"subbasin": "Saginaw Bay",
+						"area": "31345.60"
+					},
+					{
+						"subbasin": "St. Marys River",
+						"area": "5642.41"
+					},
+					{
+						"subbasin": "Whitefish Bay",
+						"area": "9433.47"
+					},
+					{
+						"subbasin": "North Channel and Georgian Bay",
+						"area": "93722.50"
+					},
+					{
+						"subbasin": "Central Lake Ontario",
+						"area": "28143.34"
+					}
+				]
+			}
+		]
+	}
+]
