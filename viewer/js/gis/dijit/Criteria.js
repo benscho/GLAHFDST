@@ -121,12 +121,6 @@ define([
 						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:&nbsp;<i class=\"fa fa-info fa-3\" id=\"crit-" + i + "-id\"></i>" 
 							+ "<br><div data-dojo-type=\"dijit/form/Form\" id=\"criteria-" + i + "\" name=\"" + results[i].name + "\" URL=\"" + results[i].URL + "\" param=\"" + results[i].param
 							+ "\" layer=\"" + results[i].layer + "\"></div>";
-						/*on(dom.byId("crit-"+ i + "-id"), "mouseover", function() {
-							popup.open({
-								popup: toolTips[this.id.slice(5,-3)],
-								around: dom.byId(this.id)
-							});
-						});*/
 						for(var j in results[i].choices){
 							dom.byId("criteria-" + i).innerHTML += "<input type=\"checkbox\" name=\"" 
 							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\"></input>" + results[i].choices[j][0] + "<br/>";
@@ -159,7 +153,13 @@ define([
 			//this.geoInfo = new Memory({ idProperty: 'id', data: []});
 			topic.subscribe("load/criteria", lang.hitch(this, this.loadCriteria));
 		},
-		runInvestigation: function (polygonGraphics) {
+		investigateAll: function (polygonGraphics) {
+			this.runInvestigation(polygonGraphics, true);
+		},
+		investigateAny: function (polygonGraphics) {
+			this.runInvestigation(polygonGraphics, false);
+		},
+		runInvestigation: function (polygonGraphics, intersect) {
 			var i = 0, result, criteriaDeferreds = [], criteriaURLs = "";
 			this.polygonGraphics.clear();
 			var selected = document.querySelectorAll("div#criteriaOptions input[type=checkbox]:checked");
@@ -167,7 +167,7 @@ define([
 				alert("Please select one or more of the habitat criteria before hitting the Investigate button!");
 				return;
 			}
-			var queryType = document.querySelector("input[name='criteriaInclusive']:checked").value;
+			//var queryType = document.querySelector("input[name='criteriaInclusive']:checked").value;
 			for (var i in selected) {
 				if (i === "length" || i === "item") {
 					break;
@@ -196,7 +196,7 @@ define([
 				this.polygonGraphics.clear();
 			}
 			console.log(params);
-			if(queryType === "intersect") {
+			if(intersect) {
 				this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 
 			}
@@ -204,10 +204,12 @@ define([
 				this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/CriteriaUnion/GPServer/Criteria%20Union")
 			}
 			this.gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
-			domStyle.set(dojo.byId("criteriaSpinner"), "display", "inline");
+			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");
+			domStyle.set(dojo.byId("criteriaMessage"), "display", "inline");
 		},
 		criteriaComplete: function (jobInfo) {
-			domStyle.set(dojo.byId("criteriaSpinner"), "display", "none");
+			domStyle.set(dojo.byId("criteriaLoading"), "display", "none");
+			domStyle.set(dojo.byId("criteriaMessage"), "display", "none");
 			//gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			this.gp.getResultData(jobInfo.jobId, "outputFC", lang.hitch(this, function (results) {
 				console.log("retrived results");

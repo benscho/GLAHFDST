@@ -447,6 +447,30 @@ body, html {
 	overflow-y: scroll;
 }
 
+#criteriaLoading {
+	height: 100%;
+	width: 100%;
+	padding: 10px 0px 10px 0px;
+	background-color: lightgray;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: .75;
+	display: none;
+}
+
+#criteriaMessage {
+	height: 100px;
+	width: 200px;
+	background-color: #fff;
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	opacity: 1;
+	border: 1px solid #000;
+	display: none;
+}
+
 #help_widget {
 	height: 100%;
 	background-color: white;

@@ -20,12 +20,16 @@ define([
 					window.open('http://ifr.snre.umich.edu/glahf/help/');
 					return;
 				}
-				if (selected) {
+				if (selected && selected !== null) {
 					domStyle.set(selected.domNode, "color", "black");
 					domStyle.set(dojo.byId(selected.id.slice(0,-6) + "widget"), "display", "none");
 					if (selected.id === 'measurement_parent') {
 						registry.byId("measurement_widget").measure.hide();
 					}
+				}
+				if(this === selected) {
+					selected = null;
+					return;
 				}
 				//annoying workaround for measurement
 				domStyle.set(this.domNode, "color", "blue");
