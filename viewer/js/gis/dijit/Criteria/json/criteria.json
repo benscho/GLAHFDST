@@ -28,7 +28,7 @@
 				"1": "4"
 			}
 		],
-		"description": "Influence of the Watershed on a specific area."
+		"description": "<b>Watershed influence</b> is the combined potential land influence from tributaries <br> and shoreline interfluves. The watershed influence class breaks are:<li> minimal (<120 km2; stream order 1-3)</li><li> small (121-2,500 km2; stream order 4-5)</li><li> medium (2,501-7,500 km2; stream order 6)</li><li> large (>7,500 km2; stream order 7)</li>"
 	},
 	{
 		"name": "Temperature Energy",
@@ -55,7 +55,7 @@
 				"1": "'warm'"
 			}
 		],
-		"description": "Data relating to the weather derivative statistic."
+		"description": "<b>Cumulative degree-days (CDD)</b> is a measure of annual heat accumulation<br> in the Great Lakes and an indicator of the thermal regime. CDD classes are: <li><3,000 degree-days</li><li> 3,000-3,900 degree-days</li><li> >3,900 degree-days</li> based on breaks in fish thermal requirements"
 	},
 	{
 		"name": "Ice cover duration (days)",
@@ -73,7 +73,7 @@
 				"1": "'61 - 90'"
 			}
 		],
-		"description": "Data related to the Ice covering."
+		"description": "<b>Ice cover duration</b> derived from ice cover data obtained from the Great Lakes<br> Ice Atlas and NOAA Great Lakes Environmental Research Laboratory. "
 	},
 	{
 		"name": "Geomorphology",
@@ -100,7 +100,7 @@
 				"1":"'very coarse'"
 			}
 		],
-		"description": "The material that exists at the bottom of the water body. Fine represents objects of X size, Coarse of Y size, and Very Coarse of Z size."
+		"description": "<b>Substrate</b> is the bottom material covering the Great Lakes which ranges from clay <br> and silt to boulders. Substrate descriptions have been aggregated into three<br> common classes: fine, coarse, and very coarse/hard. "
 	},
 	{
 		"name": "Depth (m)",
@@ -130,7 +130,7 @@
 				"1": "'Shallow offshore'"
 			}
 		],
-		"description": "The distance from the surface of the water to the lake floor."
+		"description": "These <b>Depth</b> classes represent different hydraulic and hydrogeomorphic conditions<br> relative to energy and temperature (Wang et al, 2015).  Depth classes include <li>Coastal (0-3m)</li><li> Shallow nearshore (3-5 m)</li><li> Deep nearshore (5-15 m)</li><li> Very shallow offshore (15-30 m; only in Lake Erie)</li><li> Shallow offshore (30-100 m)</li><li> Deep offshore (>100m)</li>"
 	},
 	{
 		"name": "Shoreline classification",
@@ -190,7 +190,7 @@
 				"1": "3"
 			}
 		],
-		"description": "Measure of the sinuosity index for the shoreline. Low is a sinuosity value of X, Moderate of Y, High of Z."
+		"description": "<b>Shoreline sinuosity</b> is the degree of shoreline meandering and is an indicator of habitat complexity. <br> The sinuosity was broken into three classes (low, medium, high) using the natural breaks method."
 	},
 	{
 		"name": "Biological",
@@ -217,7 +217,7 @@
 				"1": "1"
 			}
 		],
-		"description": "Data from MTRI."
+		"description": "<b>Submerged aquatic vegetation</b> is aquatic vegetation that is typically submerged below <br> surface water levels. The data is derived remotely sensed imagery and field verified from <br> Michigan Tech Research Institute (http://www.mtri.org/cladophora.html)"
 	},
 	{
 		"name": "Mechanical",
