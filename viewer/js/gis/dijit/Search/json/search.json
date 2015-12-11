@@ -13,7 +13,17 @@
 				"param": "1",
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
 				"index": "0",
-				"canned": "true"
+				"canned": "true",
+				"columns": [
+					{
+						"field": "value",
+						"label": "Basin"
+					},
+					{
+						"field": "area",
+						"label": "Area (km^2)"
+					}
+				]
 			},
 			{
 				"label": "By Basin",
@@ -21,7 +31,17 @@
 				"param": "1",
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
 				"index": "1",
-				"canned": "true"
+				"canned": "true",
+				"columns": [
+					{
+						"field": "value",
+						"label": "Basin"
+					},
+					{
+						"field": "area",
+						"label": "Area (km^2)"
+					}
+				]
 			},
 			{
 				"label": "By Subbasin",
@@ -29,7 +49,46 @@
 				"param": "1",
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_subbasins/MapServer/0",
 				"index": "2",
-				"canned": "true"
+				"canned": "true",
+				"columns": [
+					{
+						"field": "value",
+						"label": "Subbasin"
+					},
+					{
+						"field": "area",
+						"label": "Area (km^2)"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Upwelling",
+		"label": "Upwelling",
+		"index": "1",
+		"value": "1",
+		"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_upwelling/MapServer/0",
+		"param": "1",
+		"options": [
+			{
+				"label": "Overall",
+				"value": "0",
+				"param": "1",
+				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_upwelling/MapServer/0",
+				"index": "0",
+				"canned": "false",
+				"variable": "gridcode",
+				"columns": [
+					{
+						"field": "value",
+						"label": "Gridcode"
+					},
+					{
+						"field": "area",
+						"label": "Area (km^2)"
+					}
+				]
 			}
 		]
 	}

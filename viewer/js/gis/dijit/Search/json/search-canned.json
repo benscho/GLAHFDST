@@ -6,16 +6,6 @@
 			{
 				"value": "1",
 				"index": "0",
-				"columns": [
-					{
-						"field": "basin",
-						"label": "Basin"
-					},
-					{
-						"field": "area",
-						"label": "Area (km^2)"
-					}
-				],
 				"data": [
 					{
 						"basin": "Total",
@@ -26,16 +16,6 @@
 			{
 				"value": "1",
 				"index": "1",
-				"columns": [
-					{
-						"field": "lake",
-						"label": "Basin"
-					},
-					{
-						"field": "area",
-						"label": "Area (km^2)"
-					}
-				],
 				"data": [
 					{
 						"lake": "Superior",
@@ -62,16 +42,6 @@
 			{
 				"value": "1",
 				"index": "2",
-				"columns": [
-					{
-						"field": "subbasin",
-						"label": "Subbasin"
-					},
-					{
-						"field": "area",
-						"label": "Area (km^2)"
-					}
-				],
 				"data": [
 					{
 						"subbasin": "Green Bay",

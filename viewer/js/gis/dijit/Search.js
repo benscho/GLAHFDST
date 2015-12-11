@@ -81,7 +81,7 @@ define([
 			var queryIndex = registry.byId("querySelect").value;
 			var selectedTopic = this.topics[topicIndex];
 			var selectedQuery = this.queries[queryIndex];
-			if (selectedQuery.canned) {
+			if (selectedQuery.canned === "true") {
 				request.get("js/gis/dijit/Search/json/search-canned.json", {
 					handleAs: "json"
 				}).then(lang.hitch(this, function(results) {
@@ -122,7 +122,7 @@ define([
 				return;
 			}
 			var resultsData = [];
-			if (this.grouping) {
+			//if (this.grouping) {
 				for(var i in results.features) {
 					var curData = {};
 					var poly = new Polygon(results.features[i].geometry);
@@ -131,14 +131,14 @@ define([
 					curData.value = results.features[i].attributes[this.curVariable];
 					resultsData.push(curData);
 				}
-			}
-			else {
+			//}
+			/*else {
 				var resultsGeometry = new Polygon();
 				for(var i in results.features) {
 					resultsGeometry.addRing(results.features[i].geometry);
 				}
 				resultsData.push(resultsGeometry);
-			}
+			}*/
 			this.number++;
 			var grid = new Grid({
 				columns: this.columns
@@ -156,6 +156,14 @@ define([
 			console.log("changed topic");
 			this.querySelect.removeOption(this.querySelect.getOptions());
 			this.querySelect.addOption(this.topics[event].options);
+			this.queries = [];
+			request.get("js/gis/dijit/Search/json/search.json", {
+				handleAs: "json"
+			}).then(lang.hitch(this, function (results) {
+				for(var i in results[event].options) {
+					this.queries.push(results[event].options[i]);
+				}
+			}));
 			//this.querySelect.set('options', this.topics[event]);
 			//this.querySelect.loadDropDown();
 		}

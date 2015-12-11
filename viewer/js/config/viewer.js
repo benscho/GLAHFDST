@@ -514,7 +514,7 @@ define([
 				about: '<b>Summary:</b> GLAHF Adult Walleye HSI for the lake surface.',
 				parent: 'Walleye'
 			}
-		}, {
+		},/* {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_all_bottom/MapServer',
 			title: 'Walleye HSI (bottom)',
@@ -546,7 +546,7 @@ define([
 				about: '<b>Summary:</b> GLAHF Overall Walleye HSI for the lake surface.',
 				parent: 'Walleye'
 			}
-		}, {
+		},*/ {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_juvenile_bottom/MapServer',
 			title: 'Juvenile Walleye HSI (bottom)',
