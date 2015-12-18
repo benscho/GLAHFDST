@@ -12,6 +12,7 @@ define([
 	'esri/units',
 	'esri/tasks/Geoprocessor',
 	'esri/tasks/GeometryService',
+	'esri/InfoTemplate',
 
 	'dstore/Memory',
 	
@@ -29,7 +30,7 @@ define([
 	'dgrid/Grid',
 	
 	'dijit/popup',
-	'dijit/TooltipDialog',
+	'dijit/Dialog',
 	'dijit/layout/ContentPane',
 	'dijit/registry',
 	'dijit/form/Form',
@@ -44,8 +45,8 @@ define([
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
 ], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol,
-			Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, Memory,
-			domStyle, on, dom, request, declare, lang, all, topic, ioQuery, parser, Grid, popup, TooltipDialog, ContentPane, registry, Form,
+			Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, InfoTemplate, Memory,
+			domStyle, on, dom, request, declare, lang, all, topic, ioQuery, parser, Grid, popup, Dialog, ContentPane, registry, Form,
 			RadioButton, ComboBox, TextBox, Button, CheckBox, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
@@ -112,9 +113,10 @@ define([
 					//potential to support many different types of criteria
 					//but currently only checkbox and heading are supported
 					if (results[i].type === "checkbox") {
-						toolTips[i] = new TooltipDialog({
+						toolTips[i] = new Dialog({
 							content: results[i].description,
-							onMouseLeave: function() {
+							style: "width: 330px",
+							onMouseUp: function() {
 								popup.close(toolTips[this.id.slice(5,-3)]);
 							}
 						});
@@ -126,9 +128,10 @@ define([
 							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\"></input>" + results[i].choices[j][0] + "<br/>";
 						}
 					} else if (results[i].type === "heading") {
-						toolTips[i] = new TooltipDialog({
+						toolTips[i] = new Dialog({
 							content: results[i].description,
-							onMouseLeave: function() {
+							style: "width: 330px",
+							onMouseUp: function() {
 								popup.close(toolTips[this.id.slice(5,-3)]);
 							}
 						});
@@ -142,7 +145,7 @@ define([
 					if (!node) {
 						continue;
 					}
-					on(node, "mouseover", function() {
+					on(node, "click", function() {
 						popup.open({
 							popup: toolTips[this.id.slice(5,-3)],
 							around: dom.byId(this.id)
@@ -213,6 +216,13 @@ define([
 			//gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			this.gp.getResultData(jobInfo.jobId, "outputFC", lang.hitch(this, function (results) {
 				console.log("retrived results");
+				var infoTemplate = new InfoTemplate();
+				infoTemplate.setTitle("Test");
+				var fieldStr = "";
+				for(var h in results.value.fields) {
+					fieldStr += results.value.fields[h].alias + ": ${" + results.value.fields[h].name + "}<br/>";
+				}
+				infoTemplate.setContent(fieldStr);
 				if (results.value.features.length === 0) {
 					alert("Criteria Investigation returned no results!");
 					return;

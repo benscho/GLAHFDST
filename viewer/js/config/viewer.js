@@ -760,7 +760,7 @@ define([
 				srcNodeRef: 'searchToolbar',
 				canFloat: false,
 				path: 'gis/dijit/Search',
-				title: '<i class="fa fa-search fa-4x"></i><br/>Search',
+				title: '<i class="fa fa-search fa-4x"></i><br/>Query',
 				open: false,
 				position: 3,
 				options: {

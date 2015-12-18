@@ -181,6 +181,7 @@ define([
             if (layer.minScale !== 0 || layer.maxScale !== 0) {
                 this._checkboxScaleRange();
             }
+			this.expandClickNode.click();
         },
         // set checkbox based on layer so it's always in sync
         _setLayerCheckbox: function (layer, checkNode) {

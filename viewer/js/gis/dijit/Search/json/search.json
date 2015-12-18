@@ -1,6 +1,5 @@
 [
 	{
-		"name": "Basins",
 		"label": "Basins",
 		"index": "0",
 		"value": "0",
@@ -14,9 +13,10 @@
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
 				"index": "0",
 				"canned": "true",
+				"variable": "BASIN",
 				"columns": [
 					{
-						"field": "value",
+						"field": "BASIN",
 						"label": "Basin"
 					},
 					{
@@ -32,9 +32,10 @@
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_lake_basin_boundaries/MapServer/0",
 				"index": "1",
 				"canned": "true",
+				"variable": "LAKE",
 				"columns": [
 					{
-						"field": "value",
+						"field": "LAKE",
 						"label": "Basin"
 					},
 					{
@@ -50,9 +51,10 @@
 				"url": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_hydrology_subbasins/MapServer/0",
 				"index": "2",
 				"canned": "true",
+				"variable": "SUBBASIN",
 				"columns": [
 					{
-						"field": "value",
+						"field": "SUBBASIN",
 						"label": "Subbasin"
 					},
 					{
@@ -64,7 +66,6 @@
 		]
 	},
 	{
-		"name": "Upwelling",
 		"label": "Upwelling",
 		"index": "1",
 		"value": "1",
@@ -81,7 +82,7 @@
 				"variable": "gridcode",
 				"columns": [
 					{
-						"field": "value",
+						"field": "gridcode",
 						"label": "Gridcode"
 					},
 					{

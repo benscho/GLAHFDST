@@ -88,7 +88,7 @@ define([
 					var curRes = results[topicIndex].options[queryIndex];
 					this.number++;
 					var grid = new Grid({
-						columns: curRes.columns
+						columns: this.queries[queryIndex].columns
 					});
 					grid.renderArray(curRes.data);
 					var cp = new ContentPane({
