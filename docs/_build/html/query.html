@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Query &mdash; GLAHF Explorer 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="GLAHF Explorer 1 documentation" href="index.html" />
+    <link rel="prev" title="Save" href="save.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="query">
+<h1>Query<a class="headerlink" href="#query" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The query widget is designed to let users explore the data in a slightly less directed but still somewhat guided way. Users are able to query tables using queries that have been pre-defined in json.
+The queries are presented in two separate select drop-downs - one for category, and then another for finer grain selection within that category.
+Results appear in the bottom table pane.</p>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="postCreate">
+<code class="descname">postCreate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#postCreate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Sets up the basic state for the query widget. First, query.json is read and used to construct the query select drop-downs.</p>
+<dl class="function">
+<dt id="runQuery">
+<code class="descname">runQuery</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#runQuery" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Does the actual query operation. Reads the currently selected values from the drop-downs and builds the query. If the query has been serialized for performance, we just grab the data from the serialized json.
+Otherwise, we run the query in real time.</p>
+<dl class="function">
+<dt id="queryResults">
+<code class="descname">queryResults</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#queryResults" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Parses the supplied results and adds the results to the bottom table pane. Uses information from the .json file to name table columns.</p>
+</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="topics[]">
+<code class="descname">topics[]</code><a class="headerlink" href="#topics[]" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Contains a list of the top-level categories for queries.</p>
+<dl class="data">
+<dt id="queries[]">
+<code class="descname">queries[]</code><a class="headerlink" href="#queries[]" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Contains a list of the actual queries from the corresponding category. Repopulated when the selected topic is changed.</p>
+<dl class="data">
+<dt id="topicSelect">
+<code class="descname">topicSelect</code><a class="headerlink" href="#topicSelect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The Dijit object for the top-level select. <a class="reference external" href="https://dojotoolkit.org/api/?qs=1.10/dijit/form/Select">Documentation.</a></p>
+<dl class="data">
+<dt id="querySelect">
+<code class="descname">querySelect</code><a class="headerlink" href="#querySelect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The Dijit object for the lower-level select. <a class="reference external" href="https://dojotoolkit.org/api/?qs=1.10/dijit/form/Select">Documentation.</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Query</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="save.html" title="previous chapter">Save</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/query.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Ben Schoenfeldt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/query.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

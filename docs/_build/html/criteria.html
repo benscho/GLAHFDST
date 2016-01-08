@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Criteria &mdash; GLAHF Explorer 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="GLAHF Explorer 1 documentation" href="index.html" />
+    <link rel="next" title="Save" href="save.html" />
+    <link rel="prev" title="Draw" href="draw.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="criteria">
+<h1>Criteria<a class="headerlink" href="#criteria" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The criteria widget was designed solely for the GLAHF Explorer and is intended to give users an open-ended way to visually explore the relationships between different datasets.
+The datasets are divided by categories (e.g. Hydrology, Temperature Energy, etc.). Each dataset itself has several options, provided as checkboxes. All of these are defined in the JSON file located at
+Criteria/json/criteria.json. Users can select to search for results that match either &#8220;all&#8221; (resulting geometry must satisfy every checkbox) of the selected criteria or &#8220;any&#8221; of the selected criteria
+(resulting geometry must satisfy any checkbox).</p>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="postCreate">
+<code class="descname">postCreate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#postCreate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Sets up the initial state of the criteria widget.</p>
+<dl class="function">
+<dt id="investigateAll">
+<code class="descname">investigateAll</code><span class="sig-paren">(</span><em>polygonGraphics</em><span class="sig-paren">)</span><a class="headerlink" href="#investigateAll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Begins an investigation for criteria that satisfy all selected criteria</p>
+<dl class="function">
+<dt id="investigateAny">
+<code class="descname">investigateAny</code><span class="sig-paren">(</span><em>polygonGraphics</em><span class="sig-paren">)</span><a class="headerlink" href="#investigateAny" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Begins an investigation for criteria that satisfy any selected criteria</p>
+<dl class="function">
+<dt id="runInvestigation">
+<code class="descname">runInvestigation</code><span class="sig-paren">(</span><em>polygonGraphics</em>, <em>intersect</em><span class="sig-paren">)</span><a class="headerlink" href="#runInvestigation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Does the actual bulk of the processing. Depending on the value of <cite>intersect</cite>, either an intersect or union operation is performed on the polygons.</p>
+<dl class="function">
+<dt id="criteriaComplete">
+<code class="descname">criteriaComplete</code><span class="sig-paren">(</span><em>jobInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#criteriaComplete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Handles the results of a search. Retrieves the results of a investigation given the <em>jobInfo</em>. Attempts to format results, but makes no guarantee on ordering due to JSON. By default, these are fed to the bottom table.</p>
+<dl class="function">
+<dt id="criteriaStatus">
+<code class="descname">criteriaStatus</code><span class="sig-paren">(</span><em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#criteriaStatus" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Simple logging function. Keeps track of what is happening while server is crunching data.</p>
+<dl class="function">
+<dt id="criteriaFailed">
+<code class="descname">criteriaFailed</code><span class="sig-paren">(</span><em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#criteriaFailed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Logs any serious errors that arise. Ideally, fails gracefully.</p>
+<dl class="function">
+<dt id="clearCriteria">
+<code class="descname">clearCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clearCriteria" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Clears out the Criteria graphics.</p>
+<dl class="function">
+<dt id="loadCriteria">
+<code class="descname">loadCriteria</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#loadCriteria" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Simply reconstructs criteria geometry.</p>
+</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="polygonGraphics">
+<code class="descname">polygonGraphics</code><a class="headerlink" href="#polygonGraphics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>An ESRI Javascript API Feature Layer which contains the graphics created by the searches. <a href="#id1"><span class="problematic" id="id2">`</span></a>Documentation. &lt;<a class="reference external" href="https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html">https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html</a>&gt;&#8217;_</p>
+<dl class="data">
+<dt id="tooltips[]">
+<code class="descname">tooltips[]</code><a class="headerlink" href="#tooltips[]" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>An array used to construct the Dijit Dialog objects (<a class="reference external" href="https://dojotoolkit.org/api/?qs=1.10/dijit/Dialog">Documentation</a>) and hold the references to them.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Criteria</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="draw.html" title="previous chapter">Draw</a></li>
+      <li>Next: <a href="save.html" title="next chapter">Save</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/criteria.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Ben Schoenfeldt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/criteria.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

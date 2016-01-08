@@ -57,9 +57,6 @@ define([
 		templateString: criteriaTemplate,
 		postCreate: function () {
 			this.inherited(arguments);
-			this.initCriteria();
-		},
-		initCriteria: function () {
 			this.polygonGraphics = new FeatureLayer({
 				layerDefinition: {
 					geometryType: 'esriGeometryPolygon',
@@ -104,7 +101,6 @@ define([
             });
             this.polygonGraphics.setRenderer(this.polygonRenderer);
             this.map.addLayer(this.polygonGraphics);
-			this.criteriaObjs = [];
 			request.get("js/gis/dijit/Criteria/json/criteria.json", {
 				handleAs: "json"
 			}).then(function (results) {

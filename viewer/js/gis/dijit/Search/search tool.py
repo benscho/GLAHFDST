@@ -32,7 +32,7 @@ if isIntersect == "y":
 	intersectURL = raw_input("Please enter the intersect URL") #https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_upwelling/MapServer/0
 	intersectLayer = arcpy.FeatureSet(getQueryUrl(intersectURL))
 
-#call up server and test for time - decide whether or not to 'can' the query. probably ~10s?
+#call up server and test for time - decide whether or not to serialize the query. probably ~10s?
 
 baseLayer = arcpy.FeatureSet(getQueryUrl(baseURL))
 baseRows = arcpy.SearchCursor(baseLayer)
@@ -55,7 +55,6 @@ else:
 				rowAreas.append(rowInfo)
 		i += 1
 
-#columns = [("field: value", "label: Gridcode"), ("field: area", "label: Area (km^2)")]
 columns = [{"field": "value"}, {"label": "Gridcode"}, {"field": "area"}, {"label": "Area (km^2)"}]
 
 options = dict(label = "test", value = 0, param = 1, url = baseURL, index = 0, variable = "test", canned = canned, columns = columns)

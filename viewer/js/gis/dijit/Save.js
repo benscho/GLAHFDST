@@ -17,9 +17,6 @@ define([
 		templateString: saveTemplate,
 		postCreate: function () {
 			this.inherited(arguments);
-			this.initSave();
-		},
-		initSave: function () {
 			this.dbConfig = {
 				version: 10,
 				stores: {
