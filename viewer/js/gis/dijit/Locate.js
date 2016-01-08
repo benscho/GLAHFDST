@@ -57,7 +57,11 @@ define([
             'mgrs': {
                 examples: ['4QFJ123456', '14SMF6373224867', '10UFD30'],
                 helpText: 'The input accepts a grid zone designator (4Q), grid square id (FJ), and an even number of additional precision numbers (12345678). See <a href="http://en.wikipedia.org/wiki/Military_grid_reference_system" target="_blank">wikipedia entry</a> for additional info.'
-            }
+            },
+			'addr': {
+				examples: ['400 North Ingalls Street'],
+				helpText: 'The input accepts a street address, with a city and state optional (but encouraged).'
+			}
         },
 
         postCreate: function() {
@@ -107,6 +111,11 @@ define([
             var inputCoord = this.coordinateTextBox.get('value');
             var latlongCoord = this.determineLatLongFromCoordinate(inputCoord);
             // console.log(latlongCoord);
+			if (this.locateTypeSelect.get('value') === "addr") {
+				//console.log("found an addr!");
+				this.getAddress();
+				return;
+			}
             if (latlongCoord !== null && !isNaN(latlongCoord[0]) && !isNaN(latlongCoord[1])) {
                 this.map.centerAt(latlongCoord);
             }
@@ -217,9 +226,12 @@ define([
             var geoProj = proj4.defs('WGS84');
             return proj4(utmProj, geoProj, [easting, northing]);
         },
-		getAddress: function (addrStr) {
-			//var locator = new Locator("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Locators/ESRI_Geocode_USA/GeocodeServer");
-			//var address = {"Address Fields"}
+		getAddress: function () {
+			var locator = new Locator("https://arcgis.lsa.umich.edu/arcgis/rest/services/Geocoding/Composite_NA/GeocodeServer/findAddressCandidates");
+			locator.outSpatialReference = this.map.spatialReference;
+			var address = { SingleLine: "400 North Ingalls, Ann Arbor" };
+			var params = { address: address };
+			locator.addressToLocations(params);
 		}
     });
 });
