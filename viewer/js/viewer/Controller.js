@@ -551,7 +551,6 @@ define([
 			} else if (widgetConfig.type === 'domNode') {
 				this[widgetConfig.id] = new WidgetClass(options, widgetConfig.srcNodeRef);
 			} else if (widgetConfig.type === 'toolbarOption') {
-//				console.log("detected a toolbarOption");
 				this[widgetConfig.id] = new WidgetClass(options, widgetConfig.srcNodeRef);
 			} else {
 				this[widgetConfig.id] = new WidgetClass(options);

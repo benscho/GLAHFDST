@@ -227,11 +227,17 @@ define([
             return proj4(utmProj, geoProj, [easting, northing]);
         },
 		getAddress: function () {
-			var locator = new Locator("https://arcgis.lsa.umich.edu/arcgis/rest/services/Geocoding/Composite_NA/GeocodeServer/findAddressCandidates");
-			locator.outSpatialReference = this.map.spatialReference;
-			var address = { SingleLine: "400 North Ingalls, Ann Arbor" };
-			var params = { address: address };
-			locator.addressToLocations(params);
+			var locator = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates");
+			var address = this.coordinateTextBox.get('value');
+			var params = { SingleLine: address, f: "json" }; //"400 North Ingalls, Ann Arbor"
+			var adr = locator.addressToLocations(params);
+			adr.then(lang.hitch(this, function(results){
+				if(results === []) { //no results found
+					return;
+				}
+				var container = dojo.byId("results");
+				container.innerHTML = "Did you mean: " + results[0].address + "?";
+			}));
 		}
     });
 });

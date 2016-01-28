@@ -183,11 +183,7 @@ define([
 				this.currentGroup.push(layerControl.domNode.id);
 			}
 			if (layerHasSlider) {
-				console.log("found a layer with a slider");
 				domClass.replace(layerControl.menuNode, "fa-sliders", "fa-ellipsis-v");
-				//var node = document.querySelector(layerControl.id + " .layerControlTableLabel");
-				//var newNode = domConst.toDom('<i class="fa fa-sliders" style="float:right;"></i>');
-				//domConst.place(newNode, node, "after");
 			}
             layerControl.startup();
             if (this.separated) {

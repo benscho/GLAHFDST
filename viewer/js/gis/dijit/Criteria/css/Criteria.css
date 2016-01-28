@@ -23,3 +23,12 @@
 .gis_CriteriaDijit .dijitButtonNode{
 	display: inline-block !important;
 }
+
+#legend {
+	position: absolute;
+	top: 0px;
+	left: 320px;
+	background: white;
+	width: 200px;
+	display: none;
+}

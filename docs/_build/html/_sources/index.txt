@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to GLAHF Explorer's documentation!
+Welcome to GLAHF Explorer's documentation
 ==========================================
 I'm still testing everything out so it's probably quite rough around the edges. Sorry about that.
 

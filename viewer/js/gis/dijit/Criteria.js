@@ -4,7 +4,9 @@ define([
 	'esri/geometry/geometryEngine',
 	'esri/layers/FeatureLayer',
 	'esri/renderers/UniqueValueRenderer',
+	'esri/renderers/SimpleRenderer',
 	'esri/symbols/SimpleFillSymbol',
+	'esri/symbols/SimpleLineSymbol',
 	'esri/graphic',
 	'esri/geometry/Polygon',
 	'esri/Color',
@@ -44,7 +46,7 @@ define([
 	'dijit/_WidgetsInTemplateMixin',
 	'dojo/text!./Criteria/templates/Criteria.html',
 	'xstyle/css!./Criteria/css/Criteria.css'
-], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleFillSymbol,
+], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleRenderer, SimpleFillSymbol, SimpleLineSymbol,
 			Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, InfoTemplate, Memory,
 			domStyle, on, dom, request, declare, lang, all, topic, ioQuery, parser, Grid, popup, Dialog, ContentPane, registry, Form,
 			RadioButton, ComboBox, TextBox, Button, CheckBox, _WidgetBase, _TemplatedMixin,
@@ -55,6 +57,8 @@ define([
 		queryID: 0,
 		widgetsInTemplate: true,
 		templateString: criteriaTemplate,
+		criteriaLayers: [],
+		colors: [],
 		postCreate: function () {
 			this.inherited(arguments);
 			this.polygonGraphics = new FeatureLayer({
@@ -151,14 +155,9 @@ define([
 			}); 
 			//this.geoInfo = new Memory({ idProperty: 'id', data: []});
 			topic.subscribe("load/criteria", lang.hitch(this, this.loadCriteria));
+			this.colors = ["blue", "yellow", "red", "green", "purple", "orange"];
 		},
-		investigateAll: function (polygonGraphics) {
-			this.runInvestigation(polygonGraphics, true);
-		},
-		investigateAny: function (polygonGraphics) {
-			this.runInvestigation(polygonGraphics, false);
-		},
-		runInvestigation: function (polygonGraphics, intersect) {
+		runInvestigation: function (polygonGraphics) {
 			var i = 0, result, criteriaDeferreds = [], criteriaURLs = "";
 			this.polygonGraphics.clear();
 			var selected = document.querySelectorAll("div#criteriaOptions input[type=checkbox]:checked");
@@ -167,11 +166,35 @@ define([
 				return;
 			}
 			//var queryType = document.querySelector("input[name='criteriaInclusive']:checked").value;
+			//testing
+			var myLayers = [];
+			var curParent, nuLayer = {}, j = 0;
 			for (var i in selected) {
 				if (i === "length" || i === "item") {
 					break;
 				}
 				var parent = selected[i].parentNode;
+				
+				//more testing
+				if(parent === curParent) {
+					nuLayer.values.push(selected[i].value);
+				}
+				else {
+					if(curParent) {
+						myLayers.push(nuLayer);
+						j += 1;
+					}
+					curParent = parent;
+					nuLayer = {};
+					nuLayer.values = [selected[i].value];
+					nuLayer.URL = parent.attributes.url.value;
+					nuLayer.layer = parent.attributes.layer.value;
+					nuLayer.param = parent.attributes.param.value;
+					nuLayer.index = j;
+					nuLayer.name = selected[i].name;
+				}				
+				//end testing
+				
 				curVal = selected[i].value;
 				curParam = parent.attributes.param.value;
 				curURL = parent.attributes.url.value;
@@ -184,29 +207,88 @@ define([
 				var url = curURL + "/" + curLayer + "/query?where=" + curParam + "=" + curVal + "&f=json";
 				criteriaURLs += queryStr + ",";
 			}
+			myLayers.push(nuLayer)
 			criteriaURLs = criteriaURLs.slice(0, -1); //trim last ,
 			var drawnGeo = {};
 			var params = {
 				"Layers": criteriaURLs
 			};
-			if(registry.byId("criteriaCheck").checked) {
+			/*if(registry.byId("criteriaCheck").checked) {
 				drawnGeo = this.polygonGraphics.graphics;
 				params.Geometry = new Polygon(drawnGeo);
 				this.polygonGraphics.clear();
-			}
+			}*/
 			console.log(params);
-			if(intersect) {
-				this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
-
-			}
-			else {
-				this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/CriteriaUnion/GPServer/Criteria%20Union")
-			}
+			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			this.gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "inline");
+			
+			for(var i = 0; i < myLayers.length; i++) {
+				this.createLayer(myLayers[i]);
+			}
+			this.criteriaLegend();
+		},
+		criteriaLegend: function () {
+			domStyle.set(dom.byId("legend"), "display", "inline");
+			for (var i = 0; i < this.criteriaLayers.length; i++) {
+				dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\"></input>"
+					+ this.criteriaLayers[i].name + "&nbsp;<div style=\"background:" + this.colors[i] + ";width:17px;float:right;\">&nbsp;</div><br>";
+			}
+			dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" +
+				i + "\" checked=\"true\"></input>Intersection&nbsp;<div style=\"background:#99FF33;width:17px;float:right;\">&nbsp;</div><br>";
+			for(var j = 0; j < i; j++) {
+				on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
+					var id = evt.srcElement.id.slice(-1);
+					if (this.criteriaLayers[id].visible) {
+						this.criteriaLayers[id].hide();
+					}
+					else {
+						this.criteriaLayers[id].show();
+					}
+				}));
+			}
+			on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
+				if (this.polygonGraphics.visible) {
+					this.polygonGraphics.hide();
+				}
+				else {
+					this.polygonGraphics.show();
+				}
+			}));
+		},
+		createLayer: function (layerInfo) {
+			var newLayer = new FeatureLayer(layerInfo.URL + "/" + layerInfo.layer, { outFields: ["*"] });
+			if (layerInfo.values.length === 1) {
+				newLayer.setDefinitionExpression(layerInfo.param + " = " + layerInfo.values);
+			}
+			else {
+				var definitionStr = "";
+				for(var i = 0; i < layerInfo.values.length; i++) {
+					definitionStr+= (layerInfo.param + " = " + layerInfo.values[i]) + " OR ";
+				}
+				definitionStr = definitionStr.slice(0,-4);
+				newLayer.setDefinitionExpression(definitionStr);
+			}
+			var layerColor = new Color(this.colors[layerInfo.index]);
+			var simpleColor = layerColor.toRgb();
+			var rgbaColor = layerColor.toRgba();
+			rgbaColor[3] = 0.25;
+			rgbaColor = new Color(rgbaColor);
+			simpleColor = new Color(simpleColor);
+			var symbol = new SimpleRenderer(
+				new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, simpleColor, 2), rgbaColor)
+			);
+			newLayer.setRenderer(symbol);
+			var infoTemp = new InfoTemplate();
+			infoTemp.setTitle("test");
+			infoTemp.setContent("${*}");
+			newLayer.name = layerInfo.name;
+			this.criteriaLayers.push(newLayer);
+			this.map.addLayer(newLayer);
 		},
 		criteriaComplete: function (jobInfo) {
+			this.map.reorderLayer(this.polygonGraphics, this.map.layerIds.length);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "none");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "none");
 			//gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
@@ -214,10 +296,10 @@ define([
 				console.log("retrived results");
 				var infoTemplate = new InfoTemplate();
 				infoTemplate.setTitle("Test");
-				var fieldStr = "";
-				for(var h in results.value.fields) {
+				var fieldStr = "${*}";
+				/*for(var h in results.value.fields) {
 					fieldStr += results.value.fields[h].alias + ": ${" + results.value.fields[h].name + "}<br/>";
-				}
+				}*/
 				infoTemplate.setContent(fieldStr);
 				if (results.value.features.length === 0) {
 					alert("Criteria Investigation returned no results!");
@@ -244,7 +326,13 @@ define([
 			console.log("failed: " + error);
 		},
 		clearCriteria: function () {
+			for(var i = 0; i < this.criteriaLayers.length; i++) {
+				this.criteriaLayers[i].clear();
+			}
+			this.criteriaLayers = [];
 			this.polygonGraphics.clear();
+			domStyle.set(dom.byId("legend"), "display", "none");
+			dom.byId("criteriaLegend").innerHTML = "";
 			/*var checkedNodes = document.querySelectorAll("div#criteriaOptions input[type=checkbox]:checked");
 			for(var i in checkedNodes) {
 				checkedNodes[i].checked = false;

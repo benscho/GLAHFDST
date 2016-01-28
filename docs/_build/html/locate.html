@@ -88,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="query.html">Query</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Locate</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#address">Address</a></li>
 </ul>
 </li>
 </ul>
@@ -140,6 +141,12 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>A slightly modified version of the CMV widget &#8220;Goto&#8221; (<a class="reference external" href="https://github.com/BrianBunker/cmv-widgets/tree/master//Goto">Documentation</a>).
 Small modifications to get it to work with the GLAHF Explorer, as well as the addition of an address lookup feature.</p>
+</div>
+<div class="section" id="address">
+<h2>Address<a class="headerlink" href="#address" title="Permalink to this headline">¶</a></h2>
+<p>Small modifications have been made to the template (Locate.html), as well as <em>coordTypeTemplates</em> and gotoCoordinate both found in Locate.js.
+Currently will only display the &#8220;best match&#8221;. As decided by ESRI&#8217;s Geocoding service. The possibility for more granularity exists, but could arguably be outside of the scope of this project.
+When a user clicks &#8220;Locate&#8221;, the contents of the address box are sent to Esri&#8217;s Geocoding service. An array of results is returned, or an empty array if no matches are found.</p>
 </div>
 </div>
 

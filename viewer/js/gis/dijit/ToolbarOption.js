@@ -4,10 +4,11 @@ define([
 	'dojo/dom-class',
 	'dojo/dom-style',
 	'dojo/_base/lang',
+	'dojo/topic',
 	'dijit/layout/ContentPane',
 	'dijit/registry',
 	'xstyle/css!./ToolbarOption/css/ToolbarOption.css'
-], function (declare, on, domClass, domStyle, lang, ContentPane, registry) {
+], function (declare, on, domClass, domStyle, lang, topic, ContentPane, registry) {
 	var selected;
 	return declare([ContentPane], {
 		postCreate: function () {
@@ -16,8 +17,12 @@ define([
 			domStyle.set(this.domNode, "cursor", "pointer");
 			this.on('click', lang.hitch(this, function () {
 				var widgetName = this.id.slice(0,-6) + "widget";
-				if (widgetName === "help_widget") {
+				/*if (widgetName === "help_widget") {
 					window.open('http://ifr.snre.umich.edu/glahf/help/');
+					return;
+				}*/
+				if (this.id === "help_parent") {
+					topic.publish("help/display", true);
 					return;
 				}
 				if (selected && selected !== null) {

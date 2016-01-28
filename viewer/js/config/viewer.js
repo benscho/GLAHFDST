@@ -334,7 +334,7 @@ define([
 				about: '<b>Summary:</b> GLAHF Landcover for 2000-2001.',
 				parent: 'Landscape'
 			}
-		}, {
+		},/* {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_landscape_quaternary_geology/MapServer',
 			title: 'Quarternary Geology',
@@ -350,7 +350,7 @@ define([
 				about: '<b>Summary:</b> GLAHF Quarternary Geology.',
 				parent: 'Landscape'
 			}
-		}, {
+		},*/ {
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_mechanical_energy_circulation_magnitude_spring_mean/MapServer',
 			title: 'Circulation Mag. (Spring)',

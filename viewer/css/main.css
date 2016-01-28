@@ -471,12 +471,6 @@ body, html {
 	display: none;
 }
 
-#help_widget {
-	height: 100%;
-	background-color: white;
-	display: none;
-}
-
 .selected {
 	color: blue;
 }
@@ -501,5 +495,14 @@ body, html {
 	width: 300px;
 	background-color: white;
 	display: none;
+}
+
+#helpDijit {
+	background-color: white;
+	overflow: scroll;
+	top: 25%;
+	left: 25%;
+	right: 25%;
+	bottom: 25%;
 }
 /* end of GLAHF DST overrides */
