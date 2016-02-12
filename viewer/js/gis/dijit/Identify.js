@@ -9,6 +9,7 @@ define([
     'dojo/promise/all',
     'dojo/topic',
     'dojo/query',
+	'dojo/on',
     'dojo/dom-style',
     'dojo/dom-class',
     'dojo/dnd/Moveable',
@@ -22,7 +23,8 @@ define([
     'dijit/form/Form',
     'dijit/form/FilteringSelect',
     'xstyle/css!./Identify/css/Identify.css'
-], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, MenuItem, lang, array, all, topic, query, domStyle, domClass, Moveable, Memory, IdentifyTask, IdentifyParameters, PopupTemplate, IdentifyTemplate, i18n) {
+], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, MenuItem, lang, array, all, topic, query, on,
+	domStyle, domClass, Moveable, Memory, IdentifyTask, IdentifyParameters, PopupTemplate, IdentifyTemplate, i18n) {
     return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
         widgetsInTemplate: true,
         templateString: IdentifyTemplate,
@@ -116,6 +118,15 @@ define([
             if (this.draggable) {
                 this.setupDraggable();
             }
+			
+			on(dojo.byId("idEnabled"), "click", lang.hitch(this, function() {
+				if(dojo.byId("idEnabled").checked) {
+					this.mapClickMode = "identify";
+				}
+				else {
+					this.mapClickMode = "none";
+				}
+			}));
         },
         addRightClickMenu: function () {
             this.map.on('MouseDown', lang.hitch(this, function (evt) {

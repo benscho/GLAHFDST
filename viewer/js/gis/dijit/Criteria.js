@@ -24,6 +24,7 @@ define([
 	'dojo/request',
 	'dojo/_base/declare',
 	'dojo/_base/lang',
+	'dojo/_base/json',
 	'dojo/promise/all',
 	'dojo/topic',
 	'dojo/io-query',
@@ -48,7 +49,7 @@ define([
 	'xstyle/css!./Criteria/css/Criteria.css'
 ], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleRenderer, SimpleFillSymbol, SimpleLineSymbol,
 			Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, InfoTemplate, Memory,
-			domStyle, on, dom, request, declare, lang, all, topic, ioQuery, parser, Grid, popup, Dialog, ContentPane, registry, Form,
+			domStyle, on, dom, request, declare, lang, json, all, topic, ioQuery, parser, Grid, popup, Dialog, ContentPane, registry, Form,
 			RadioButton, ComboBox, TextBox, Button, CheckBox, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
@@ -166,7 +167,6 @@ define([
 				return;
 			}
 			//var queryType = document.querySelector("input[name='criteriaInclusive']:checked").value;
-			//testing
 			var myLayers = [];
 			var curParent, nuLayer = {}, j = 0;
 			for (var i in selected) {
@@ -174,8 +174,6 @@ define([
 					break;
 				}
 				var parent = selected[i].parentNode;
-				
-				//more testing
 				if(parent === curParent) {
 					nuLayer.values.push(selected[i].value);
 				}
@@ -193,40 +191,44 @@ define([
 					nuLayer.index = j;
 					nuLayer.name = selected[i].name;
 				}				
-				//end testing
-				
-				curVal = selected[i].value;
-				curParam = parent.attributes.param.value;
-				curURL = parent.attributes.url.value;
-				curLayer = parent.attributes.layer.value;
+			}
+			myLayers.push(nuLayer);
+			var queryStr = "";
+			var queryParams = [];
+			for (var i = 0; i < myLayers.length; i++) {
+				this.createLayer(myLayers[i]);
+				var curParam = myLayers[i].param;
+				var whereStr = "";
+				var nuValues = []; //rename this
+				for (var j = 0; j < myLayers[i].values.length; j++) {
+					whereStr += curParam + " = " + myLayers[i].values[j] + " OR ";
+					nuValues.push(" = " + myLayers[i].values[j])
+				}
+				whereStr = whereStr.slice(0, -4); //trim last " OR "
 				var query = {
-					where: curParam + "=" + curVal,
+					where: whereStr,
 					f: "json"
 				};
-				var queryStr = curURL + "/" + curLayer + "/query?" + ioQuery.objectToQuery(query);
-				var url = curURL + "/" + curLayer + "/query?where=" + curParam + "=" + curVal + "&f=json";
-				criteriaURLs += queryStr + ",";
+				var baseURL = myLayers[i].URL + "/" + myLayers[i].layer + "/";
+				var urlStr = baseURL + "query?" + ioQuery.objectToQuery(query);
+				queryStr += urlStr + ",";
+				var nuParams = { //rename this
+					"URL": baseURL,
+					"values": nuValues,
+					"variable": curParam
+				};
+				queryParams.push(nuParams);
 			}
-			myLayers.push(nuLayer)
-			criteriaURLs = criteriaURLs.slice(0, -1); //trim last ,
-			var drawnGeo = {};
+			queryStr = queryStr.slice(0, -1); //trim last ","
 			var params = {
-				"Layers": criteriaURLs
+				"Layers": queryStr
 			};
-			/*if(registry.byId("criteriaCheck").checked) {
-				drawnGeo = this.polygonGraphics.graphics;
-				params.Geometry = new Polygon(drawnGeo);
-				this.polygonGraphics.clear();
-			}*/
 			console.log(params);
-			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
-			this.gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
+			console.log(json.toJson(queryParams));
+			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/CriteriaQuery/GPServer/Criteria");
+			this.gp.submitJob(queryParams, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "inline");
-			
-			for(var i = 0; i < myLayers.length; i++) {
-				this.createLayer(myLayers[i]);
-			}
 			this.criteriaLegend();
 		},
 		criteriaLegend: function () {
@@ -292,7 +294,7 @@ define([
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "none");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "none");
 			//gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
-			this.gp.getResultData(jobInfo.jobId, "outputFC", lang.hitch(this, function (results) {
+			this.gp.getResultData(jobInfo.jobId, "Output", lang.hitch(this, function (results) {
 				console.log("retrived results");
 				var infoTemplate = new InfoTemplate();
 				infoTemplate.setTitle("Test");

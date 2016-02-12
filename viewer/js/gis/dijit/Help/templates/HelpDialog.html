@@ -2,6 +2,10 @@
     <div data-dojo-type="dijit/layout/ContentPane" data-dojo-attach-point="containerNode" class="helpContainer">
         <div class="helpNode">
             <div data-dojo-type="dijit/layout/TabContainer" class="helpTabContainer">
+				<div data-dojo-type="dijit/layout/ContentPane" title="About">
+					Welcome to the GLAHF Explorer! This interactive web mapping application is designed to present the data collected as part of the GLAHF project in an
+					accessible and highly usable way. 
+				</div>	
                 <div data-dojo-type="dijit/layout/ContentPane" title="Navigation">
                     <table>
                         <tbody>
@@ -45,38 +49,51 @@
                         </tbody>
                     </table>
                 </div>
-                <div data-dojo-type="dijit/layout/ContentPane" title="Search">
-                    A variety of searches can be performed in the search box:
+                <div data-dojo-type="dijit/layout/ContentPane" title="Layers">
+                    A variety of data layers can be enabled or disabled:
                     <ul class="listdbootstrapFix">
                         <li>
-                            Search by Address
+                            Clicking on a group causes it to expand<br/>
+							<img src="/images/expand.png"></img>
                         </li>
                         <li>
-                            Search by Place Name
+                            Individual layers can be enabled or disabled<br/>
+							<img src="/images/toggle.png"></img>
                         </li>
                         <li>
-                            Search By Zip Code, County, etc.
+                            Layers with a slider view are marked
+							<img src="/images/slider.png"></img>
                         </li>
                     </ul>
                 </div>
-                <div data-dojo-type="dijit/layout/ContentPane" title="Tools">
-                    In addition to Search capabilities, the following tools are provided:
-                    <ul class="listdbootstrapFix">
-                        <li>
-                            Measure
-                        </li>
-                        <div>
-                            The measure tool provides the capabilities to draw a point, line, or polygon
-                            on the map and specify the unit of measurement.
-                        </div>
-                        <li>
-                            Print
-                        </li>
-                        <div>
-                            This map can be exported to varouis formats and layouts
-                        </div>
-                    </ul>
+                <div data-dojo-type="dijit/layout/ContentPane" title="Criteria">
+                    The Criteria tool is designed to allow you to explore the GLAHF datasets in a more open-ended fashion.
+					Define your criteria, and the tool will compute the intersection between them (if any exists).
                 </div>
+				<div data-dojo-type="dijit/layout/ContentPane" title="Draw">
+					The draw tool allows you to add your own markup to the map in the form of text or geometry.
+				</div>
+				<div data-dojo-type="dijit/layout/ContentPane" title="Query">
+					The query tool allows you interact directly with the GLAHF data. Please let us know what types of data you would like to see made available!
+				</div>				
+				<div data-dojo-type="dijit/layout/ContentPane" title="Identify">
+					The identify tool is designed to provide you with information about an active map layer. You can choose which layers you would like to select from.
+				</div>
+				<div data-dojo-type="dijit/layout/ContentPane" title="Save">
+					The save tool allows you to save your currently active layers, drawing, map extent, and criteria to your browser's local storage so you can resume at a later time.
+				</div>
+				<div data-dojo-type="dijit/layout/ContentPane" title="Print">
+					The print tool prepares the current map for printing, and provides you with a .PDF file.
+				</div>	
+				<div data-dojo-type="dijit/layout/ContentPane" title="Measure">
+					The measure tool allows you to measure spaces on the map. Supported options include area, distance, and latitude/longitude coordinates.
+				</div>
+				<div data-dojo-type="dijit/layout/ContentPane" title="Locate">
+					The locate tool allows you to translate lat/long coordinates or an address to an actual point on the map.
+				</div>
+				<div data-dojo-type="dijit/layout/ContentPane" title="Help">
+					If you would like more assistance, please visit our help page <a href="http://glahf.org/help" target="_blank">here</a> (link will open in new tab).
+				</div>	
             </div>
         </div>
     </div>

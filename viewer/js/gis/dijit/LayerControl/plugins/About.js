@@ -26,7 +26,7 @@ define([
             lang.mixin(this, options);
         },
         postCreate: function () {
-			if (this.layerDescriptionUrl !== null) {
+			if (this.layerDescriptionUrl !== undefined) {
 				var metadatalink = '<br><a href="' + this.layerDescriptionUrl + '" target="_blank">Metadata</i></a>';
 			} else {
 				var metadatalink = '';

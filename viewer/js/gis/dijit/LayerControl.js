@@ -379,7 +379,7 @@ define([
 		createGroup: function () {
 			var group = new ContentPane();
 			var groupContent = "<table class='layerControlTable'><tbody><tr><td class='expandNode'><i class='fa fa-plus-square-o layerControlIcon' id='"
-			+ this.currentParent + "-expand'></td></i><td class='layerControlLabel'><span class='groupLabel'>" + this.currentParent + "</span>"
+			+ this.currentParent + "-expand' style='cursor: pointer;'></td></i><td class='layerControlLabel'><span class='groupLabel'>" + this.currentParent + "</span>"
 			+ "</td><td class='layerControlTableUpdate'></td><td class='layerControlTableMenu'>" +/* <i class='fa fa-bars layerControlMenuIcon'></i> +*/ "</td></tr></tbody></table>";
 			group.set('content', groupContent);
 			group.set('id', this.currentParent);

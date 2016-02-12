@@ -128,15 +128,6 @@ define([
 					layerDescription: controlOptions.about,
 					layerDescriptionUrl: controlOptions.url
                 }));
-                /*menu.addChild(new MenuItem({
-                    label: 'About',
-                    onClick: function () {
-						alert(controlOptions.about);
-						console.debug(controlOptions);
-						
-						
-                    }
-                }));*/
             }
 			//Slider View
 			if (controlOptions.slider) {

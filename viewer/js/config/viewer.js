@@ -88,7 +88,7 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF GLB Great Lakes Basin Extent.',
-				url: '',
+				//url: '',
 				parent: 'Hydrology'
 			}
 		}, {
@@ -121,7 +121,7 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF GLB Basins.',
-				url: '',
+				//url: '',
 				parent: 'Hydrology'
 			}
 		}, {
@@ -170,6 +170,7 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLANSIS Invasive Species occurences.',
+				url: 'http://glahf.org/explorer/metadata/invasive_species.html',
 				parent: 'Biological'
 			}
 		}, {
@@ -218,6 +219,7 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF Depth.',
+				url: 'http://glahf.org/explorer/metadata/depth.html',
 				parent: 'Geomorphology',
 				slider: true,
 				sliderUrl: './Bathymetry.html'
@@ -236,6 +238,7 @@ define([
 			},
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> GLAHF Shoreline Classification.',
+				url: 'http://glahf.org/explorer/metadata/shoreline_classification.html',
 				parent: 'Geomorphology'
 			}
 		}, {
@@ -860,7 +863,7 @@ define([
 					map: true
 				}
 			},
-			help: {
+			/*help: {
 				include: true,
 				id: 'help',
 				type: 'toolbarOption',
@@ -870,6 +873,17 @@ define([
 				open: false,
 				position: 9,
 				options: {}
+			}*/
+			help: {
+				include: true,
+				id: 'help',
+				type: 'floating',
+				path: 'gis/dijit/Help',
+				title: 'GLAHF Explorer Help Menu',
+				options: {
+					draggable: true
+					//openOnStartup: true
+				}
 			}
 		}
 	};
