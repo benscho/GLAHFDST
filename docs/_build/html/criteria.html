@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="save.html">Save</a></li>
 <li class="toctree-l1"><a class="reference internal" href="query.html">Query</a></li>
 <li class="toctree-l1"><a class="reference internal" href="locate.html">Locate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 </ul>
 
             
@@ -155,29 +156,29 @@ Criteria/json/criteria.json. Users can select to search for results that match e
 
 <p>Sets up the initial state of the criteria widget.</p>
 <dl class="function">
-<dt id="investigateAll">
-<code class="descname">investigateAll</code><span class="sig-paren">(</span><em>polygonGraphics</em><span class="sig-paren">)</span><a class="headerlink" href="#investigateAll" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Begins an investigation for criteria that satisfy all selected criteria</p>
-<dl class="function">
-<dt id="investigateAny">
-<code class="descname">investigateAny</code><span class="sig-paren">(</span><em>polygonGraphics</em><span class="sig-paren">)</span><a class="headerlink" href="#investigateAny" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Begins an investigation for criteria that satisfy any selected criteria</p>
-<dl class="function">
 <dt id="runInvestigation">
-<code class="descname">runInvestigation</code><span class="sig-paren">(</span><em>polygonGraphics</em>, <em>intersect</em><span class="sig-paren">)</span><a class="headerlink" href="#runInvestigation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">runInvestigation</code><span class="sig-paren">(</span><em>polygonGraphics</em><span class="sig-paren">)</span><a class="headerlink" href="#runInvestigation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p>Does the actual bulk of the processing. Depending on the value of <cite>intersect</cite>, either an intersect or union operation is performed on the polygons.</p>
+<p>Processes the selected fields. The selected layers are enabled as transparent feature layers, but also sent to the server for geoprocessing.</p>
 <dl class="function">
 <dt id="criteriaComplete">
 <code class="descname">criteriaComplete</code><span class="sig-paren">(</span><em>jobInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#criteriaComplete" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Handles the results of a search. Retrieves the results of a investigation given the <em>jobInfo</em>. Attempts to format results, but makes no guarantee on ordering due to JSON. By default, these are fed to the bottom table.</p>
+<dl class="function">
+<dt id="createLegend">
+<code class="descname">createLegend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#createLegend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Creates and displays a legend pane for Criteria. Allows users to enable/disable any of the various feature layers or the results layer itself. Hidden when a user hits &#8220;clear&#8221; or changes the active toolbar.</p>
+<dl class="function">
+<dt id="createLayer">
+<code class="descname">createLayer</code><span class="sig-paren">(</span><em>layerInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#createLayer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Given some <em>layerInfo</em>, construct the transparent feature layer that will display on the map. Colors are picked from a list to ensure they have sufficient contrast, layers outside the index of the list are not allowed.</p>
 <dl class="function">
 <dt id="criteriaStatus">
 <code class="descname">criteriaStatus</code><span class="sig-paren">(</span><em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#criteriaStatus" title="Permalink to this definition">¶</a></dt>
@@ -195,19 +196,19 @@ Criteria/json/criteria.json. Users can select to search for results that match e
 <code class="descname">clearCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clearCriteria" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p>Clears out the Criteria graphics.</p>
+<p>Clears out the Criteria graphics found in <em>this.polygonGraphics</em> and zeroes out <em>this.criteriaLayers</em>.</p>
 <dl class="function">
 <dt id="loadCriteria">
 <code class="descname">loadCriteria</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#loadCriteria" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p>Simply reconstructs criteria geometry.</p>
+<p>Reconstructs the geometry from the browser&#8217;s indexedDB. Feature layers are re-queried, but the geometry information is preserved.</p>
 </div>
 <div class="section" id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
 <dl class="data">
-<dt id="polygonGraphics">
-<code class="descname">polygonGraphics</code><a class="headerlink" href="#polygonGraphics" title="Permalink to this definition">¶</a></dt>
+<dt id="this.polygonGraphics">
+<code class="descclassname">this.</code><code class="descname">polygonGraphics</code><a class="headerlink" href="#this.polygonGraphics" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>An ESRI Javascript API Feature Layer which contains the graphics created by the searches. <a href="#id1"><span class="problematic" id="id2">`</span></a>Documentation. &lt;<a class="reference external" href="https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html">https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html</a>&gt;&#8217;_</p>
@@ -217,6 +218,18 @@ Criteria/json/criteria.json. Users can select to search for results that match e
 <dd></dd></dl>
 
 <p>An array used to construct the Dijit Dialog objects (<a class="reference external" href="https://dojotoolkit.org/api/?qs=1.10/dijit/Dialog">Documentation</a>) and hold the references to them.</p>
+<dl class="data">
+<dt id="this.colors[]">
+<code class="descclassname">this.</code><code class="descname">colors[]</code><a class="headerlink" href="#this.colors[]" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>An array of colors. Contains blue, yellow, red, green, purple, and orange. Used to assign colors to the feature layers created during an investigation.</p>
+<dl class="data">
+<dt id="this.criteriaLayers[]">
+<code class="descclassname">this.</code><code class="descname">criteriaLayers[]</code><a class="headerlink" href="#this.criteriaLayers[]" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>An array of the layers currently being used with Criteria. By design, the intersection layer is the final one. Cleared when <em>clearCriteria()</em> is called.</p>
 </div>
 </div>
 

@@ -60,9 +60,12 @@ define([
 					else {
 						if (layers[i].graphics.length > 0) {
 							for (var j in layers[i].graphics) {
+								var json = layers[i].graphics[j].toJson();
+								var geo = json.geometry, attr = json.attributes;
 								var insert = {
 									id: layers[i].id,
-									geometry: layers[i].graphics[j].geometry.toJson()
+									geometry: geo,
+									attributes: attr
 								}
 								if (layers[i].graphics[j].symbol) {
 									insert.symbol = layers[i].graphics[j].symbol.toJson();

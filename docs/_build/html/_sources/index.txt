@@ -23,6 +23,7 @@ Contents:
    save
    query
    locate
+   help
 
 
 Indices and tables

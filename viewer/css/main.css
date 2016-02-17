@@ -505,4 +505,13 @@ body, html {
 	right: 25%;
 	bottom: 25%;
 }
+
+#esri_dijit_SymbolEditor_0 {
+	top: 235px !important;
+	left: 0px !important;
+	overflow: hidden;
+	height: 375px;
+	padding-left: 5px;
+	border-radius: 0px 0px 10px 0px;
+}
 /* end of GLAHF DST overrides */

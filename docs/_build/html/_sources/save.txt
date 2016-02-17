@@ -29,3 +29,18 @@ When a slot changes, make sure our slot object is pointing at the right one.
 
 Properties
 ----------
+.. js:data:: this.dbConfig
+
+Our configuration property used to set up the initial database state.
+
+.. js:data:: this.geoLayerDB
+
+Our connection to the database that will hold our geographical layers (e.g. layers enabled/disabled through the "Layers" toolbar).
+
+.. js:data:: this.graphicsLayerDB
+
+Our connection to the database that will hold our user-generated graphics (e.g. graphics created by Draw or Habitat Criteria).
+
+.. js:data:: this.slot
+
+An integer which lets us know which "slot" is currently selected - 1, 2, or 3 by default. Updated when a user selects a different slot.

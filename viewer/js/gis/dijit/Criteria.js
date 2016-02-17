@@ -126,7 +126,7 @@ define([
 							+ "\" layer=\"" + results[i].layer + "\"></div>";
 						for(var j in results[i].choices){
 							dom.byId("criteria-" + i).innerHTML += "<input type=\"checkbox\" name=\"" 
-							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\"></input>" + results[i].choices[j][0] + "<br/>";
+							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\" style=\"cursor: pointer;\"></input>" + results[i].choices[j][0] + "<br/>";
 						}
 					} else if (results[i].type === "heading") {
 						toolTips[i] = new Dialog({
@@ -194,7 +194,7 @@ define([
 			}
 			myLayers.push(nuLayer);
 			var queryStr = "";
-			var queryParams = [];
+			this.queryParams = [];
 			for (var i = 0; i < myLayers.length; i++) {
 				this.createLayer(myLayers[i]);
 				var curParam = myLayers[i].param;
@@ -202,31 +202,34 @@ define([
 				var nuValues = []; //rename this
 				for (var j = 0; j < myLayers[i].values.length; j++) {
 					whereStr += curParam + " = " + myLayers[i].values[j] + " OR ";
-					nuValues.push(" = " + myLayers[i].values[j])
+					nuValues.push(myLayers[i].values[j])
 				}
 				whereStr = whereStr.slice(0, -4); //trim last " OR "
 				var query = {
 					where: whereStr,
 					f: "json"
 				};
-				var baseURL = myLayers[i].URL + "/" + myLayers[i].layer + "/";
+				var baseURL = myLayers[i].URL + "/"; //+ "/" + myLayers[i].layer + "/";
 				var urlStr = baseURL + "query?" + ioQuery.objectToQuery(query);
 				queryStr += urlStr + ",";
 				var nuParams = { //rename this
 					"URL": baseURL,
 					"values": nuValues,
-					"variable": curParam
+					"layer": myLayers[i].layer,
+					"param": curParam,
+					"index": myLayers[i].index,
+					"name": myLayers[i].name
 				};
-				queryParams.push(nuParams);
+				this.queryParams.push(nuParams);
 			}
 			queryStr = queryStr.slice(0, -1); //trim last ","
 			var params = {
 				"Layers": queryStr
 			};
-			console.log(params);
-			console.log(json.toJson(queryParams));
+			//console.log(params);
+			console.log(json.toJson(this.queryParams));
 			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/CriteriaQuery/GPServer/Criteria");
-			this.gp.submitJob(queryParams, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
+			this.gp.submitJob(this.queryParams, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "inline");
 			this.criteriaLegend();
@@ -234,11 +237,11 @@ define([
 		criteriaLegend: function () {
 			domStyle.set(dom.byId("legend"), "display", "inline");
 			for (var i = 0; i < this.criteriaLayers.length; i++) {
-				dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\"></input>"
+				dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\" style=\"cursor: pointer;\"></input>"
 					+ this.criteriaLayers[i].name + "&nbsp;<div style=\"background:" + this.colors[i] + ";width:17px;float:right;\">&nbsp;</div><br>";
 			}
 			dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" +
-				i + "\" checked=\"true\"></input>Intersection&nbsp;<div style=\"background:#99FF33;width:17px;float:right;\">&nbsp;</div><br>";
+				i + "\" checked=\"true\" style=\"cursor: pointer;\"></input>Intersection&nbsp;<div style=\"background:#99FF33;width:17px;float:right;\">&nbsp;</div><br>";
 			for(var j = 0; j < i; j++) {
 				on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
 					var id = evt.srcElement.id.slice(-1);
@@ -253,9 +256,11 @@ define([
 			on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
 				if (this.polygonGraphics.visible) {
 					this.polygonGraphics.hide();
+					dojo.byId("crit-layer-" + j).checked = false;
 				}
 				else {
 					this.polygonGraphics.show();
+					dojo.byId("crit-layer-" + j).checked = true;
 				}
 			}));
 		},
@@ -293,15 +298,11 @@ define([
 			this.map.reorderLayer(this.polygonGraphics, this.map.layerIds.length);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "none");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "none");
-			//gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			this.gp.getResultData(jobInfo.jobId, "Output", lang.hitch(this, function (results) {
 				console.log("retrived results");
 				var infoTemplate = new InfoTemplate();
 				infoTemplate.setTitle("Test");
 				var fieldStr = "${*}";
-				/*for(var h in results.value.fields) {
-					fieldStr += results.value.fields[h].alias + ": ${" + results.value.fields[h].name + "}<br/>";
-				}*/
 				infoTemplate.setContent(fieldStr);
 				if (results.value.features.length === 0) {
 					alert("Criteria Investigation returned no results!");
@@ -313,7 +314,9 @@ define([
 						critPoly.addRing(results.value.features[i].geometry.rings[j]);
 					}
 				}
-				var graphic = new Graphic(critPoly, null, { ren: 1 });
+				var graphic = new Graphic(critPoly, null);
+				var attr = { ren: 1, "queryParams": this.queryParams };
+				graphic.setAttributes(attr);
 				this.polygonGraphics.add(graphic);
 				this.map.setExtent(critPoly.getExtent());
 			}), function (error) {
@@ -335,51 +338,21 @@ define([
 			this.polygonGraphics.clear();
 			domStyle.set(dom.byId("legend"), "display", "none");
 			dom.byId("criteriaLegend").innerHTML = "";
-			/*var checkedNodes = document.querySelectorAll("div#criteriaOptions input[type=checkbox]:checked");
-			for(var i in checkedNodes) {
-				checkedNodes[i].checked = false;
-			}*/
 		},
 		loadCriteria: function (data) {
 			this.clearCriteria();
-			var graphic = new Graphic(new Polygon(data.geometry), null, { ren: 1 });
-			this.polygonGraphics.add(graphic);
-		},
-		/*createFeatureTable: function (polygons) {
-            //var attributeTable = registry.byId('attributesContainer_widget');
-			var tabContainer = registry.byId('tabContainer');
-            this.queryID = this.queryID + 1;
-			var columns = [ //start simple, add lake, subbasin, zone after we get it working
-				{
-					field: "number",
-					label: "#"
-				},
-				{
-					field: "area",
-					label: "Area (km^2)"
-				}
-			];
-			
-			var processedResults = [];
-			for(var i=0;i<polygons.rings.length;i++) {
-				var result = [];
-				result.number = i+1;
-				result.polygon = new Polygon(new SpatialReference(102100));
-				result.polygon.addRing(polygons.rings[i]);
-				result.area = GeometryEngine.geodesicArea(result.polygon);
-				processedResults[i] = result;
+			this.queryParams = data.attributes.queryParams;
+			for (var i = 0; i < this.queryParams.length; i++) {
+				this.createLayer(this.queryParams[i]);
 			}
-			
-			var grid = new Grid({
-				id: this.queryID,
-				columns: columns
-			});
-			grid.renderArray(processedResults);
-			var cp = new ContentPane({
-				title: "Criteria " + this.queryID,
-				content: grid
-			});
-			tabContainer.addChild(cp);
-		}*/
+			var graphic = new Graphic(new Polygon(data.geometry), null);
+			var attr = { ren: 1, "queryParams": this.queryParams };
+			graphic.setAttributes(attr);
+			this.polygonGraphics.add(graphic);
+			this.criteriaLegend();
+			for (i = 0; i < this.queryParams.length; i++) {
+				this.map.reorderLayer(this.criteriaLayers[i],0);
+			}
+		}
 	});
 });

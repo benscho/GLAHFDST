@@ -688,12 +688,12 @@ define([
 				options: {
 					map: true,
 					extent: new Extent({
-						xmin: -180,
-						ymin: -85,
-						xmax: 180,
-						ymax: 85,
+						xmin: -10625145,
+						ymin: 5020496,
+						xmax: -8549069,
+						ymax: 6063298,
 						spatialReference: {
-							wkid: 4326
+							wkid: 102100
 						}
 					})
 				}

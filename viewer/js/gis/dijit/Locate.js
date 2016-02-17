@@ -13,6 +13,13 @@ define([
     'put-selector',
 	
 	'esri/tasks/locator',
+	'esri/layers/GraphicsLayer',
+	'esri/symbols/SimpleMarkerSymbol',
+	'esri/symbols/SimpleLineSymbol',
+	'esri/graphic',
+	'esri/geometry/Point',
+	'esri/Color',
+	'esri/renderers/SimpleRenderer',
 
     '//cdnjs.cloudflare.com/ajax/libs/proj4js/2.2.1/proj4.js',
 
@@ -34,7 +41,7 @@ define([
     on, keys,
     TooltipDialog, popup,
     put,
-	Locator,
+	Locator, GraphicsLayer, SimpleMarkerSymbol, SimpleLineSymbol, Graphic, Point, Color, SimpleRenderer,
     proj4,
     _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
     template, css
@@ -67,6 +74,18 @@ define([
         postCreate: function() {
             this.inherited(arguments);
             this.setupConnections();
+			this.pointSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 1), new Color([255, 0, 0, 1.0]));
+			this.pointRenderer = new SimpleRenderer(this.pointSymbol);
+            this.pointRenderer.label = 'User Located Points';
+            this.pointRenderer.description = 'User Located Points';
+			
+			this.locateGraphics = new GraphicsLayer({
+				id: 'locate_points',
+				title: 'Locate Points'
+			});
+			
+			this.locateGraphics.setRenderer(this.pointRenderer);
+			this.map.addLayer(this.locateGraphics);
         },
         setupConnections: function() {
             this.helpTooltip = new TooltipDialog({
@@ -81,6 +100,7 @@ define([
             this.locateTypeSelect.on('change', lang.hitch(this, 'updateHintText'));
             this.coordinateTextBox.on('keypress', lang.hitch(this, 'handleCoordInput'));
             this.goButton.on('click', lang.hitch(this, 'gotoCoordinate'));
+			this.clearButton.on('click', lang.hitch(this, 'clearGraphics'));
         },
         updateHintText: function() {
             var coordTypeDisplay = this.locateTypeSelect.get('displayedValue');
@@ -229,15 +249,25 @@ define([
 		getAddress: function () {
 			var locator = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates");
 			var address = this.coordinateTextBox.get('value');
-			var params = { SingleLine: address, f: "json" }; //"400 North Ingalls, Ann Arbor"
+			var params = { SingleLine: address, f: "json" };
 			var adr = locator.addressToLocations(params);
 			adr.then(lang.hitch(this, function(results){
 				if(results === []) { //no results found
 					return;
 				}
 				var container = dojo.byId("results");
-				container.innerHTML = "Did you mean: " + results[0].address + "?";
+				container.innerHTML = "Did you mean: <a id=\"locateAddress\">" + results[0].address + "</a>?";
+				on(dojo.byId("locateAddress"), "click", lang.hitch(this, function(evt) {
+					this.locateGraphics.clear();
+					this.map.centerAndZoom(results[0].location, 16);
+					var point = new Point(results[0].location);
+					var graphic = new Graphic(point);
+					this.locateGraphics.add(graphic);
+				}));
 			}));
+		},
+		clearGraphics: function () {
+			this.locateGraphics.clear();
 		}
     });
 });
