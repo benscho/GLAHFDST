@@ -164,6 +164,9 @@ define([
         // set layer visibility and update icon
         _setLayerVisibility: function (layer, checkNode) {
             if (layer.visible) {
+				if(domClass.contains(this.expandIconNode, "fa-minus-square-o")){
+					this.expandClickNode.click();
+				}
                 this._setLayerCheckbox(layer, checkNode);
                 layer.hide();
                 topic.publish('layerControl/layerToggle', {
@@ -171,6 +174,9 @@ define([
                     visible: layer.visible
                 });
             } else {
+				if(domClass.contains(this.expandIconNode, "fa-plus-square-o")){
+					this.expandClickNode.click();
+				}
                 this._setLayerCheckbox(layer, checkNode);
                 layer.show();
                 topic.publish('layerControl/layerToggle', {
@@ -181,7 +187,6 @@ define([
             if (layer.minScale !== 0 || layer.maxScale !== 0) {
                 this._checkboxScaleRange();
             }
-			this.expandClickNode.click();
         },
         // set checkbox based on layer so it's always in sync
         _setLayerCheckbox: function (layer, checkNode) {

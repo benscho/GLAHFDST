@@ -73,7 +73,7 @@
 				"1": "'61 - 90'"
 			}
 		],
-		"description": "<b>Ice cover duration</b> derived from ice cover data obtained from the Great Lakes Ice Atlas and NOAA Great Lakes Environmental Research Laboratory. "
+		"description": "<b>Ice cover duration</b> derived from ice cover data obtained from the Great Lakes Ice Atlas and NOAA Great Lakes Environmental Research Laboratory.  Ice cover data are available as a daily percent ice cover grid for the ice season (December 1 – May 31).  Using the threshold of 10%, the duration, in days, was tallied for each ice season. Ice cover duration classes are divided into increments of 30 days (e.g., 0-30, 30-60, 60-90, etc.)."
 	},
 	{
 		"name": "Geomorphology",
@@ -100,7 +100,7 @@
 				"1":"'very coarse'"
 			}
 		],
-		"description": "<b>Substrate</b> is the bottom material covering the Great Lakes which ranges from clay  and silt to boulders. Substrate descriptions have been aggregated into three common classes: fine, coarse, and very coarse/hard. "
+		"description": "<b>Substrate</b> in the Great Lakes has been compiled from many data sources including published journal article and books and from independent research projects collecting field data.  To fill the coastal margin  and nearshore areas the U.S. Army Corps of Engineers beach material (2012) and the Environment Canada Environmental Sensitivity Atlas (1990s) shoreline classification.  Please see metadata for complete sources.  We aggregated substrate descriptions into three common classes: fine, coarse, and very coarse/hard."
 	},
 	{
 		"name": "Depth (m)",
@@ -130,7 +130,7 @@
 				"1": "'Shallow offshore'"
 			}
 		],
-		"description": "These <b>Depth</b> classes represent different hydraulic and hydrogeomorphic conditions relative to energy and temperature (Wang et al, 2015).  Depth classes include <li>Coastal (0-3m)</li><li> Shallow nearshore (3-5 m)</li><li> Deep nearshore (5-15 m)</li><li> Very shallow offshore (15-30 m; only in Lake Erie)</li><li> Shallow offshore (30-100 m)</li><li> Deep offshore (>100m)</li>"
+		"description": "<b>Depth</b> Depth zones delineated from NOAA National Centers for Environmental Information Great Lakes bathymetry. Depth classes include: <li>Coastal (0-3m)</li><li>shallow nearshore (3-5 m)</li><li>deep nearshore (5-15 m)</li><li>very shallow offshore (15-30m; only in Lake Erie)</li><li>shallow offshore (30-100 m)</li><li>deep offshore (>100m)</li>"
 	},
 	{
 		"name": "Shoreline classification",
@@ -168,7 +168,7 @@
 				"1": "7"
 			}
 		],
-		"description": "Classification of the great lakes shoreline."
+		"description": "<b>Shoreline classification</b> represents the highest level common shoreline classes from the U.S. Army Corps of Engineers shoreline descriptions (2012) and Environment Canada Environmental Sensitivity Atlas (1990s)."
 	},
 	{
 		"name": "Shoreline sinuosity",
@@ -190,7 +190,7 @@
 				"1": "3"
 			}
 		],
-		"description": "<b>Shoreline sinuosity</b> is the degree of shoreline meandering and is an indicator of habitat complexity.  The sinuosity was broken into three classes (low, medium, high) using the natural breaks method."
+		"description": "<b>Shoreline sinuosity</b> is the degree of shoreline meandering.  Sinuosity was calculated by dividing the high resolution shoreline layer by the 1800 m GLAHF spatial framework grid and calculating the length of the shoreline divided by the straight line distance.  The sinuosity was broken into three classes (low, medium, high) using the natural breaks method."
 	},
 	{
 		"name": "Biological",
@@ -217,7 +217,7 @@
 				"1": "1"
 			}
 		],
-		"description": "<b>Submerged aquatic vegetation</b> is aquatic vegetation that is typically submerged below  surface water levels. The data is derived remotely sensed imagery and field verified from  Michigan Tech Research Institute (http://www.mtri.org/cladophora.html)"
+		"description": "<b>Submerged aquatic vegetation</b> from Michigan Tech Research Institute (http://www.mtri.org/cladophora.html) derived remotely sensed imagery and field verified.  Classes include dense (>75%), light (75-25%), and sand/uncolonized (<25%)."
 	},
 	{
 		"name": "Mechanical",
@@ -248,10 +248,10 @@
 				"1": "4"
 			}
 		],
-		"description": "The cyclic motion of colder water towards the surface as warmer water sinks. Low represents X degree of upwelling, Medium represents Y degree, High represents Z degree."
+		"description": "<b>Upwelling</b> occurs when strong surface winds push warm surface water away from the coastline, which is replaced by cold, nutrient rich water that wells up from deeper areas below.  This variable was calculated following the methods described in Plattner et. al., 2006 and calculated from NOAA Great Lakes CoastWatch daily mean surface water temperature.  Upwelling classes are 0, 1-3, 3-11, and 11-29 days."
 	},
 	{
-		"name": "Circulation (m/s)",
+		"name": "Circulation magnitude, spring (m/s)",
 		"URL": "https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/glahf_dss_le_circulation_magnitude/MapServer",
 		"layer": "0",
 		"type": "checkbox",
@@ -270,7 +270,7 @@
 				"1": "3"
 			}
 		],
-		"description": "Rate at which the water is flowing offshore. Low is X m/s, Moderate is Y m/s, and High is Z m/s."
+		"description": "<b>Circulation magnitude</b>, spring modeled for the offshore from the Great Lakes Coastal Forecasting System, NOAA Great Lakes Environmental Research Laboratory. The mean spring data are shown in this layer divided into the classes <li>low (<0.031 m/s)</li><li> medium (0.031-0.0495 m/s)</li><li> high (>0.0495 m/s)</li> using the natural breaks method."
 	},
 	{
 		"name": "Wave height, mean",
@@ -292,7 +292,7 @@
 				"1": "3"
 			}
 		],
-		"description": "Mean wave height for spring."
+		"description": "<b>Wave height, spring mean</b> was calculated from the U.S. Army Corps of Engineers Wave Information Studies modeled data.  Mean wave height classes are <li>low (<0.276 m)</li><li>moderate (0.276-0.440 m)</li><li>high (0.440-0.764 m)</li> Classes were divided using natural breaks."
 	},
 	{
 		"name": "Wave height, max",
@@ -314,6 +314,6 @@
 				"1": "3"
 			}
 		],
-		"description": "Max wave height for spring."
+		"description": "<b>Wave height, spring maximum</b> was calculated from the U.S. Army Corps of Engineers Wave Information Studies modeled data.  Maximum wave height classes are <li>low (<2,670 m)</li><li>moderate (2,670-4,200 m)</li><li>high (>4,200 m)</li> Classes were divided using natural breaks."
 	}
 ]
