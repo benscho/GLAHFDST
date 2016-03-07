@@ -6,6 +6,7 @@ Overview
 The query widget is designed to let users explore the data in a slightly less directed but still somewhat guided way. Users are able to query tables using queries that have been pre-defined in json.
 The queries are presented in two separate select drop-downs - one for category, and then another for finer grain selection within that category.
 Results appear in the bottom table pane.
+Needs some expansion in terms of queries offerred, and possibly a redesign or removal.
 
 Methods
 -------

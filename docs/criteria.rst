@@ -51,7 +51,7 @@ Properties
 
 .. js:data:: this.polygonGraphics
 
-An ESRI Javascript API Feature Layer which contains the graphics created by the searches. `Documentation. <https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html>'_
+An ESRI Javascript API Feature Layer which contains the graphics created by the searches. `Documentation. <https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html>`_
 
 .. js:data:: tooltips[]
 

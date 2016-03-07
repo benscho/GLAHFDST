@@ -21,7 +21,7 @@ Finishes collecting data, then serializes it and stores it in the database.
 
 .. js:function:: loadData()
 
-Loads the data from the browser database. When loading is finished, it uses Dojo's topic/publish to distribute information. For the graphics layers, we have to send the data to the proper widget for redrawing.
+Loads the data from the browser database. When loading is finished, it uses Dojo's topic/publish (`Documentation <https://dojotoolkit.org/reference-guide/1.10/dojo/topic.html#dojo-topic>`_) to distribute information. For the graphics layers, we have to send the data to the proper widget for redrawing.
 
 .. js:function:: _onSlotChange()
 

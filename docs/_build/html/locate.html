@@ -148,7 +148,9 @@ Small modifications to get it to work with the GLAHF Explorer, as well as the ad
 <h2>Address<a class="headerlink" href="#address" title="Permalink to this headline">¶</a></h2>
 <p>Small modifications have been made to the template (Locate.html), as well as <em>coordTypeTemplates</em> and gotoCoordinate both found in Locate.js.
 Currently will only display the &#8220;best match&#8221;. As decided by ESRI&#8217;s Geocoding service. The possibility for more granularity exists, but could arguably be outside of the scope of this project.
-When a user clicks &#8220;Locate&#8221;, the contents of the address box are sent to Esri&#8217;s Geocoding service. An array of results is returned, or an empty array if no matches are found.</p>
+When a user clicks &#8220;Locate&#8221;, the contents of the address box are sent to Esri&#8217;s Geocoding service. An array of results is returned, or an empty array if no matches are found.
+Currently, only the &#8220;best match&#8221; address is displayed to the user. Clicking on it will cause the map to zoom and center on the address and place a green dot.
+There will be a maximum of one dot at any time, which can be cleared with the &#8220;Clear&#8221; button.</p>
 </div>
 </div>
 

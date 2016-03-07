@@ -210,7 +210,7 @@ define([
 					f: "json"
 				};
 				var baseURL = myLayers[i].URL + "/"; //+ "/" + myLayers[i].layer + "/";
-				var urlStr = baseURL + "query?" + ioQuery.objectToQuery(query);
+				var urlStr = baseURL + myLayers[i].layer + "/" + "query?" + ioQuery.objectToQuery(query);
 				queryStr += urlStr + ",";
 				var nuParams = { //rename this
 					"URL": baseURL,
@@ -224,12 +224,11 @@ define([
 			}
 			queryStr = queryStr.slice(0, -1); //trim last ","
 			var params = {
-				"Layers": queryStr
+				"layers": queryStr
 			};
 			//console.log(params);
-			console.log(json.toJson(this.queryParams));
-			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/CriteriaQuery/GPServer/Criteria");
-			this.gp.submitJob(this.queryParams, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
+			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/NewCriteria/GPServer/New%20Criteria");
+			this.gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "inline");
 			this.criteriaLegend();
@@ -298,7 +297,7 @@ define([
 			this.map.reorderLayer(this.polygonGraphics, this.map.layerIds.length);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "none");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "none");
-			this.gp.getResultData(jobInfo.jobId, "Output", lang.hitch(this, function (results) {
+			this.gp.getResultData(jobInfo.jobId, "outputFC", lang.hitch(this, function (results) {
 				console.log("retrived results");
 				var infoTemplate = new InfoTemplate();
 				infoTemplate.setTitle("Test");
@@ -345,11 +344,18 @@ define([
 			for (var i = 0; i < this.queryParams.length; i++) {
 				this.createLayer(this.queryParams[i]);
 			}
-			var graphic = new Graphic(new Polygon(data.geometry), null);
+			//var graphic = new Graphic(new Polygon(data.geometry), null);
+			var critPoly = new Polygon(new SpatialReference({wkid:3857}));
+			for(var j in data.geometry.rings){
+				critPoly.addRing(data.geometry.rings[j]);
+			}
+			
 			var attr = { ren: 1, "queryParams": this.queryParams };
+			var graphic = new Graphic(critPoly, null);
 			graphic.setAttributes(attr);
 			this.polygonGraphics.add(graphic);
 			this.criteriaLegend();
+			this.polygonGraphics.show();
 			for (i = 0; i < this.queryParams.length; i++) {
 				this.map.reorderLayer(this.criteriaLayers[i],0);
 			}

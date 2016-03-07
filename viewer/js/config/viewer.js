@@ -519,85 +519,37 @@ define([
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_adult_bottom/MapServer',
-			title: 'Adult Walleye HSI (bottom)',
-			noLegend: false,
-			collapsed: true,
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_glfc/MapServer',
+			title: 'GLFC Walleye Suitable Habitat',
+			noLegend: 'false',
+			collapsed: 'true',
 			options: {
-				id: 'walleyehsiadultbottom',
+				id: 'walleyehabitat',
 				opacity: 1.0,
-				visible: false,
+				visibility: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Adult walleye habitat suitability index (HSI) for the bottom of Lake Erie ' +
-				'for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				about: '<b>Summary:</b> This layer shows waters less than 13 m of depth, which is the definition of suitable' +
+				'walleye habitat by the the Great Lakes Fishery Commission Standing Technical Committee (2007).',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi_glfc.html',
 				parent: 'Walleye'
 			}
 		}, {
 			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_adult_surface/MapServer',
-			title: 'Adult Walleye HSI (surface)',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_model_boundary/MapServer',
+			title: 'Walleye HSI Model Boundary',
 			noLegend: false,
 			collapsed: true,
 			options: {
-				id: 'walleyehsiadultsurface',
+				id: 'walleyehsiboundary',
 				opacity: 1.0,
 				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Adult walleye habitat suitability index (HSI) for the surface layer of Lake '+
-				'Erie for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
-				parent: 'Walleye'
-			}
-		},/* {
-			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_all_bottom/MapServer',
-			title: 'Walleye HSI (bottom)',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'walleyehsioverallbottom',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Overall Walleye HSI for the lake bottom.',
-				parent: 'Walleye'
-			}
-		}, {
-			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_all_surface/MapServer',
-			title: 'Walleye HSI (surface)',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'walleyehsioverallsurface',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> GLAHF Overall Walleye HSI for the lake surface.',
-				parent: 'Walleye'
-			}
-		},*/ {
-			type: 'dynamic',
-			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_juvenile_bottom/MapServer',
-			title: 'Juvenile Walleye HSI (bottom)',
-			noLegend: false,
-			collapsed: true,
-			options: {
-				id: 'walleyehsijuvenilebottom',
-				opacity: 1.0,
-				visible: false,
-				imageParameters: imageParameters
-			},
-			layerControlLayerInfos: {
-				about: '<b>Summary:</b> Juvenile walleye habitat suitability index (HSI) for the surface layer of ' +
-				'Lake Erie for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				about: '<b>Summary:</b> The walleye habitat suitability index (HSI) boundary for the model published in Pandit et al. (2013) for Lake Erie.',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi_model_boundary.html',
 				parent: 'Walleye'
 			}
 		}, {
@@ -615,6 +567,97 @@ define([
 			layerControlLayerInfos: {
 				about: '<b>Summary:</b> Juvenile walleye habitat suitability index (HSI) for the bottom of Lake Erie ' +
 				'for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi.html',
+				parent: 'Walleye'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_juvenile_bottom/MapServer',
+			title: 'Juvenile Walleye HSI (bottom)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'walleyehsijuvenilebottom',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> Juvenile walleye habitat suitability index (HSI) for the surface layer of ' +
+				'Lake Erie for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi.html',
+				parent: 'Walleye'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_adult_surface/MapServer',
+			title: 'Adult Walleye HSI (surface)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'walleyehsiadultsurface',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> Adult walleye habitat suitability index (HSI) for the surface layer of Lake '+
+				'Erie for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi.html',
+				parent: 'Walleye'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_adult_bottom/MapServer',
+			title: 'Adult Walleye HSI (bottom)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'walleyehsiadultbottom',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> Adult walleye habitat suitability index (HSI) for the bottom of Lake Erie ' +
+				'for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi.html',
+				parent: 'Walleye'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_all_surface/MapServer',
+			title: 'Walleye HSI (surface)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'walleyehsioverallsurface',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> All walleye habitat suitability index (HSI) for the surface of Lake' +
+				'Erie for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi.html',
+				parent: 'Walleye'
+			}
+		}, {
+			type: 'dynamic',
+			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_hsi_all_bottom/MapServer',
+			title: 'Walleye HSI (bottom)',
+			noLegend: false,
+			collapsed: true,
+			options: {
+				id: 'walleyehsioverallbottom',
+				opacity: 1.0,
+				visible: false,
+				imageParameters: imageParameters
+			},
+			layerControlLayerInfos: {
+				about: '<b>Summary:</b> All walleye habitat suitability index (HSI) for the bottom of Lake' + 
+				'Erie for summer 2006-2010. Based on the Pandit et al. (2013) linear regression interaction model.',
+				url: 'http://glahf.org/explorer/metadata/le_wae_hsi.html',
 				parent: 'Walleye'
 			}
 		}],

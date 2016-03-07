@@ -32,7 +32,7 @@
   
     <link rel="top" title="GLAHF Explorer 1 documentation" href="index.html"/>
         <link rel="next" title="Draw" href="draw.html"/>
-        <link rel="prev" title="Welcome to GLAHF Explorer’s documentation!" href="index.html"/> 
+        <link rel="prev" title="Welcome to GLAHF Explorer’s documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="save.html">Save</a></li>
 <li class="toctree-l1"><a class="reference internal" href="query.html">Query</a></li>
 <li class="toctree-l1"><a class="reference internal" href="locate.html">Locate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 </ul>
 
             
@@ -153,6 +154,12 @@ Groups are mainly just an HTML construct with little behind-the-scenes functiona
 </div>
 <div class="section" id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="loadLayers">
+<code class="descname">loadLayers</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#loadLayers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Called when Layers receives a &#8216;load/data&#8217; call. Hides all of the layers, then unhides the layers passed in through <em>data</em>. Also re-centers the map based on <em>data.extent</em>.</p>
 </div>
 </div>
 
@@ -166,7 +173,7 @@ Groups are mainly just an HTML construct with little behind-the-scenes functiona
         <a href="draw.html" class="btn btn-neutral float-right" title="Draw" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to GLAHF Explorer’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to GLAHF Explorer’s documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

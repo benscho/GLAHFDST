@@ -1,6 +1,8 @@
 define([
 	'dstore/LocalDB',
 	
+	'esri/geometry/Extent',
+	
 	'dojo/dom',
 	'dojo/_base/declare',
 	'dojo/json',
@@ -11,7 +13,7 @@ define([
 	'dijit/_TemplatedMixin',
 	'dijit/_WidgetsInTemplateMixin',
 	'dijit/form/FilteringSelect'
-], function (LocalDB, dom, declare, JSON, topic, saveTemplate, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin) {
+], function (LocalDB, Extent, dom, declare, JSON, topic, saveTemplate, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin) {
 	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 		widgetsInTemplate: true,
 		templateString: saveTemplate,
@@ -80,7 +82,7 @@ define([
 		},
 		saveData: function () {
 			var options = { overwrite: true };
-			var extent = this.map.geographicExtent;
+			var extent = this.map.extent;
 			insert = {
 				layers: this.activeGeoLayers,
 				id: this.slot,

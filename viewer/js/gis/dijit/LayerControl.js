@@ -7,11 +7,13 @@ define([
     'dojo/dom-attr',
     'dojo/dom-construct',
 	'dojo/dom-class',
+	'dojo/topic',
     'dijit/_WidgetBase',
     'dijit/_Container',
     'dijit/layout/ContentPane',
     'dijit/form/Button',
     'esri/tasks/ProjectParameters',
+	'esri/geometry/Extent',
     'esri/config',
     'require',
     'xstyle/css!./LayerControl/css/LayerControl.css'
@@ -24,11 +26,13 @@ define([
     domAttr,
     domConst,
 	domClass,
+	topic,
     WidgetBase,
     Container,
     ContentPane,
     Button,
     ProjectParameters,
+	Extent,
     esriConfig,
     require
 ) {
@@ -151,6 +155,7 @@ define([
 				this.createGroup();
                 this._checkReorder();
             }));
+			topic.subscribe('load/data', lang.hitch(this, this.loadLayers));
         },
         // create layer control and add to appropriate _container
         _addControl: function (layerInfo, LayerControl) {
@@ -396,8 +401,24 @@ define([
 					domClass.toggle(dojo.byId(child), "hidden");
 					domClass.toggle(dojo.byId(child), "layerControlIndent");
 				});
-				console.log("clicked an expand node");
+				//console.log("clicked an expand node");
 			});
+		},
+		loadLayers: function (data) {
+			var layers = this.map.getLayersVisibleAtScale();
+			for (var i in layers) {
+				if (layers[i].id === "layer0") {
+					continue;
+				}
+				layers[i].hide();
+				for (var j in data.layers) {
+					if (layers[i].id === data.layers[j].id) {
+						layers[i].show();
+					}
+				}
+			}
+			var extent = new Extent(data.extent);
+			this.map.setExtent(extent);
 		}
     });
     return LayerControl;

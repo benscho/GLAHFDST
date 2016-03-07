@@ -18,3 +18,6 @@ Groups are mainly just an HTML construct with little behind-the-scenes functiona
 Properties
 ----------
 
+.. js:function:: loadLayers(data)
+
+Called when Layers receives a 'load/data' call. Hides all of the layers, then unhides the layers passed in through *data*. Also re-centers the map based on *data.extent*.
