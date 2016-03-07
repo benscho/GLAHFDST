@@ -226,7 +226,7 @@ define([
 			var params = {
 				"layers": queryStr
 			};
-			//console.log(params);
+			console.log(params);
 			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/NewCriteria/GPServer/New%20Criteria");
 			this.gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");

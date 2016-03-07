@@ -521,12 +521,12 @@ define([
 			type: 'dynamic',
 			url: 'https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/le_walleye_glfc/MapServer',
 			title: 'GLFC Walleye Suitable Habitat',
-			noLegend: 'false',
-			collapsed: 'true',
+			noLegend: false,
+			collapsed: true,
 			options: {
-				id: 'walleyehabitat',
+				id: 'walleyesuitablehabitat',
 				opacity: 1.0,
-				visibility: false,
+				visible: false,
 				imageParameters: imageParameters
 			},
 			layerControlLayerInfos: {
