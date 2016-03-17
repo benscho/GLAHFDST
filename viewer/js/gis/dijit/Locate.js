@@ -74,7 +74,7 @@ define([
         postCreate: function() {
             this.inherited(arguments);
             this.setupConnections();
-			this.pointSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([0, 255, 0]), 1), new Color([0, 255, 0, 1.0]));
+			this.pointSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([0, 0, 255]), 1), new Color([0, 0, 255, 1.0]));
 			this.pointRenderer = new SimpleRenderer(this.pointSymbol);
             this.pointRenderer.label = 'User Located Points';
             this.pointRenderer.description = 'User Located Points';

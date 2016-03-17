@@ -10,7 +10,7 @@ define([
 	esriConfig.defaults.io.proxyUrl = 'proxy/proxy.ashx';
 	esriConfig.defaults.io.alwaysUseProxy = false;
 	// url to your geometry server.
-	esriConfig.defaults.geometryService = new GeometryService('https://arcgis.lsa.umich.edu/arcgis/rest/services/Utilities/Geometry/GeometryServer');
+	esriConfig.defaults.geometryService = new GeometryService('https://arcgis.lsa.umich.edu/arcpub/rest/services/Utilities/Geometry/GeometryServer');
 
 	//image parameters for dynamic services, set to png32 for higher quality exports.
 	var imageParameters = new ImageParameters();

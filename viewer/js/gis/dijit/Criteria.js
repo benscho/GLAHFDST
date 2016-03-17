@@ -156,11 +156,13 @@ define([
 			}); 
 			//this.geoInfo = new Memory({ idProperty: 'id', data: []});
 			topic.subscribe("load/criteria", lang.hitch(this, this.loadCriteria));
-			this.colors = ["blue", "yellow", "red", "green", "purple", "orange"];
+			this.colors = ["blue", "yellow", "red", "green", "purple", "#FFA500"]; //last value is the hex for orange
+			//esri's Color() method doesn't accept "orange" as a valid color string for some reason...
 		},
 		runInvestigation: function (polygonGraphics) {
 			var i = 0, result, criteriaDeferreds = [], criteriaURLs = "";
 			this.polygonGraphics.clear();
+			this.clearCriteria();
 			var selected = document.querySelectorAll("div#criteriaOptions input[type=checkbox]:checked");
 			if (selected.length === 0) {
 				alert("Please select one or more of the habitat criteria before hitting the Investigate button!");
@@ -193,6 +195,10 @@ define([
 				}				
 			}
 			myLayers.push(nuLayer);
+			if (myLayers.length > 6) {
+				alert("Please select criteria from fewer than 6 categories.");
+				return;
+			}
 			var queryStr = "";
 			this.queryParams = [];
 			for (var i = 0; i < myLayers.length; i++) {
@@ -227,7 +233,7 @@ define([
 				"layers": queryStr
 			};
 			console.log(params);
-			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/NewCriteria/GPServer/New%20Criteria");
+			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			this.gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "inline");
@@ -317,6 +323,7 @@ define([
 				var attr = { ren: 1, "queryParams": this.queryParams };
 				graphic.setAttributes(attr);
 				this.polygonGraphics.add(graphic);
+				console.log(GeometryEngine.geodesicArea(critPoly, 'square-kilometers'));
 				this.map.setExtent(critPoly.getExtent());
 			}), function (error) {
 				console.log("failure to return results");
