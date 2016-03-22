@@ -29,6 +29,10 @@
 	top: 0px;
 	left: 320px;
 	background: white;
-	width: 200px;
+	width: 250px;
+	display: none;
+}
+
+.inactive{
 	display: none;
 }

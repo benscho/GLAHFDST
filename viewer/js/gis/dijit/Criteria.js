@@ -29,6 +29,7 @@ define([
 	'dojo/topic',
 	'dojo/io-query',
 	'dojo/parser',
+	'dojo/dom-class',
 	
 	'dgrid/Grid',
 	
@@ -49,7 +50,7 @@ define([
 	'xstyle/css!./Criteria/css/Criteria.css'
 ], function (QueryTask, Query, GeometryEngine, FeatureLayer, UniqueValueRenderer, SimpleRenderer, SimpleFillSymbol, SimpleLineSymbol,
 			Graphic, Polygon, Color, SpatialReference, Units, Geoprocessor, GeometryService, InfoTemplate, Memory,
-			domStyle, on, dom, request, declare, lang, json, all, topic, ioQuery, parser, Grid, popup, Dialog, ContentPane, registry, Form,
+			domStyle, on, dom, request, declare, lang, json, all, topic, ioQuery, parser, domClass, Grid, popup, Dialog, ContentPane, registry, Form,
 			RadioButton, ComboBox, TextBox, Button, CheckBox, _WidgetBase, _TemplatedMixin,
 				_WidgetsInTemplateMixin, criteriaTemplate) {
 	
@@ -126,7 +127,8 @@ define([
 							+ "\" layer=\"" + results[i].layer + "\"></div>";
 						for(var j in results[i].choices){
 							dom.byId("criteria-" + i).innerHTML += "<input type=\"checkbox\" name=\"" 
-							+ results[i].name + "\" value=\"" + results[i].choices[j][1] + "\" style=\"cursor: pointer;\"></input>" + results[i].choices[j][0] + "<br/>";
+							+ results[i].choices[j][0] + "\" value=\"" + results[i].choices[j][1] + "\" style=\"cursor: pointer;\"></input>"
+							+ results[i].choices[j][0] + "<br/>";
 						}
 					} else if (results[i].type === "heading") {
 						toolTips[i] = new Dialog({
@@ -168,7 +170,6 @@ define([
 				alert("Please select one or more of the habitat criteria before hitting the Investigate button!");
 				return;
 			}
-			//var queryType = document.querySelector("input[name='criteriaInclusive']:checked").value;
 			var myLayers = [];
 			var curParent, nuLayer = {}, j = 0;
 			for (var i in selected) {
@@ -178,6 +179,7 @@ define([
 				var parent = selected[i].parentNode;
 				if(parent === curParent) {
 					nuLayer.values.push(selected[i].value);
+					nuLayer.options.push(selected[i].name);
 				}
 				else {
 					if(curParent) {
@@ -191,7 +193,8 @@ define([
 					nuLayer.layer = parent.attributes.layer.value;
 					nuLayer.param = parent.attributes.param.value;
 					nuLayer.index = j;
-					nuLayer.name = selected[i].name;
+					nuLayer.name = parent.attributes.name.value;
+					nuLayer.options = [selected[i].name];
 				}				
 			}
 			myLayers.push(nuLayer);
@@ -242,11 +245,19 @@ define([
 		criteriaLegend: function () {
 			domStyle.set(dom.byId("legend"), "display", "inline");
 			for (var i = 0; i < this.criteriaLayers.length; i++) {
-				dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\" style=\"cursor: pointer;\"></input>"
-					+ this.criteriaLayers[i].name + "&nbsp;<div style=\"background:" + this.colors[i] + ";width:17px;float:right;\">&nbsp;</div><br>";
+				var html = "<div id = \"legend-group-" + i + "\"><i class=\"fa layerControlIcon fa-plus-square-o\""
+					+ "id = \"legend-expand-" + i + "\" style=\"cursor: pointer;\"></i>" 
+					+ "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\" style=\"cursor: pointer;\"></input>"
+					+ this.criteriaLayers[i].name + "&nbsp;<div style=\"background:" + this.colors[i] + ";width:17px;float:right;\">&nbsp;</div>";
+				var options = this.criteriaLayers[i].options;
+				for (var j = 0; j < options.length; j++) {
+					html += "<div class=\"inactive\">" + options[j] + "</div>";
+				}
+				html += "</div>";
+				dom.byId("criteriaLegend").innerHTML += html;
 			}
-			dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" +
-				i + "\" checked=\"true\" style=\"cursor: pointer;\"></input>Intersection&nbsp;<div style=\"background:#99FF33;width:17px;float:right;\">&nbsp;</div><br>";
+			dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\" style=\"cursor: pointer; margin-left:15px;\">" 
+				+ "</input>Intersection&nbsp;<div style=\"background:#99FF33;width:17px;float:right;\">&nbsp;</div><br>";
 			for(var j = 0; j < i; j++) {
 				on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
 					var id = evt.srcElement.id.slice(-1);
@@ -256,6 +267,14 @@ define([
 					else {
 						this.criteriaLayers[id].show();
 					}
+				}));
+				on(dojo.byId("legend-expand-" + j), "click", lang.hitch(this, function(evt) {
+					var id = evt.srcElement.id.slice(-1);
+					var inactiveOptions = document.querySelectorAll("#legend-group-" + id + " .inactive");
+					for(var j in inactiveOptions) {
+						domClass.toggle(inactiveOptions[j], "inactive");
+					}
+					//console.log("clicked an expand node");
 				}));
 			}
 			on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
@@ -296,6 +315,7 @@ define([
 			infoTemp.setTitle("test");
 			infoTemp.setContent("${*}");
 			newLayer.name = layerInfo.name;
+			newLayer.options = layerInfo.options;
 			this.criteriaLayers.push(newLayer);
 			this.map.addLayer(newLayer);
 		},
@@ -351,7 +371,6 @@ define([
 			for (var i = 0; i < this.queryParams.length; i++) {
 				this.createLayer(this.queryParams[i]);
 			}
-			//var graphic = new Graphic(new Polygon(data.geometry), null);
 			var critPoly = new Polygon(new SpatialReference({wkid:3857}));
 			for(var j in data.geometry.rings){
 				critPoly.addRing(data.geometry.rings[j]);
