@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:res="http://www.esri.com/metadata/res/">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:res="http://www.esri.com/metadata/res/">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <style type="text/css" id="internalStyle" xmlns="" xmlns:esri="http://www.esri.com/metadata/">
@@ -350,22 +350,20 @@
   </head>
   <body oncontextmenu="return true">
     <div class="itemDescription" id="overview" xmlns="" xmlns:esri="http://www.esri.com/metadata/" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
-      <h1 class="idHeading">Shoreline Classification</h1><br><br>
+      <h1 class="idHeading">Shoreline Sinuosity</h1><br><br>
       <p class="center">
         <span class="idHeading">Tags</span>
-        <br />Great Lakes, Laurentian Great Lakes, Erie, Huron, Michigan, Ontario, Superior, St. Clair, Niagara River, St. Marys River, Ontario, Minnesota, Wisconsin, Illinois, Indiana, Michigan, Ohio, Pennsylvania, New York, framework, Great Lakes, Laurentian Great Lakes, framework, inlandWaters, planningCadastre, shoreline, shoreline classification</p>
+        <br />Great Lakes, Laurentian Great Lakes, framework, inlandWaters, planningCadastre, shoreline, geomorphology, sinuosity</p>
       <br />
       <div class="itemInfo">
         <span class="idHeading">Summary</span>
         <p>
-          <pre class="wrap">The Great Lakes shoreline classification composite dataset is a composite of the environmental sensitivity atlas (ESA) from Environment Canada (EC) and the U.S. Army Corps of Engineers (ACOE) shoreline descriptors.  The dataset was compiled for the Great Lakes Aquatic Habitat Framework (GLAHF) project with the most comprehensive shoreline classifications with the classes harmonized into the most common, high level classes.</pre>
+          <pre class="wrap">Shoreline sinuosity is the ratio of the straight line distance between two points to the actual, meandering distance of a shoreline segment. For this calculation the shoreline was divided into 1 km segments and the sinuosity was calculated for each segment.  A value of 1 is a straight segement of shoreline and the values near zero are highly sinuous.</pre>
         </p>
       </div>
       <div class="itemInfo">
         <span class="idHeading">Description</span>
-
-The Great Lakes shoreline classification composite dataset is a composite of the environmental sensitivity atlas (ESA) from Environment Canada (EC) and the U.S. Army Corps of Engineers (ACOE) shoreline descriptors. The ESA data ranges in dates from 1987 through the late 1990s, and the ACOE shoreline descriptions are from the 2012 oblique imagery interpetation. The full shoreline class descriptions were reviewed for both datasets and harmonized into 6 common classes, which were further simplified into 3 classes for aquatic habitat classification purposes.
-
+To calculate sinuosity the shoreline delineation (from the Great Lakes Hydrography Dataset version 1) was first dissolved to create one continuous shoreline feature. Islands were removed from the data layer. The continuous shoreline feature class was then divided into approximately 1 km segements using the Python Geometry class. The positionAlongLine Python object was used to create a point feature class containg a point for every 1,000 m along the shoreline. The dissolved shoreline was then divided at each point using the Split Line at Point Tool. The resulting data layer contained shoreline segements of approximately 1 km. The X, Y coordinates for the start (X_START, Y_START) and end (X_END, Y_END) vertex of each line segement was added to the attributed table. The sinuosity was calculated by dividing the straight line distance between the segments start and end points by the length of each line segement (SINUOSITY).
       </div>
       <div class="itemInfo">
         <span class="idHeading">Credits</span>
@@ -375,9 +373,7 @@ The Great Lakes shoreline classification composite dataset is a composite of the
       </div>
       <div class="itemInfo">
         <span class="idHeading">Use limitations</span>
-        <p>
-          <span class="noContent">There are no access and use limitations for this item.</span>
-        </p>
+ None
       </div>
       <p>
         <span class="idHeading">Extent</span>
@@ -392,16 +388,16 @@ The Great Lakes shoreline classification composite dataset is a composite of the
               <tr>
                 <td class="description">
                   <span class="idHeading">West</span> </td>
-                <td class="description">-92.368494</td>
+                <td class="description">-92.542434</td>
                 <td class="description">   <span class="idHeading">East</span> </td>
-                <td class="description">-73.372620</td>
+                <td class="description">-74.820971</td>
               </tr>
               <tr>
                 <td class="description">
                   <span class="idHeading">North</span> </td>
-                <td class="description">49.185539</td>
+                <td class="description">49.190737</td>
                 <td class="description">   <span class="idHeading">South</span> </td>
-                <td class="description">40.267565</td>
+                <td class="description">40.474652</td>
               </tr>
             </table>
           </dt>

@@ -350,7 +350,7 @@ body, html {
 
 /* end media queries bootstrap style */
 
-/* GLAHF DST overrides */
+/* GLAHF Explorer overrides */
 .hidden {
 	display: none;
 }
@@ -460,14 +460,10 @@ body, html {
 }
 
 #criteriaMessage {
-	/*height: 100px;
-	width: 200px;
-	background-color: #fff;*/
 	position: absolute;
 	top: 30px;
 	left: 60px;
 	opacity: 1;
-	/*border: 1px solid #000;*/
 	display: none;
 }
 

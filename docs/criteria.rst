@@ -64,3 +64,37 @@ An array of colors. Contains blue, yellow, red, green, purple, and orange. Used 
 .. js:data:: this.criteriaLayers[]
 
 An array of the layers currently being used with Criteria. By design, the intersection layer is the final one. Cleared when *clearCriteria()* is called.
+
+JSON
+----
+
+All of the data for the Criteria options is stored in criteria.json. This data is read by Criteria.js during *postCreate()*. Currently, two "types" are supported: "checkbox" and "heading".
+Adding support for new "types" is designed to be easy. In *Criteria.js*, add a check for *(results[i].type === "newType")* and create the entries with new types in *criteria.json*.
+
+.. js:data:: name
+
+The is the display name that will be used for the Criteria group. Examples are "Watershed Influence", "Cumulative degree-days", "Temperature Energy", etc. Common between "checkbox" and "heading".
+
+.. js:data:: type
+
+This defines how Criteria.js should operate on the object. So far only "checkbox" and "heading" are supported, but this is designed to be extensible.
+
+.. js:data:: description
+
+This provides a brief explanation of what the Criteria group is and what the options are (as well as units). Only "checkbox" supports this feature, and it appears as a tooltip alongside the group name.
+
+.. js:data:: URL
+
+A URL to the REST endpoint for the service this group is based on. Should be to the general level, not layer level (there is a separate option to specify layer). Supported by "checkbox" Criteria.
+
+.. js:data:: layer
+
+The layer of the service (specific by the URL) that this Criteria object will be dealing with. Terminology is confusing, but the URL directs to the "service", which can have multiple "layers". 0-indexed.
+
+.. js:data:: param
+
+The parameter of the layer we will be using. This should be a value that easily breaks the data into groups, usually the variable the layer is designed around.
+
+.. js:data:: choices[]
+
+An array of the options for the user to select. 0 is the display value, and 1 is the internal value that will be used for querying.

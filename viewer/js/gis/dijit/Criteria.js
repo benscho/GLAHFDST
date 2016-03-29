@@ -127,8 +127,8 @@ define([
 							+ "\" layer=\"" + results[i].layer + "\"></div>";
 						for(var j in results[i].choices){
 							dom.byId("criteria-" + i).innerHTML += "<input type=\"checkbox\" name=\"" 
-							+ results[i].choices[j][0] + "\" value=\"" + results[i].choices[j][1] + "\" style=\"cursor: pointer;\"></input>"
-							+ results[i].choices[j][0] + "<br/>";
+							+ results[i].choices[j]["name"] + "\" value=\"" + results[i].choices[j]["value"] + "\" style=\"cursor: pointer;\"></input>"
+							+ results[i].choices[j]["name"] + "<br/>";
 						}
 					} else if (results[i].type === "heading") {
 						toolTips[i] = new Dialog({
@@ -170,66 +170,55 @@ define([
 				alert("Please select one or more of the habitat criteria before hitting the Investigate button!");
 				return;
 			}
-			var myLayers = [];
-			var curParent, nuLayer = {}, j = 0;
+			var curParent, newLayer = {}, j = 0, myLayers = [];
 			for (var i in selected) {
 				if (i === "length" || i === "item") {
 					break;
 				}
 				var parent = selected[i].parentNode;
 				if(parent === curParent) {
-					nuLayer.values.push(selected[i].value);
-					nuLayer.options.push(selected[i].name);
+					newLayer.values.push(selected[i].value);
+					newLayer.options.push(selected[i].name);
 				}
 				else {
 					if(curParent) {
-						myLayers.push(nuLayer);
+						myLayers.push(newLayer);
 						j += 1;
 					}
 					curParent = parent;
-					nuLayer = {};
-					nuLayer.values = [selected[i].value];
-					nuLayer.URL = parent.attributes.url.value;
-					nuLayer.layer = parent.attributes.layer.value;
-					nuLayer.param = parent.attributes.param.value;
-					nuLayer.index = j;
-					nuLayer.name = parent.attributes.name.value;
-					nuLayer.options = [selected[i].name];
+					newLayer = {};
+					newLayer.values = [selected[i].value];
+					newLayer.URL = parent.attributes.url.value;
+					newLayer.layer = parent.attributes.layer.value;
+					newLayer.param = parent.attributes.param.value;
+					newLayer.index = j;
+					newLayer.name = parent.attributes.name.value;
+					newLayer.options = [selected[i].name];
 				}				
 			}
-			myLayers.push(nuLayer);
+			myLayers.push(newLayer);
 			if (myLayers.length > 6) {
-				alert("Please select criteria from fewer than 6 categories.");
+				alert("Please select criteria from 6 or fewer categories.");
 				return;
 			}
 			var queryStr = "";
 			this.queryParams = [];
+			this.criteriaLayers = [];
 			for (var i = 0; i < myLayers.length; i++) {
 				this.createLayer(myLayers[i]);
 				var curParam = myLayers[i].param;
 				var whereStr = "";
-				var nuValues = []; //rename this
 				for (var j = 0; j < myLayers[i].values.length; j++) {
 					whereStr += curParam + " = " + myLayers[i].values[j] + " OR ";
-					nuValues.push(myLayers[i].values[j])
 				}
 				whereStr = whereStr.slice(0, -4); //trim last " OR "
 				var query = {
 					where: whereStr,
 					f: "json"
 				};
-				var baseURL = myLayers[i].URL + "/"; //+ "/" + myLayers[i].layer + "/";
+				var baseURL = myLayers[i].URL + "/";
 				var urlStr = baseURL + myLayers[i].layer + "/" + "query?" + ioQuery.objectToQuery(query);
 				queryStr += urlStr + ",";
-				var nuParams = { //rename this
-					"URL": baseURL,
-					"values": nuValues,
-					"layer": myLayers[i].layer,
-					"param": curParam,
-					"index": myLayers[i].index,
-					"name": myLayers[i].name
-				};
-				this.queryParams.push(nuParams);
 			}
 			queryStr = queryStr.slice(0, -1); //trim last ","
 			var params = {
@@ -251,7 +240,7 @@ define([
 					+ this.criteriaLayers[i].name + "&nbsp;<div style=\"background:" + this.colors[i] + ";width:17px;float:right;\">&nbsp;</div>";
 				var options = this.criteriaLayers[i].options;
 				for (var j = 0; j < options.length; j++) {
-					html += "<div class=\"inactive\">" + options[j] + "</div>";
+					html += "<div class=\"inactive legendOption\">" + options[j] + "</div>";
 				}
 				html += "</div>";
 				dom.byId("criteriaLegend").innerHTML += html;
@@ -270,11 +259,13 @@ define([
 				}));
 				on(dojo.byId("legend-expand-" + j), "click", lang.hitch(this, function(evt) {
 					var id = evt.srcElement.id.slice(-1);
-					var inactiveOptions = document.querySelectorAll("#legend-group-" + id + " .inactive");
+					var inactiveOptions = document.querySelectorAll("#legend-group-" + id + " .legendOption");
 					for(var j in inactiveOptions) {
 						domClass.toggle(inactiveOptions[j], "inactive");
+						domClass.toggle(inactiveOptions[j], "active");
 					}
-					//console.log("clicked an expand node");
+					domClass.toggle("legend-expand-" + id, "fa-plus-square-o");
+					domClass.toggle("legend-expand-" + id, "fa-minus-square-o");
 				}));
 			}
 			on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
@@ -298,22 +289,20 @@ define([
 				for(var i = 0; i < layerInfo.values.length; i++) {
 					definitionStr+= (layerInfo.param + " = " + layerInfo.values[i]) + " OR ";
 				}
+				//remove last " OR "
 				definitionStr = definitionStr.slice(0,-4);
 				newLayer.setDefinitionExpression(definitionStr);
 			}
 			var layerColor = new Color(this.colors[layerInfo.index]);
 			var simpleColor = layerColor.toRgb();
 			var rgbaColor = layerColor.toRgba();
-			rgbaColor[3] = 0.25;
+			rgbaColor[3] = 0.25; //opacity
 			rgbaColor = new Color(rgbaColor);
 			simpleColor = new Color(simpleColor);
 			var symbol = new SimpleRenderer(
 				new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, simpleColor, 2), rgbaColor)
 			);
 			newLayer.setRenderer(symbol);
-			var infoTemp = new InfoTemplate();
-			infoTemp.setTitle("test");
-			infoTemp.setContent("${*}");
 			newLayer.name = layerInfo.name;
 			newLayer.options = layerInfo.options;
 			this.criteriaLayers.push(newLayer);
@@ -360,7 +349,6 @@ define([
 			for(var i = 0; i < this.criteriaLayers.length; i++) {
 				this.criteriaLayers[i].clear();
 			}
-			this.criteriaLayers = [];
 			this.polygonGraphics.clear();
 			domStyle.set(dom.byId("legend"), "display", "none");
 			dom.byId("criteriaLegend").innerHTML = "";

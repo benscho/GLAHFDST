@@ -177,16 +177,16 @@ This should be any server with PHP 5.4.2 or later.</p>
 </div>
 <div class="section" id="geoprocessing">
 <h2>Geoprocessing<a class="headerlink" href="#geoprocessing" title="Permalink to this headline">¶</a></h2>
-<p>In order for tasks like the Criteria function to operate, you&#8217;ll need a corresponding geoprocessing service running on the server. The currently used geoprocessing service is a python script titled &#8220;criteriaQuery.py&#8221;
+<p>In order for tasks like the Criteria function to operate, you&#8217;ll need a corresponding geoprocessing service running on the server. The currently used geoprocessing service is a python script titled &#8220;criteriaIntersect.py&#8221;
 which is included in the repository under the &#8220;Geoprocessing&#8221; sub-folder. To set this service up, use the following steps:</p>
 <ol class="arabic simple">
 <li>Open ArcCatalog or ArcMap (either will work, but this will mainly be written from the perspective of ArcCatalog)</li>
 <li>In the catalog tree, navigate to &#8220;My Toolboxes&#8221; and create a new toolbox (I named mine &#8220;Criteria&#8221;)</li>
 <li>Right click on the toolbox and select Add &gt; Script...</li>
-<li>Add the criteriaQuery.py script</li>
+<li>Add the criteriaIntersect.py script</li>
 <li>Right click on the script and select &#8220;Properties&#8221;. On the Parameters tab, make sure you have two variables - a required input String (can be named whatever you want, but be consistent) and a derived output Feature Class.</li>
 <li>Right click on the toolbox again. Select New &gt; Model...</li>
-<li>Drag the &#8220;criteriaQuery&#8221; script into the model window</li>
+<li>Drag the &#8220;criteriaIntersect&#8221; script into the model window</li>
 <li>In the model window, select Insert &gt; Create Variable. Select &#8220;String&#8221;</li>
 <li>Using the &#8220;Connect&#8221; command from the model window toolbar (icon is two boxes connected by a line), connect your String to the script. When prompted, select &#8220;layerData&#8221; for the String.</li>
 <li>Right click &#8220;String&#8221; and select &#8220;Model Parameter&#8221;. Do this for &#8220;Output&#8221; as well.</li>

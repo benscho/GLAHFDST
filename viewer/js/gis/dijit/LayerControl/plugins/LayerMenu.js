@@ -126,7 +126,8 @@ define([
                     label: '<i class="icon-question-sign"></i> About',
                     layer: layer,
 					layerDescription: controlOptions.about,
-					layerDescriptionUrl: controlOptions.url
+					layerDescriptionUrl: controlOptions.url,
+					layerDescriptionText: controlOptions.text
                 }));
             }
 			//Slider View

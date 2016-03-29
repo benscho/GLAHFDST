@@ -27,7 +27,11 @@ define([
         },
         postCreate: function () {
 			if (this.layerDescriptionUrl !== undefined) {
-				var metadatalink = '<br><a href="' + this.layerDescriptionUrl + '" target="_blank">Metadata</i></a>';
+				var urlText = "Metadata";
+				if (this.layerDescriptionText !== undefined) {
+					urlText = this.layerDescriptionText;
+				}
+				var metadatalink = '<br><a href="' + this.layerDescriptionUrl + '" target="_blank">' + urlText + '</i></a>';
 			} else {
 				var metadatalink = '';
 			}

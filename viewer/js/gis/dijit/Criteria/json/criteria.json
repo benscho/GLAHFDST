@@ -1,8 +1,7 @@
 [
 	{
 		"name": "Hydrology",
-		"type": "heading",
-		"description": "Criteria related to the movement, distribution, and quality of water in the Great Lakes."
+		"type": "heading"
 	},
 	{
 		"name": "Watershed Influence",
@@ -12,28 +11,27 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "Minimal",
-				"1": "1"
+				"name": "Minimal",
+				"value": "1"
 			},
 			{
-				"0": "Small",
-				"1": "2"
+				"name": "Small",
+				"value": "2"
 			},
 			{
-				"0": "Medium",
-				"1": "3"
+				"name": "Medium",
+				"value": "3"
 			},
 			{
-				"0": "Large",
-				"1": "4"
+				"name": "Large",
+				"value": "4"
 			}
 		],
 		"description": "<b>Watershed influence</b> is the combined potential land influence from tributaries and shoreline interfluves. The watershed influence class breaks are:<li> minimal (<120 km2; stream order 1-3)</li><li> small (121-2,500 km2; stream order 4-5)</li><li> medium (2,501-7,500 km2; stream order 6)</li><li> large (>7,500 km2; stream order 7)</li>"
 	},
 	{
 		"name": "Temperature Energy",
-		"type": "heading",
-		"description": "Data relating to the temperature of the water."
+		"type": "heading"
 	},
 	{
 		"name": "Cumulative degree-days",
@@ -43,16 +41,16 @@
 		"param": "cddClassDescription",
 		"choices": [
 			{
-				"0": "Cold",
-				"1": "'cold'"
+				"name": "Cold",
+				"value": "'cold'"
 			},
 			{
-				"0": "Cool",
-				"1": "'cool'"
+				"name": "Cool",
+				"value": "'cool'"
 			},
 			{
-				"0": "Warm",
-				"1": "'warm'"
+				"name": "Warm",
+				"value": "'warm'"
 			}
 		],
 		"description": "<b>Cumulative degree-days (CDD)</b> is a measure of annual heat accumulation in the Great Lakes and an indicator of the thermal regime. CDD classes are: <li><3,000 degree-days</li><li> 3,000-3,900 degree-days</li><li> >3,900 degree-days</li> based on breaks in fish thermal requirements"
@@ -65,20 +63,19 @@
 		"param": "daysOfIceRange",
 		"choices": [
 			{
-				"0": "31 - 60",
-				"1": "'31 - 60'"
+				"name": "31 - 60",
+				"value": "'31 - 60'"
 			},
 			{
-				"0": "61 - 90",
-				"1": "'61 - 90'"
+				"name": "61 - 90",
+				"value": "'61 - 90'"
 			}
 		],
 		"description": "<b>Ice cover duration</b> derived from ice cover data obtained from the Great Lakes Ice Atlas and NOAA Great Lakes Environmental Research Laboratory.  Ice cover data are available as a daily percent ice cover grid for the ice season (December 1 – May 31).  Using the threshold of 10%, the duration, in days, was tallied for each ice season. Ice cover duration classes are divided into increments of 30 days (e.g., 0-30, 30-60, 60-90, etc.)."
 	},
 	{
 		"name": "Geomorphology",
-		"type": "heading",
-		"description": "Criteria related to topographic and bathymetric features."
+		"type": "heading"
 	},
 	{
 		"name": "Substrate",
@@ -88,16 +85,16 @@
 		"param": "glahf_subs_simple",
 		"choices": [
 			{
-				"0": "Fine",
-				"1": "'fine'"
+				"name": "Fine",
+				"value": "'fine'"
 			},
 			{
-				"0":"Coarse",
-				"1":"'coarse'"
+				"name":"Coarse",
+				"value":"'coarse'"
 			},
 			{
-				"0":"Very Coarse",
-				"1":"'very coarse'"
+				"name":"Very Coarse",
+				"value":"'very coarse'"
 			}
 		],
 		"description": "<b>Substrate</b> in the Great Lakes has been compiled from many data sources including published journal article and books and from independent research projects collecting field data.  To fill the coastal margin  and nearshore areas the U.S. Army Corps of Engineers beach material (2012) and the Environment Canada Environmental Sensitivity Atlas (1990s) shoreline classification.  Please see metadata for complete sources.  We aggregated substrate descriptions into three common classes: fine, coarse, and very coarse/hard."
@@ -110,24 +107,24 @@
 		"param": "DepthClass",
 		"choices": [
 			{
-				"0": "Coastal",
-				"1": "'Coastal / very shallow'"
+				"name": "Coastal",
+				"value": "'Coastal / very shallow'"
 			},
 			{
-				"0": "Shallow nearshore",
-				"1": "'Shallow nearshore'"
+				"name": "Shallow nearshore",
+				"value": "'Shallow nearshore'"
 			},
 			{
-				"0": "Deep nearshore",
-				"1": "'Deep nearshore'"
+				"name": "Deep nearshore",
+				"value": "'Deep nearshore'"
 			},
 			{
-				"0": "Very shallow offshore",
-				"1": "'Very shallow offshore'"
+				"name": "Very shallow offshore",
+				"value": "'Very shallow offshore'"
 			},
 			{
-				"0": "Shallow offshore",
-				"1": "'Shallow offshore'"
+				"name": "Shallow offshore",
+				"value": "'Shallow offshore'"
 			}
 		],
 		"description": "<b>Depth</b> Depth zones delineated from NOAA National Centers for Environmental Information Great Lakes bathymetry. Depth classes include: <li>Coastal (0-3m)</li><li>shallow nearshore (3-5 m)</li><li>deep nearshore (5-15 m)</li><li>very shallow offshore (15-30m; only in Lake Erie)</li><li>shallow offshore (30-100 m)</li><li>deep offshore (>100m)</li>"
@@ -140,32 +137,32 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "Artificial",
-				"1": "1"
+				"name": "Artificial",
+				"value": "1"
 			},
 			{
-				"0": "Coarse grain flat coast",
-				"1": "2"
+				"name": "Coarse grain flat coast",
+				"value": "2"
 			},
 			{
-				"0": "Coastal wetland/riparian zone",
-				"1": "3"
+				"name": "Coastal wetland/riparian zone",
+				"value": "3"
 			},
 			{
-				"0": "Mixed beach",
-				"1": "4"
+				"name": "Mixed beach",
+				"value": "4"
 			},
 			{
-				"0": "Rocky cliffs/bluffs",
-				"1": "5"
+				"name": "Rocky cliffs/bluffs",
+				"value": "5"
 			},
 			{
-				"0": "Sand beach",
-				"1": "6"
+				"name": "Sand beach",
+				"value": "6"
 			},
 			{
-				"0": "Sediment scarp",
-				"1": "7"
+				"name": "Sediment scarp",
+				"value": "7"
 			}
 		],
 		"description": "<b>Shoreline classification</b> represents the highest level common shoreline classes from the U.S. Army Corps of Engineers shoreline descriptions (2012) and Environment Canada Environmental Sensitivity Atlas (1990s)."
@@ -178,24 +175,23 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "Low",
-				"1": "3"
+				"name": "Low",
+				"value": "3"
 			},
 			{
-				"0": "Moderate",
-				"1": "2"
+				"name": "Moderate",
+				"value": "2"
 			},
 			{
-				"0": "High",
-				"1": "3"
+				"name": "High",
+				"value": "3"
 			}
 		],
 		"description": "<b>Shoreline sinuosity</b> is the degree of shoreline meandering.  Sinuosity was calculated by dividing the high resolution shoreline layer by the 1800 m GLAHF spatial framework grid and calculating the length of the shoreline divided by the straight line distance.  The sinuosity was broken into three classes (low, medium, high) using the natural breaks method."
 	},
 	{
 		"name": "Biological",
-		"type": "heading",
-		"description": "Biological criteria."
+		"type": "heading"
 	},
 	{
 		"name": "Submerged aquatic vegetation",
@@ -205,24 +201,23 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "Sand/uncolonized",
-				"1": "3"
+				"name": "Sand/uncolonized",
+				"value": "3"
 			},
 			{
-				"0": "Light SAV",
-				"1": "2"
+				"name": "Light SAV",
+				"value": "2"
 			},
 			{
-				"0": "Dense SAV",
-				"1": "1"
+				"name": "Dense SAV",
+				"value": "1"
 			}
 		],
 		"description": "<b>Submerged aquatic vegetation</b> from Michigan Tech Research Institute (http://www.mtri.org/cladophora.html) derived remotely sensed imagery and field verified.  Classes include dense (>75%), light (75-25%), and sand/uncolonized (<25%)."
 	},
 	{
 		"name": "Mechanical",
-		"type": "heading",
-		"description": "Criteria related to movement of the water within the Great Lakes."
+		"type": "heading"
 	},
 	{
 		"name": "Upwelling",
@@ -232,20 +227,20 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "None",
-				"1": "1"
+				"name": "None",
+				"value": "1"
 			},
 			{
-				"0":"Low",
-				"1": "2"
+				"name":"Low",
+				"value": "2"
 			},
 			{
-				"0":"Medium",
-				"1": "3"
+				"name":"Medium",
+				"value": "3"
 			},
 			{
-				"0":"High",
-				"1": "4"
+				"name":"High",
+				"value": "4"
 			}
 		],
 		"description": "<b>Upwelling</b> occurs when strong surface winds push warm surface water away from the coastline, which is replaced by cold, nutrient rich water that wells up from deeper areas below.  This variable was calculated following the methods described in Plattner et. al., 2006 and calculated from NOAA Great Lakes CoastWatch daily mean surface water temperature.  Upwelling classes are 0, 1-3, 3-11, and 11-29 days."
@@ -258,16 +253,16 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "Low",
-				"1": "1"
+				"name": "Low",
+				"value": "1"
 			},
 			{
-				"0": "Moderate",
-				"1": "2"
+				"name": "Moderate",
+				"value": "2"
 			},
 			{
-				"0": "High",
-				"1": "3"
+				"name": "High",
+				"value": "3"
 			}
 		],
 		"description": "<b>Circulation magnitude</b>, spring modeled for the offshore from the Great Lakes Coastal Forecasting System, NOAA Great Lakes Environmental Research Laboratory. The mean spring data are shown in this layer divided into the classes <li>low (<0.031 m/s)</li><li> medium (0.031-0.0495 m/s)</li><li> high (>0.0495 m/s)</li> using the natural breaks method."
@@ -280,16 +275,16 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "Low",
-				"1": "1"
+				"name": "Low",
+				"value": "1"
 			},
 			{
-				"0": "Moderate",
-				"1": "2"
+				"name": "Moderate",
+				"value": "2"
 			},
 			{
-				"0": "High",
-				"1": "3"
+				"name": "High",
+				"value": "3"
 			}
 		],
 		"description": "<b>Wave height, spring mean</b> was calculated from the U.S. Army Corps of Engineers Wave Information Studies modeled data.  Mean wave height classes are <li>low (<0.276 m)</li><li>moderate (0.276-0.440 m)</li><li>high (0.440-0.764 m)</li> Classes were divided using natural breaks."
@@ -302,16 +297,16 @@
 		"param": "gridcode",
 		"choices": [
 			{
-				"0": "Low",
-				"1": "1"
+				"name": "Low",
+				"value": "1"
 			},
 			{
-				"0": "Moderate",
-				"1": "2"
+				"name": "Moderate",
+				"value": "2"
 			},
 			{
-				"0": "High",
-				"1": "3"
+				"name": "High",
+				"value": "3"
 			}
 		],
 		"description": "<b>Wave height, spring maximum</b> was calculated from the U.S. Army Corps of Engineers Wave Information Studies modeled data.  Maximum wave height classes are <li>low (<2,670 m)</li><li>moderate (2,670-4,200 m)</li><li>high (>4,200 m)</li> Classes were divided using natural breaks."

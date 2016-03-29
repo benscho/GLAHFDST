@@ -82,12 +82,14 @@
             
             
                 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layers.html">Layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="draw.html">Draw</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Criteria</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#methods">Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#json">JSON</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="save.html">Save</a></li>
@@ -230,6 +232,53 @@ Criteria/json/criteria.json. Users can select to search for results that match e
 <dd></dd></dl>
 
 <p>An array of the layers currently being used with Criteria. By design, the intersection layer is the final one. Cleared when <em>clearCriteria()</em> is called.</p>
+</div>
+<div class="section" id="json">
+<h2>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h2>
+<p>All of the data for the Criteria options is stored in criteria.json. This data is read by Criteria.js during <em>postCreate()</em>. Currently, two &#8220;types&#8221; are supported: &#8220;checkbox&#8221; and &#8220;heading&#8221;.
+Adding support for new &#8220;types&#8221; is designed to be easy. In <em>Criteria.js</em>, add a check for <em>(results[i].type === &#8220;newType&#8221;)</em> and create the entries with new types in <em>criteria.json</em>.</p>
+<dl class="data">
+<dt id="name">
+<code class="descname">name</code><a class="headerlink" href="#name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The is the display name that will be used for the Criteria group. Examples are &#8220;Watershed Influence&#8221;, &#8220;Cumulative degree-days&#8221;, &#8220;Temperature Energy&#8221;, etc. Common between &#8220;checkbox&#8221; and &#8220;heading&#8221;.</p>
+<dl class="data">
+<dt id="type">
+<code class="descname">type</code><a class="headerlink" href="#type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This defines how Criteria.js should operate on the object. So far only &#8220;checkbox&#8221; and &#8220;heading&#8221; are supported, but this is designed to be extensible.</p>
+<dl class="data">
+<dt id="description">
+<code class="descname">description</code><a class="headerlink" href="#description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This provides a brief explanation of what the Criteria group is and what the options are (as well as units). Only &#8220;checkbox&#8221; supports this feature, and it appears as a tooltip alongside the group name.</p>
+<dl class="data">
+<dt id="URL">
+<code class="descname">URL</code><a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A URL to the REST endpoint for the service this group is based on. Should be to the general level, not layer level (there is a separate option to specify layer). Supported by &#8220;checkbox&#8221; Criteria.</p>
+<dl class="data">
+<dt id="layer">
+<code class="descname">layer</code><a class="headerlink" href="#layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The layer of the service (specific by the URL) that this Criteria object will be dealing with. Terminology is confusing, but the URL directs to the &#8220;service&#8221;, which can have multiple &#8220;layers&#8221;. 0-indexed.</p>
+<dl class="data">
+<dt id="param">
+<code class="descname">param</code><a class="headerlink" href="#param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The parameter of the layer we will be using. This should be a value that easily breaks the data into groups, usually the variable the layer is designed around.</p>
+<dl class="data">
+<dt id="choices[]">
+<code class="descname">choices[]</code><a class="headerlink" href="#choices[]" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>An array of the options for the user to select. 0 is the display value, and 1 is the internal value that will be used for querying.</p>
 </div>
 </div>
 

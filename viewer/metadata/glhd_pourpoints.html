@@ -350,27 +350,31 @@
   </head>
   <body oncontextmenu="return true">
     <div class="itemDescription" id="overview" xmlns="" xmlns:esri="http://www.esri.com/metadata/" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
-      <h1 class="idHeading">Shoreline Classification</h1><br><br>
+      <h1 class="idHeading">Great Lakes Hydrography Dataset (GLHD) Pour Points</h1><br><br>
       <p class="center">
         <span class="idHeading">Tags</span>
-        <br />Great Lakes, Laurentian Great Lakes, Erie, Huron, Michigan, Ontario, Superior, St. Clair, Niagara River, St. Marys River, Ontario, Minnesota, Wisconsin, Illinois, Indiana, Michigan, Ohio, Pennsylvania, New York, framework, Great Lakes, Laurentian Great Lakes, framework, inlandWaters, planningCadastre, shoreline, shoreline classification</p>
+        <br />Planning Cadaster, Great Lakes, Laurentian Great Lakes, Erie, Huron, Michigan, Ontario, Superior, St. Clair, Niagara River, St., Marys River, Ontario, Minnesota, Wisconsin, Illinois, Indiana, Michigan, Ohio, Pennsylvania, New York, framework, inlandWaters, Great Lakes, Laurentian Great Lakes, framework</p>
       <br />
       <div class="itemInfo">
         <span class="idHeading">Summary</span>
         <p>
-          <pre class="wrap">The Great Lakes shoreline classification composite dataset is a composite of the environmental sensitivity atlas (ESA) from Environment Canada (EC) and the U.S. Army Corps of Engineers (ACOE) shoreline descriptors.  The dataset was compiled for the Great Lakes Aquatic Habitat Framework (GLAHF) project with the most comprehensive shoreline classifications with the classes harmonized into the most common, high level classes.</pre>
+          <pre class="wrap">The Great Lakes Hydrography Dataset Version 1 (GLHDv1.0), 2014, contains a consistent, binational, basin-wide watershed and interfluve layer and several related reference layers. The watershed and interfluve layer was specifically created to be incorporated into the Great Lakes Aquatic Habitat Framework (GLAHF) Great Lakes aquatic habitat classification and nearshore fish habitat assessment to summarize landscape variables consistently across the basin. The dataset was also intended to be used for a wide range of applications in the region, including nutrient modeling, data summaries, and hydrology.</pre>
         </p>
       </div>
       <div class="itemInfo">
         <span class="idHeading">Description</span>
+        <p>
+          <pre class="wrap">
+The GLHDv1.0 (2014) was created as a part of the GLAHF project, a geospatial database and framework for the aquatic environment of the Great Lakes. This data package contains a consistent, basin-wide watershed and interfluve layer and supporting datasets, including modified vector layers from official hydrology base datasets, and intermediate reference layers created during delineation of the watersheds and interfluves. Several base hydrology sources were utilized, including the National Hydrography Dataset Plus Version 2 (NHD+v2), the Ontario Integrated Hydrology Data Version 1.0 (OIHDv1.0), the 1:24,000 National Hydrography Dataset (NHD), and the 30m x 30m National Elevation Dataset (NED). An ArcHydro process flow was used that began with modified flow direction grids from base datasets and delineated a synthetic drainage network, associated reach-catchments, sub watersheds, and basin-wide, consistent tributary catchments boundaries. Coastal interfluves, the area between the delineated aggregated reach catchments and the shoreline (Gilliam et al. 1997), were also delineated basin-wide in a secondary processing step. Watersheds and interfluves were developed following the stream interfluves delineation methods outlined in Hollenhorst et al. (2007) using ArcHydro processing guidance from Merwade (2010). The final watersheds and interfluves layers and pour point layers, all synthetic reference layers, and modified official hydrology layers were packaged by entire Great Lakes Basin and by each Great Lake basin. Connecting channels are included with the downstream lake. A few pre-processing steps were performed to prepare the base flow direction grids for delienation: 1) the Great Lakes shoreline was enforced into the OIHDv1.0 flow direction grids; 2) EPA identified bays were used to enforce additional embayments into the shoreline to create a more detailed shoreline; 3) connecting channels were enforced at the shoreline for the NHD+v2 grids, and 4) the original hydrology datasets were modified to reflect these changes in the shoreline. Please see the Read Me document included in this data package for more details on methods and background.
 
-The Great Lakes shoreline classification composite dataset is a composite of the environmental sensitivity atlas (ESA) from Environment Canada (EC) and the U.S. Army Corps of Engineers (ACOE) shoreline descriptors. The ESA data ranges in dates from 1987 through the late 1990s, and the ACOE shoreline descriptions are from the 2012 oblique imagery interpetation. The full shoreline class descriptions were reviewed for both datasets and harmonized into 6 common classes, which were further simplified into 3 classes for aquatic habitat classification purposes.
-
+This layer contains the final, post processed mainland watershed pour points. A copy was made of the WatershedPoint_Original layer, and points were then edited to reflect edits made to the watershed polygon layer. Attributes from the nearest downstream reach from the OIHDv1.0 and the NHD+v2 (and names from the National Hydro Network (NHN) and the Geographic Extent Layer (GEL) for Canadian watershds) were attributed to each watershed point, as long as the reach was within 200 meters. This data was then attributed to watershed polygon that corresponded to every point. Since attributes were added from the hydrology source used to delineate data for that watershed, each watershed or watershed point is linked to only the NHD+v2 or the OIHDv1; therefore no watershed polygon or point will have attributes for all fields associated from the original hydrology. Please see the Attribute Description document included with the data package and the Fields section of this metadata record for more details.
+          </pre>
+        </p>
       </div>
       <div class="itemInfo">
         <span class="idHeading">Credits</span>
         <p>
-          <pre class="wrap">The Great Lakes Aquatic Habitat Framework (GLAHF) project has been funded by the Great Lakes Fishery Trust and led by Dr. Catherine Riseng, PI at the University of Michigan School of Natural Resources and Environment, with partners from Michigan Department of Natural Resources-Institute for Fisheries Research, NOAA Great Lakes Environmental Research Laboratory, International Joint Commission, Michigan State University, The Nature Conservancy, Ontario Ministry of Natural Resources, University of Minnesota-Duluth, U.S. Fish &amp; Wildlife Service, U.S. Geological Survey and many collaborating partners in both the USA and Canada. More information about this project can be found at <a target="_blank" href="http://glahf.org/">http://glahf.org/</a>.</pre>
+          <pre class="wrap">1) The National Hydrography Dataset Plus Version 2 (1:100,000), 2012; 2) Ontario Integrated Hydrology Data Version 1, 2012; 3) The National Elevation Dataset; 4) The National Hydrography Dataset (1:24,000); 5) Hollenhorst, T.P., Brown, T.N., Johnson, L.B., Ciborowski, J.H. and Host, G.E. 2007. Methods for generating multi-scale watershed delineations for indicator development in Great Lakes coastal ecosystems. Journal of Great Lakes Research 33 (Special Issue 3:13-26, 6) Merwade, Venkatesh. 2010. Watershed and Stream Network Delineation using ArcHydro Tools. &lt;<a target="_blank" href="http://web.ics.purdue.edu/~vmerwade/education/terrain_processing.pdf&gt;,:">http://web.ics.purdue.edu/~vmerwade/education/terrain_processing.pdf&gt;,:</a> and, 7) Gilliam, J.W., Osmond, D.L., and Evans, R.O. 1997. Selected agricultural best management practices to control nitrogen in the Neuse River basin. North Carolina Agricultural Research Service technical bulletin 311, North Carolina State University, Raleigh, North Carolina. 8) The Great Lakes Aquatic Habitat Framework (GLAHF) project has been funded by the Great Lakes Fishery Trust and led by Dr. Catherine Riseng, PI at the University of Michigan School of Natural Resources and Environment, with partners from Michigan Department of Natural Resources-Institute for Fisheries Research, NOAA Great Lakes Environmental Research Laboratory, International Joint Commission, Michigan State University, The Nature Conservancy, Ontario Ministry of Natural Resources, University of Minnesota-Duluth, U.S. Fish &amp; Wildlife Service, U.S. Geological Survey and many collaborating partners in both the USA and Canada. More information about this project can be found at <a target="_blank" href="http://glahf.org/">http://glahf.org/</a>.</pre>
         </p>
       </div>
       <div class="itemInfo">
@@ -392,16 +396,16 @@ The Great Lakes shoreline classification composite dataset is a composite of the
               <tr>
                 <td class="description">
                   <span class="idHeading">West</span> </td>
-                <td class="description">-92.368494</td>
+                <td class="description">-92.539300</td>
                 <td class="description">   <span class="idHeading">East</span> </td>
-                <td class="description">-73.372620</td>
+                <td class="description">-73.612550</td>
               </tr>
               <tr>
                 <td class="description">
                   <span class="idHeading">North</span> </td>
-                <td class="description">49.185539</td>
+                <td class="description">49.188339</td>
                 <td class="description">   <span class="idHeading">South</span> </td>
-                <td class="description">40.267565</td>
+                <td class="description">40.335431</td>
               </tr>
             </table>
           </dt>

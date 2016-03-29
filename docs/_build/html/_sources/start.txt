@@ -35,16 +35,16 @@ You're done! Note that it can take some time (30min - 1hr) for your changes to s
 
 Geoprocessing
 -------------
-In order for tasks like the Criteria function to operate, you'll need a corresponding geoprocessing service running on the server. The currently used geoprocessing service is a python script titled "criteriaQuery.py"
+In order for tasks like the Criteria function to operate, you'll need a corresponding geoprocessing service running on the server. The currently used geoprocessing service is a python script titled "criteriaIntersect.py"
 which is included in the repository under the "Geoprocessing" sub-folder. To set this service up, use the following steps:
 
 #. Open ArcCatalog or ArcMap (either will work, but this will mainly be written from the perspective of ArcCatalog)
 #. In the catalog tree, navigate to "My Toolboxes" and create a new toolbox (I named mine "Criteria")
 #. Right click on the toolbox and select Add > Script...
-#. Add the criteriaQuery.py script
+#. Add the criteriaIntersect.py script
 #. Right click on the script and select "Properties". On the Parameters tab, make sure you have two variables - a required input String (can be named whatever you want, but be consistent) and a derived output Feature Class.
 #. Right click on the toolbox again. Select New > Model...
-#. Drag the "criteriaQuery" script into the model window
+#. Drag the "criteriaIntersect" script into the model window
 #. In the model window, select Insert > Create Variable. Select "String"
 #. Using the "Connect" command from the model window toolbar (icon is two boxes connected by a line), connect your String to the script. When prompted, select "layerData" for the String.
 #. Right click "String" and select "Model Parameter". Do this for "Output" as well.

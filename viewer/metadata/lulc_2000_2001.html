@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:res="http://www.esri.com/metadata/res/">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:res="http://www.esri.com/metadata/res/">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <style type="text/css" id="internalStyle" xmlns="" xmlns:esri="http://www.esri.com/metadata/">
@@ -350,33 +350,56 @@
   </head>
   <body oncontextmenu="return true">
     <div class="itemDescription" id="overview" xmlns="" xmlns:esri="http://www.esri.com/metadata/" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
-      <h1 class="idHeading">Shoreline Classification</h1><br><br>
+      <h1 class="idHeading">Land Use/Land Cover (2000/2001)</h1><br><br>
       <p class="center">
         <span class="idHeading">Tags</span>
-        <br />Great Lakes, Laurentian Great Lakes, Erie, Huron, Michigan, Ontario, Superior, St. Clair, Niagara River, St. Marys River, Ontario, Minnesota, Wisconsin, Illinois, Indiana, Michigan, Ohio, Pennsylvania, New York, framework, Great Lakes, Laurentian Great Lakes, framework, inlandWaters, planningCadastre, shoreline, shoreline classification</p>
+        <br />Great Lakes, Laurentian Great Lakes, framework, inlandWaters, planningCadastre. landcover</p>
       <br />
       <div class="itemInfo">
         <span class="idHeading">Summary</span>
         <p>
-          <pre class="wrap">The Great Lakes shoreline classification composite dataset is a composite of the environmental sensitivity atlas (ESA) from Environment Canada (EC) and the U.S. Army Corps of Engineers (ACOE) shoreline descriptors.  The dataset was compiled for the Great Lakes Aquatic Habitat Framework (GLAHF) project with the most comprehensive shoreline classifications with the classes harmonized into the most common, high level classes.</pre>
+          <pre class="wrap">Land cover has an important influence on watersheds and the Great Lakes. When performing land cover related analyses on the Great Lakes, it is important to utilize cohesive data across the entire basin for both the U.S. and Canada. However, the province of Ontario and the U.S. utilize different classification systems for land cover datasets.  We created a crosswalked data layer that includes similar categories across the basin and provides a snapshot of land cover from 2000/2001.  The Ontario data sources were: 1) the 29 class 2000 Provincial Landcover Ontario (PLO); and, 2) the 25 class 2000 SOLRIS v1.2 landcover.  The PLO covers Northern Ontario and SOLRIS v1.2 covers Southern Ontario.  Both data layers can be downloaded from the Land Information Ontario (LIO) Metadata Management Tool: https://www.javacoeapp.lrc.gov.on.ca/geonetwork/srv/en/main.home.  The U.S. data source was the 2001 United States Geological Survey (USGS) National Landcover Dataset, 2011 edition.  This layer contains 8 level one classes and 16 nested level two classes and can be downloaded from the Multi-Resolution Land Characteristics Consortium (MRLC): <a target="_blank" href="http://www.mrlc.gov/nlcd01_data.php">http://www.mrlc.gov/nlcd01_data.php</a></pre>
         </p>
       </div>
       <div class="itemInfo">
         <span class="idHeading">Description</span>
+        <p>
+          <pre class="wrap">
+ We created a mosaic of the U.S. NLCD 01 (2011 edition) and the Canadian 2000 PLO and the SOLRIS v1.2. We selected these datasets since they were created from imagery collected in approximately the same time frames, included similar categories, and covered the full extent of the Great Lakes Basin. To process the data, we first clipped each input data layer by the extent of the Great Lakes States and the Province of Ontario. Next, we reclassified the raster values using the Reclassify tool, changing the original values to crosswalked values. Next we projected the data into the standardized projection used by the Great Lakes Aquatic Habitat Framework (GLAHF) USA Contiguous Albers Equal Area Conic USGS projection and resampled the pixel size to 30 meters, the standard projection and pixel size for the Great Lakes Aquatic Habitat Framework (GLAHF). We then created a mosaic using Mosaic to New Raster, incorporating the waters of the Great Lakes as the value “1”, using the shoreline of the watersheds in the GLAHF Hydrology Data Package V1 as a mask to determine if water pixels were part of the Great Lakes.
 
-The Great Lakes shoreline classification composite dataset is a composite of the environmental sensitivity atlas (ESA) from Environment Canada (EC) and the U.S. Army Corps of Engineers (ACOE) shoreline descriptors. The ESA data ranges in dates from 1987 through the late 1990s, and the ACOE shoreline descriptions are from the 2012 oblique imagery interpetation. The full shoreline class descriptions were reviewed for both datasets and harmonized into 6 common classes, which were further simplified into 3 classes for aquatic habitat classification purposes.
-
+ Landcover Codes:
+ 1 = Great Lakes Waters
+ 11 = Water
+ 2 = Developed
+ 31 = Barren Land
+ 41 = Deciduous Forest
+ 42 = Evergreen Forest
+ 43 = Mixed Forest
+ 52 = Scrub/Shrub
+ 71 = Grassland/Herbaceous
+ 8 = Agriculture
+ 90 = Forested Wetland
+ 95 = Emergent Wetland
+ 98 = Other/Undefined
+          </pre>
+        </p>
       </div>
       <div class="itemInfo">
         <span class="idHeading">Credits</span>
         <p>
-          <pre class="wrap">The Great Lakes Aquatic Habitat Framework (GLAHF) project has been funded by the Great Lakes Fishery Trust and led by Dr. Catherine Riseng, PI at the University of Michigan School of Natural Resources and Environment, with partners from Michigan Department of Natural Resources-Institute for Fisheries Research, NOAA Great Lakes Environmental Research Laboratory, International Joint Commission, Michigan State University, The Nature Conservancy, Ontario Ministry of Natural Resources, University of Minnesota-Duluth, U.S. Fish &amp; Wildlife Service, U.S. Geological Survey and many collaborating partners in both the USA and Canada. More information about this project can be found at <a target="_blank" href="http://glahf.org/">http://glahf.org/</a>.</pre>
+          <pre class="wrap">1) National Land Cover Dataset, 2001 v11 <a target="_blank" href="http://www.mrlc.gov/nlcd01_data.php">http://www.mrlc.gov/nlcd01_data.php</a>; 2) The 2000 Provincial Landcover Ontario (PLO) https://www.javacoeapp.lrc.gov.on.ca/geonetwork/srv/en/main.home; 3) 2000 Southern Ontario Land Resrouce Information System (SOLRIS) v 1.2 https://www.javacoeapp.lrc.gov.on.ca/geonetwork/srv/en/main.home; 4) Anderson, J.R., Hardy, E. E., Roach, J.T., Witmer, R. E., 1976. A Land Use and Land Cover Classification System for Use with Remote Sensor Data. United States Department of the Interior. Geological Survey Professional Paper 964. A revision of the land use classification system as presented in U.S. Geological Survey Circular 671. Conversion to Digital 2001. United States Government Printing Office, Washington. 1976.; 5) Hollenhorst, T. P., Johnson, L.B., and Ciborowski, J., 2011. Monitoring land cover change in the Lake Superior Basin. Aquatic Ecosystem Health and Management, 14(4):433-442.; 5)Wolter, P.T., Johnston, C. A., Niemi, G.J., 2006. Land Use Land Cover Change in the U.S. Great Lakes Basin 1992 to 2001. Journal of Great Lakes Research. 32:607-628.: 6)The Great Lakes Aquatic Habitat Framework (GLAHF) project has been funded by the Great Lakes Fishery Trust and led by Dr. Catherine Riseng, PI at the University of Michigan School of Natural Resources and Environment, with partners from Michigan Department of Natural Resources-Institute for Fisheries Research, NOAA Great Lakes Environmental Research Laboratory, International Joint Commission, Michigan State University, The Nature Conservancy, Ontario Ministry of Natural Resources, University of Minnesota-Duluth, U.S. Fish &amp; Wildlife Service, U.S. Geological Survey and many collaborating partners in both the USA and Canada. More information about this project can be found at <a target="_blank" href="http://glahf.org/.&#xD;&#xA;&#xD;&#xA;">http://glahf.org/.
+
+</a></pre>
         </p>
       </div>
       <div class="itemInfo">
         <span class="idHeading">Use limitations</span>
         <p>
-          <span class="noContent">There are no access and use limitations for this item.</span>
+          <pre class="wrap">
+There are some caveats to using the data. The original SOLRIS v 1.2 and 2000 PLO grids were 15 meters x 15 meters, and 25 meters x 25 meters, respectively. In very small analysis areas, reclassification may have greatly altered the percentage of some pixel types that represent a very small portion of the overall area. When aggregated to the watershed or basin level, the difference is very small, but the effect will be larger at smaller scales. For very small scale, local analysis, please utilize the original grids.
+					  
+Additionally, the SOLRIS v1.2 combined most agriculture types together with other classifications in an “Undifferentiated” category. Agriculture was also contained in a “Plantations – Tree Cultivated” category, but “Undifferentiated” included “all agriculture features (e.g. field and forage crops and rural properties) as well as urban brown fields, and openings within forests.” The GLAHF team contacted Adam Hogg of the Ontario Ministry of Natural Resources, who confirmed the entire extent of the 2000 SOLRIS layer had never been updated to tease out agriculture from the undefined category, but that the 2012 version included updated agriculture classes. However, in order to compare SOLRIS v1.2 to SOLRIS v2.0, we grouped any agriculture classes together with the Undifferentiated category in both datasets. Because of this, agriculture may be overestimated for the SOLRIS data extents compared to the other data sources, but is comparable between the two time periods.
+          </pre>
         </p>
       </div>
       <p>
@@ -392,16 +415,16 @@ The Great Lakes shoreline classification composite dataset is a composite of the
               <tr>
                 <td class="description">
                   <span class="idHeading">West</span> </td>
-                <td class="description">-92.368494</td>
+                <td class="description">-93.447646</td>
                 <td class="description">   <span class="idHeading">East</span> </td>
-                <td class="description">-73.372620</td>
+                <td class="description">-72.212856</td>
               </tr>
               <tr>
                 <td class="description">
                   <span class="idHeading">North</span> </td>
-                <td class="description">49.185539</td>
+                <td class="description">51.264122</td>
                 <td class="description">   <span class="idHeading">South</span> </td>
-                <td class="description">40.267565</td>
+                <td class="description">39.250714</td>
               </tr>
             </table>
           </dt>
