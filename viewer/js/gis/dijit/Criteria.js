@@ -122,7 +122,7 @@ define([
 								popup.close(toolTips[this.id.slice(5,-3)]);
 							}
 						});
-						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:&nbsp;<i class=\"fa fa-info fa-3\" id=\"crit-" + i + "-id\"></i>" 
+						dom.byId('criteriaOptions').innerHTML +="<u>"+ results[i].name + "</u>:&nbsp;<i class=\"fa fa-info fa-3 critInfo\" id=\"crit-" + i + "-id\"></i>" 
 							+ "<br><div data-dojo-type=\"dijit/form/Form\" id=\"criteria-" + i + "\" name=\"" + results[i].name + "\" URL=\"" + results[i].URL + "\" param=\"" + results[i].param
 							+ "\" layer=\"" + results[i].layer + "\"></div>";
 						for(var j in results[i].choices){
@@ -225,11 +225,16 @@ define([
 				"layers": queryStr
 			};
 			console.log(params);
+			this.numLayers = myLayers.length;
+			this.criteriaLegend();
+			if (this.numLayers === 1) {
+				console.log("only 1 layer selected");
+				return;
+			}
 			this.gp = new Geoprocessor("https://arcgis.lsa.umich.edu/arcpub/rest/services/IFR/Criteria/GPServer/Criteria");
 			this.gp.submitJob(params, lang.hitch(this, this.criteriaComplete), this.criteriaStatus, this.criteriaFailed);
 			domStyle.set(dojo.byId("criteriaLoading"), "display", "inline");
 			domStyle.set(dojo.byId("criteriaMessage"), "display", "inline");
-			this.criteriaLegend();
 		},
 		criteriaLegend: function () {
 			domStyle.set(dom.byId("legend"), "display", "inline");
@@ -245,9 +250,11 @@ define([
 				html += "</div>";
 				dom.byId("criteriaLegend").innerHTML += html;
 			}
-			dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\" style=\"cursor: pointer; margin-left:15px;\">" 
-				+ "</input>Intersection&nbsp;<div style=\"background:#99FF33;width:17px;float:right;\">&nbsp;</div><br>";
-			for(var j = 0; j < i; j++) {
+			if (this.numLayers > 1) {
+				dom.byId("criteriaLegend").innerHTML += "<input type=\"checkbox\" id=\"crit-layer-" + i + "\" checked=\"true\" style=\"cursor: pointer; margin-left:15px;\">" 
+					+ "</input>Intersection&nbsp;<div style=\"background:#99FF33;width:17px;float:right;\">&nbsp;</div><br>";
+			}
+			for(var j = 0; j < this.numLayers; j++) {
 				on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
 					var id = evt.srcElement.id.slice(-1);
 					if (this.criteriaLayers[id].visible) {
@@ -268,16 +275,18 @@ define([
 					domClass.toggle("legend-expand-" + id, "fa-minus-square-o");
 				}));
 			}
-			on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
-				if (this.polygonGraphics.visible) {
-					this.polygonGraphics.hide();
-					dojo.byId("crit-layer-" + j).checked = false;
-				}
-				else {
-					this.polygonGraphics.show();
-					dojo.byId("crit-layer-" + j).checked = true;
-				}
-			}));
+			if (this.numLayers > 1) {
+				on(dojo.byId("crit-layer-" + j), "click", lang.hitch(this, function(evt) {
+					if (this.polygonGraphics.visible) {
+						this.polygonGraphics.hide();
+						dojo.byId("crit-layer-" + j).checked = false;
+					}
+					else {
+						this.polygonGraphics.show();
+						dojo.byId("crit-layer-" + j).checked = true;
+					}
+				}));
+			}
 		},
 		createLayer: function (layerInfo) {
 			var newLayer = new FeatureLayer(layerInfo.URL + "/" + layerInfo.layer, { outFields: ["*"] });

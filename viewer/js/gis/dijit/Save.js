@@ -99,7 +99,6 @@ define([
 			this.geoLayerDB.get(this.slot).then(function (results) {
 				topic.publish("load/data", results);
 			});
-			//topic.publish("load/clear"); //clear map of current graphics, NYI
 			this.graphicLayerDB.get(this.slot).then(function (results) {
 				for (var i in results.layers) {
 					var prefix = results.layers[i].id.split("_");

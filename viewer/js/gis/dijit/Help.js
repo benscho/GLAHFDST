@@ -24,7 +24,7 @@ define([
 		widgetsInTemplate: true,
 		templateString: template,
 		title: 'Help',
-		html: '<div class="dijitContentPane" id="help_parent" style="text-align: center; cursor: pointer;"><i class="fa fa-question-circle fa-4x"></i><br/>Help</div>',
+		html: '<div class="dijitContentPane" id="help_parent" style="text-align: center; cursor: pointer;"><i class="fa fa-question-circle fa-3x"></i><br/>Help</div>',
 		domTarget: 'helpDijit',
 		draggable: true,
 		baseClass: 'helpDijit',

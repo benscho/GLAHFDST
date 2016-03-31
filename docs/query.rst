@@ -7,6 +7,7 @@ The query widget is designed to let users explore the data in a slightly less di
 The queries are presented in two separate select drop-downs - one for category, and then another for finer grain selection within that category.
 Results appear in the bottom table pane.
 Needs some expansion in terms of queries offerred, and possibly a redesign or removal.
+The code is still intact in the github repository, but it has currently been disabled in viewer.js and viewer/templates/mapOverlay.html
 
 Methods
 -------

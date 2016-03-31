@@ -41,10 +41,6 @@
 		"param": "cddClassDescription",
 		"choices": [
 			{
-				"name": "Cold",
-				"value": "'cold'"
-			},
-			{
 				"name": "Cool",
 				"value": "'cool'"
 			},

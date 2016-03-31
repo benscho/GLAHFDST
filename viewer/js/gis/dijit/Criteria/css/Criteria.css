@@ -20,6 +20,10 @@
 .critRadio{
 	float: left;
 }
+.critInfo {
+	padding: 5px;
+	cursor: pointer;
+}
 .gis_CriteriaDijit .dijitButtonNode{
 	display: inline-block !important;
 }

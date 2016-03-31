@@ -51,16 +51,16 @@ define([
 		// 		splitter: true,
 		// 		collapsible: true
 		// 	},
-		 	bottom: {
-		 		id: 'sidebarBottom',
-		 		placeAt: 'outer',
-		 		splitter: true,
-		 		collapsible: true,
-		 		region: 'bottom',
-				open: true,
-                style: 'height:200px;',
-                content: '<div id="attributesContainer"></div>'
-		 	}
+		// 	bottom: {
+		// 		id: 'sidebarBottom',
+		// 		placeAt: 'outer',
+		// 		splitter: true,
+		// 		collapsible: true,
+		// 		region: 'bottom',
+		//		open: true,
+        //      style: 'height:200px;',
+        //      content: '<div id="attributesContainer"></div>'
+		// 	}
 		// 	top: {
 		// 		id: 'sidebarTop',
 		// 		placeAt: 'outer',
@@ -818,7 +818,7 @@ define([
 				id: 'layerControl',
 				type: 'toolbarOption',
 				path: 'gis/dijit/LayerControl',
-				title: '<i class="fa fa-list fa-4x"></i><br/>Layers',
+				title: '<i class="fa fa-list fa-3x"></i><br/>Layers',
 				srcNodeRef: 'layerToolbar',
 				open: false,
 				position: 0,
@@ -836,7 +836,7 @@ define([
 				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Criteria',
-				title: '<i class="fa fa-check-square-o fa-4x"></i><br/>Habitat<br>Criteria',
+				title: '<i class="fa fa-check-square-o fa-3x"></i><br/>Habitat<br>Criteria',
 				srcNodeRef: 'criteriaToolbar',
 				open: false,
 				position: 1,
@@ -849,7 +849,7 @@ define([
 				id: 'draw',
 				type: 'toolbarOption',
 				path: 'gis/dijit/Draw',
-				title: '<i class="fa fa-pencil-square-o fa-4x"></i><br/>Draw',
+				title: '<i class="fa fa-pencil-square-o fa-3x"></i><br/>Draw',
 				srcNodeRef: 'drawToolbar',
 				open: false,
 				position: 2,
@@ -858,26 +858,26 @@ define([
 					mapClickMode: true
 				}
 			},
-			search: {
+			/*search: {
 				include: true,
 				id: 'search',
 				type: 'toolbarOption',
 				srcNodeRef: 'searchToolbar',
 				canFloat: false,
 				path: 'gis/dijit/Search',
-				title: '<i class="fa fa-search fa-4x"></i><br/>Query',
+				title: '<i class="fa fa-search fa-3x"></i><br/>Query',
 				open: false,
 				position: 3,
 				options: {
 					map: true
 				}
-			},
+			},*/
 			identify: {
 				include: true,
 				id: 'identify',
 				type: 'toolbarOption',
 				path: 'gis/dijit/Identify',
-				title: '<i class="fa fa-info fa-4x"></i><br/>Identify',
+				title: '<i class="fa fa-info fa-3x"></i><br/>Identify',
 				srcNodeRef: 'identifyToolbar',
 				open: false,
 				position: 3,
@@ -889,7 +889,7 @@ define([
 				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Save',
-				title: '<i class="fa fa-floppy-o fa-4x"></i><br/>Save',
+				title: '<i class="fa fa-floppy-o fa-3x"></i><br/>Save',
 				srcNodeRef: 'saveToolbar',
 				open: false,
 				position: 4,
@@ -903,7 +903,7 @@ define([
 				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Print',
-				title: '<i class="fa fa-print fa-4x"></i><br/>Print',
+				title: '<i class="fa fa-print fa-3x"></i><br/>Print',
 				srcNodeRef: 'printToolbar',
 				open: false,
 				position: 5,
@@ -923,7 +923,7 @@ define([
 				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Extract',
-				title: '<i class="fa fa-file fa-4x"></i><br/>Export',
+				title: '<i class="fa fa-file fa-3x"></i><br/>Export',
 				srcNodeRef: 'extractToolbar',
 				open: false,
 				position: 6,
@@ -940,7 +940,7 @@ define([
 				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Measurement',
-				title: '<i class="fa fa-cog fa-4x"></i><br/>Measure',
+				title: '<i class="fa fa-cog fa-3x"></i><br/>Measure',
 				srcNodeRef: 'measureToolbar',
 				open: false,
 				position: 7,
@@ -957,7 +957,7 @@ define([
 				type: 'toolbarOption',
 				canFloat: true,
 				path: 'gis/dijit/Locate',
-				title: '<i class="fa fa-location-arrow fa-4x"></i><br/>Locate',
+				title: '<i class="fa fa-location-arrow fa-3x"></i><br/>Locate',
 				srcNodeRef: 'locateToolbar',
 				open: false,
 				position: 8,
@@ -970,7 +970,7 @@ define([
 				id: 'help',
 				type: 'toolbarOption',
 				path: 'gis/dijit/Help',
-				title: '<i class="fa fa-question-circle fa-4x"></i><br/>Help',
+				title: '<i class="fa fa-question-circle fa-3x"></i><br/>Help',
 				srcNodeRef: 'helpToolbar',
 				open: false,
 				position: 9,

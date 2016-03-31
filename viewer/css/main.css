@@ -53,7 +53,7 @@ body, html {
 }
 #borderContainerOuter {
     position: absolute;
-    top: 107.5px;
+    top: 90px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -364,7 +364,7 @@ body, html {
 }
 
 #toolbar {
-	height:107.5px;
+	height:90px;
 }
 
 .toolbarOption {
